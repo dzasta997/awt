@@ -1,10 +1,10 @@
-<mxfile host="app.diagrams.net" modified="2023-03-09T18:04:22.732Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36" version="20.6.2" etag="HfdfXpC5bF5kyQY07wna" type="github">
+<mxfile host="app.diagrams.net" modified="2023-03-09T18:10:39.420Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36" version="20.6.2" etag="3Q9k2oYbxzu91_yycme2" type="github">
   <diagram id="BhhGLLBL8qw27qqaKnJw" name="Page-1">
-    <mxGraphModel dx="3178" dy="1825" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2583" dy="1483" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-1" value="Library System" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-1" value="Library System" style="swimlane;whiteSpace=wrap;html=1;fillColor=#99CCFF;" vertex="1" parent="1">
           <mxGeometry x="160" y="260" width="905" height="660" as="geometry" />
         </mxCell>
         <mxCell id="DdpT-OFBI1ggHvNi21Hl-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="DdpT-OFBI1ggHvNi21Hl-1" source="DdpT-OFBI1ggHvNi21Hl-19" target="DdpT-OFBI1ggHvNi21Hl-21">
@@ -15,10 +15,10 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-19" value="&lt;br&gt;Browse book catalog" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-19" value="&lt;br&gt;Browse book catalog" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#CCE5FF;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
           <mxGeometry x="80" y="60" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-21" value="&lt;br&gt;Search for book" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-21" value="&lt;br&gt;Search for book" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#CCE5FF;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
           <mxGeometry x="310" y="60" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DdpT-OFBI1ggHvNi21Hl-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="DdpT-OFBI1ggHvNi21Hl-1" source="DdpT-OFBI1ggHvNi21Hl-24" target="DdpT-OFBI1ggHvNi21Hl-19">
@@ -29,28 +29,28 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-24" value="&lt;br&gt;Rent book" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-24" value="&lt;br&gt;Rent book" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#CCE5FF;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
           <mxGeometry x="80" y="285" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-28" value="&lt;br&gt;Check rental details" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-28" value="&lt;br&gt;Check rental details" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#CCE5FF;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
           <mxGeometry x="80" y="430" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DdpT-OFBI1ggHvNi21Hl-38" value="&amp;lt;&amp;lt;extends&amp;gt;&amp;gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=none;endFill=0;dashed=1;" edge="1" parent="DdpT-OFBI1ggHvNi21Hl-1" source="DdpT-OFBI1ggHvNi21Hl-34" target="DdpT-OFBI1ggHvNi21Hl-37">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-34" value="&lt;br&gt;Check orders" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-34" value="&lt;br&gt;Check orders" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#CCE5FF;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
           <mxGeometry x="520" y="60" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-37" value="&lt;br&gt;Change order status" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-37" value="&lt;br&gt;Change order status" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#CCE5FF;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
           <mxGeometry x="520" y="200" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-39" value="&lt;br&gt;Manage book catalog" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-39" value="&lt;br&gt;Manage book catalog" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#CCE5FF;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
           <mxGeometry x="510" y="295" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-41" value="&lt;br&gt;Check users details" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-41" value="&lt;br&gt;Check users details" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#CCE5FF;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
           <mxGeometry x="510" y="430" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-45" value="&lt;div style=&quot;line-height: 120%;&quot;&gt;Send email notification&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;labelBackgroundColor=#FFFFFF;align=center;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-52" value="&lt;span style=&quot;background-color: rgb(204, 229, 255);&quot;&gt;Send Notofication&lt;br&gt;&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#CCE5FF;labelBackgroundColor=#FFFFFF;" vertex="1" parent="DdpT-OFBI1ggHvNi21Hl-1">
           <mxGeometry x="80" y="550" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DdpT-OFBI1ggHvNi21Hl-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="DdpT-OFBI1ggHvNi21Hl-2" target="DdpT-OFBI1ggHvNi21Hl-7">
@@ -69,7 +69,7 @@
         <mxCell id="DdpT-OFBI1ggHvNi21Hl-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="DdpT-OFBI1ggHvNi21Hl-2" target="DdpT-OFBI1ggHvNi21Hl-19">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-2" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;User&lt;/span&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-2" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;User&lt;/span&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#3399FF;" vertex="1" parent="1">
           <mxGeometry x="80" y="320" width="30" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DdpT-OFBI1ggHvNi21Hl-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="DdpT-OFBI1ggHvNi21Hl-7" target="DdpT-OFBI1ggHvNi21Hl-24">
@@ -86,7 +86,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-7" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Authenticated User&lt;/span&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-7" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Authenticated User&lt;/span&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#3399FF;" vertex="1" parent="1">
           <mxGeometry x="80" y="545" width="30" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DdpT-OFBI1ggHvNi21Hl-35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="DdpT-OFBI1ggHvNi21Hl-15" target="DdpT-OFBI1ggHvNi21Hl-34">
@@ -106,13 +106,13 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-15" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Librarian&lt;/span&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-15" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Librarian&lt;/span&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#3399FF;" vertex="1" parent="1">
           <mxGeometry x="1100" y="320" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-46" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="DdpT-OFBI1ggHvNi21Hl-43" target="DdpT-OFBI1ggHvNi21Hl-45">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-53" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="DdpT-OFBI1ggHvNi21Hl-43" target="DdpT-OFBI1ggHvNi21Hl-52">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="DdpT-OFBI1ggHvNi21Hl-43" value="System" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;labelBackgroundColor=#FFFFFF;" vertex="1" parent="1">
+        <mxCell id="DdpT-OFBI1ggHvNi21Hl-43" value="System" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;labelBackgroundColor=#FFFFFF;fillColor=#3399FF;" vertex="1" parent="1">
           <mxGeometry x="80" y="810" width="30" height="60" as="geometry" />
         </mxCell>
       </root>
