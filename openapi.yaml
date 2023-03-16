@@ -1,0 +1,588 @@
+openapi: 3.0.3
+info:
+  title: Library system 1.0
+  description: |-
+    This is a library system api documentation for Advanced Web Technologies project.
+  version: 1.0.0
+
+  contact:
+    email: dev@dev.com
+externalDocs:
+  description: Find out more about our project
+  url: https://github.com/dzasta997/awt
+  
+servers:
+  - url: https://localhost:8080
+  
+tags:
+  - name: author
+    description: author operations
+  - name: book
+    description: book operations
+  - name: category
+    description: category operations
+  - name: copy
+    description: copy operations
+ 
+paths:
+  /authors:
+    get:
+      tags:
+        - author
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Author'
+    post:
+      tags:
+        - author
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Author'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Author'
+        '400':
+          description: bad request              
+                  
+  /authors/{author_id}:
+    get:
+      tags:
+        - author
+      parameters: 
+        - name: author_id
+          in: path
+          schema: 
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Author'
+        '404':
+          description: not found
+    delete:
+      tags:
+        - author
+      parameters: 
+        - name: author_id
+          in: path
+          schema: 
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Author'
+        '404':
+          description: not found
+    put:
+      tags:
+        - author
+      parameters: 
+        - name: author_id
+          in: path
+          schema: 
+            type: integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Author'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Author'
+        '404':
+          description: not found
+        '400':
+          description: bad request
+
+  /books:
+    get:
+      tags:
+        - book
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Book'
+    post:
+      tags:
+        - book
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Book'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: bad request              
+                  
+  /books/{book_id}:
+    get:
+      tags:
+        - book
+      parameters: 
+        - name: book_id
+          in: path
+          schema: 
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: not found
+    delete:
+      tags:
+        - book
+      parameters: 
+        - name: book_id
+          in: path
+          schema: 
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: not found
+    put:
+      tags:
+        - book
+      parameters: 
+        - name: book_id
+          in: path
+          schema: 
+            type: integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Book'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: not found
+        '400':
+          description: bad request 
+          
+  /categories:
+    get:
+      tags:
+        - category
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Category'
+    post:
+      tags:
+        - category
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Category'
+        '400':
+          description: bad request              
+                  
+  /categories/{category_id}:
+    get:
+      tags:
+        - category
+      parameters: 
+        - name: category_id
+          in: path
+          schema: 
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Category'
+        '404':
+          description: not found
+    delete:
+      tags:
+        - category
+      parameters: 
+        - name: category_id
+          in: path
+          schema: 
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Category'
+        '404':
+          description: not found
+    put:
+      tags:
+        - category
+      parameters: 
+        - name: category_id
+          in: path
+          schema: 
+            type: integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Category'
+        '404':
+          description: not found
+        '400':
+          description: bad request       
+  
+  /copies:
+    get:
+      tags:
+        - copy
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Copy'
+    post:
+      tags:
+        - copy
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Copy'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Copy'
+        '400':
+          description: bad request              
+                  
+  /copies/{copy_id}:
+    get:
+      tags:
+        - copy
+      parameters: 
+        - name: copy_id
+          in: path
+          schema: 
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Copy'
+        '404':
+          description: not found
+    delete:
+      tags:
+        - copy
+      parameters: 
+        - name: copy_id
+          in: path
+          schema: 
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Copy'
+        '404':
+          description: not found
+    put:
+      tags:
+        - copy
+      parameters: 
+        - name: copy_id
+          in: path
+          schema: 
+            type: integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Copy'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Copy'
+        '404':
+          description: not found
+        '400':
+          description: bad request
+  
+
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        book_id:
+          type: integer
+          format: int64
+          example: 10
+        title:
+          type: string
+          example: 'Harry Potter and the chamber of secrets'
+        author:
+          $ref: '#/components/schemas/Author'
+        description:
+          type: string
+          example: 'A part of a bestseller story'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+
+        
+    Author:
+      type: object
+      properties:
+        author_id:
+          type: integer
+          format: int64
+          example: 3
+        first_name:
+          type: string
+          example: 'Joanne'
+        last_name:
+          type: string
+          example: 'Rowling'
+        description:
+          type: string
+          example: 'Fantasy author'
+          
+          
+    Category:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: 'Fantasy'
+        description:
+          type: string
+          example: 'Here you can find your favorite fantasy books!'
+          
+    
+    Copy:
+      type: object
+      properties:
+        copy_id:
+          type: integer
+          format: int64
+          example: 11
+        book:
+          $ref: '#/components/schemas/Book'
+        description:
+          type: string
+          example: 'New edition'
+        isbn:
+          type: string
+          example: '978-3-16-148410-0'
+        publication_year:
+          type: integer
+          format: int64
+          example: 2022
+          
+    BookRental:
+      type: object
+      properties:
+        book_rental_id:
+          type: integer
+          format: int64
+          example: 115
+        book_copy:
+          $ref: '#/components/schemas/Copy'
+        user:
+          $ref: '#/components/schemas/User'
+        rental_date:
+          type: string
+          example: '2022-12-02'
+        due_date:
+          type: string
+          example: '2023-01-02'
+        return_date:
+          type: string
+          example: '2023-01-01'
+        missed_deadline:
+          type: boolean
+          example: false
+        
+      
+        
+
+    UserInfo:
+      type: object
+      properties: 
+        customer_id:
+          type: integer
+          format: int64
+          example: 7
+        first_name:
+          type: string
+          example: 'Elon'
+        last_name:
+          type: string
+          example: 'Musk'
+        email:
+          type: string
+          example: 'melon@twitter.com'
+        phone_number:
+          type: string
+          example: '1122334455'
+        address:
+          $ref: '#/components/schemas/Address'
+        
+        
+        
+    User:
+      type: object
+      properties: 
+        user_id:
+          type: integer
+          format: int64
+          example: 7
+        username:
+          type: string
+          example: 'melon123'
+        password:
+          type: string
+          example: 'pass123'
+        role:
+          $ref: '#/components/schemas/Role'
+        user_info:
+          $ref: '#/components/schemas/UserInfo'
+        
+        
+    Address:
+      type: object
+      properties:
+        address_id: 
+          type: integer
+          format: int64
+          example: 2
+        street:
+          type: string
+          example: 'Sesame'
+        number:
+          type: string
+          example: '2/4'
+        city:
+          type: string
+          example: 'California'
+        zipcode:
+          type: string
+          example: '11223'
+          
+    Role:
+      type: string
+      example: 'CUSTOMER'
+      
+          
+    
+          
+        
+          
+         
+          
+       
+      
+        
+        
+         
+        
+ 
