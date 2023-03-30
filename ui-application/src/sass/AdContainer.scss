@@ -1,0 +1,42 @@
+.ad-header {
+  font-size: 2rem;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.adContainer {
+  //max-width: 140rem;
+  width: 100%;
+  margin: 7rem auto;
+  background-color: var(--color-grey-light-1);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+  box-shadow: var(--shadow-dark);
+  min-height: 60rem;
+}
+
+.container {
+  background-color: white;
+  padding: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  &__item--1 {
+    background-color: aqua;
+    
+  }
+
+  &__item--2 {
+    background-color: chocolate;
+  }
+
+  &__item--3 {
+    background-color: orangered;
+  }
+
+  &__item--4 {
+    background-color: black;
+    
+  }
+}
