@@ -1,4 +1,4 @@
-package com.pwr.awt.librarysystem.entities;
+package com.pwr.awt.librarysystem.entity;
 
 import jakarta.persistence.*;
 

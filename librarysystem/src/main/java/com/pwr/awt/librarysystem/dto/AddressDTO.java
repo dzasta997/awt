@@ -1,28 +1,24 @@
-package com.pwr.awt.librarysystem.entities;
+package com.pwr.awt.librarysystem.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
-@Entity
-public class Address {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+
+public class AddressDTO {
     private Long addressId;
     private String street;
     private String number;
     private String city;
     private String zipcode;
 
-    public Address() {
+    public AddressDTO() {
     }
 
     public Long getAddressId() {
         return addressId;
     }
 
-    public Address setAddressId(Long addressId) {
+    public AddressDTO setAddressId(Long addressId) {
         this.addressId = addressId;
         return this;
     }
@@ -31,7 +27,7 @@ public class Address {
         return street;
     }
 
-    public Address setStreet(String street) {
+    public AddressDTO setStreet(String street) {
         this.street = street;
         return this;
     }
@@ -40,7 +36,7 @@ public class Address {
         return number;
     }
 
-    public Address setNumber(String number) {
+    public AddressDTO setNumber(String number) {
         this.number = number;
         return this;
     }
@@ -49,7 +45,7 @@ public class Address {
         return city;
     }
 
-    public Address setCity(String city) {
+    public AddressDTO setCity(String city) {
         this.city = city;
         return this;
     }
@@ -58,7 +54,7 @@ public class Address {
         return zipcode;
     }
 
-    public Address setZipcode(String zipcode) {
+    public AddressDTO setZipcode(String zipcode) {
         this.zipcode = zipcode;
         return this;
     }

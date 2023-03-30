@@ -1,0 +1,31 @@
+version: "3.8"
+
+networks:
+  library-network:
+    name: library-network
+    driver: bridge
+
+services:
+  db:
+    image: postgres:15.1-alpine
+    restart: always
+    networks:
+      - library-network
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+
+  library-system:
+    build:
+      context: ./librarysystem
+      dockerfile: Dockerfile
+    networks:
+      - library-network
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"

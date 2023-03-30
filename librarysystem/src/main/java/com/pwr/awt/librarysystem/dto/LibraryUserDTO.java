@@ -1,29 +1,24 @@
-package com.pwr.awt.librarysystem.entities;
+package com.pwr.awt.librarysystem.dto;
 
-import jakarta.persistence.*;
+import com.pwr.awt.librarysystem.entity.UserInfo;
 
-@Entity
-public class LibraryUser {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class LibraryUserDTO {
     private Long userId;
     private String username;
     private String password;
     //TODO:    Will be changed to enum, now just a draft
     private String role;
-    @OneToOne
-    @JoinColumn(name="user_info_id")
-    private UserInfo userInfo;
+    private UserInfoDTO userInfo;
 
-    public LibraryUser() {
+    public LibraryUserDTO() {
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    public LibraryUser setUserId(Long userId) {
+    public LibraryUserDTO setUserId(Long userId) {
         this.userId = userId;
         return this;
     }
@@ -32,7 +27,7 @@ public class LibraryUser {
         return username;
     }
 
-    public LibraryUser setUsername(String username) {
+    public LibraryUserDTO setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -41,7 +36,7 @@ public class LibraryUser {
         return password;
     }
 
-    public LibraryUser setPassword(String password) {
+    public LibraryUserDTO setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -50,16 +45,16 @@ public class LibraryUser {
         return role;
     }
 
-    public LibraryUser setRole(String role) {
+    public LibraryUserDTO setRole(String role) {
         this.role = role;
         return this;
     }
 
-    public UserInfo getUserInfo() {
+    public UserInfoDTO getUserInfo() {
         return userInfo;
     }
 
-    public LibraryUser setUserInfo(UserInfo userInfo) {
+    public LibraryUserDTO setUserInfo(UserInfoDTO userInfo) {
         this.userInfo = userInfo;
         return this;
     }
