@@ -3,7 +3,10 @@ package com.pwr.awt.librarysystem.mapper;
 import com.pwr.awt.librarysystem.dto.CopyDTO;
 import com.pwr.awt.librarysystem.entity.Copy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
+@Component
 public class CopyMapper extends ApplicationMapper<Copy, CopyDTO>{
 
     private final BookMapper bookMapper;
