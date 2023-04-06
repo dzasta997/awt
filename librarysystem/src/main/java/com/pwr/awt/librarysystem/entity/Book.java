@@ -62,12 +62,32 @@ public class Book {
         return this;
     }
 
+    public Book addAuthor(Author author){
+        this.authors.add(author);
+        return this;
+    }
+
+    public Book removeAuthor(Author author){
+        this.authors.remove(author);
+        return this;
+    }
+
     public List<Category> getCategories() {
         return categories;
     }
 
     public Book setCategories(List<Category> categories) {
         this.categories = categories;
+        return this;
+    }
+
+    public Book addCategory(Category category){
+        this.categories.add(category);
+        return this;
+    }
+
+    public Book removeCategory(Category category){
+        this.categories.remove(category);
         return this;
     }
 }
