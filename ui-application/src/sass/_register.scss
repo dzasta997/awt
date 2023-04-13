@@ -1,0 +1,112 @@
+.register {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__picture-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 124rem;
+    position: absolute;
+    z-index: -1;
+  }
+
+  &__form-box {
+    padding-right: 12rem;
+    padding-left: 12rem;
+    margin-top: 2rem;
+    margin-left: -3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100rem;
+
+    &__column {
+      display: flex;
+      margin-right: 2rem;
+    }
+  }
+
+  &__input {
+    font-size: 1.5rem;
+    border: none;
+    min-width: 100%;
+    height: 4.7rem;
+    border-radius: 1rem;
+    padding: 1.5rem 5rem;
+    line-height: 1rem;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+    background-color: rgba(255, 255, 255, 0.85);
+    transition: all 0;
+  }
+
+  &__submit {
+    font-family: inherit;
+    background-color: var(--color-white);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    border-radius: 10rem;
+    transition: all 0.2s;
+    max-width: 20rem;
+    border: none;
+    cursor: pointer;
+    margin-left: -4rem;
+
+    &:focus {
+      box-shadow: 0 0 1rem rgba(var(--color-white), 0.5); // Change the color to yellow
+      outline: none; // Remove the default blue outline
+    }
+
+    &:active {
+      transform: scale(
+        0.95
+      ); // Slightly decrease the size when the button is pressed
+    }
+
+    &:hover:not(:active) {
+      background-color: rgba(255, 255, 0, 0.534); // Slightly change the background color when hovering
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+    display: block;
+    transition: all 0.5s ease;
+  }
+
+  &__input:placeholder-shown + &__label {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
+
+  &__close {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: 0;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    right: 5;
+  }
+}

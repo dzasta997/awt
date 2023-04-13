@@ -3,7 +3,10 @@ import '../sass/main.scss';
 import logo from '../SvgContainer/logo.svg';
 import searchIcon from '../SvgContainer/search.svg';
 
-const Header: React.FC<{ onButtonClick: () => void }> = ({ onButtonClick }) => {
+const Header: React.FC<{
+  onButtonClick: () => void;
+  onRegisterClick: () => void;
+}> = ({ onButtonClick, onRegisterClick }) => {
   return (
     <header className='header'>
       <div className='header__logo-container'>
@@ -25,7 +28,7 @@ const Header: React.FC<{ onButtonClick: () => void }> = ({ onButtonClick }) => {
         </button>
       </form>
       <nav className='user-nav'>
-        <button className='user-nav__register'>Register</button>
+        <button className='user-nav__register' onClick={onRegisterClick}>Register</button>
         <button className='user-nav__sign-up' onClick={onButtonClick}>
           Log in
         </button>
