@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -75,5 +76,14 @@ public class BookService {
         book.removeAuthor(author);
         bookRepository.save(book);
         return book;
+    }
+
+    public List<Book> searchBook(
+                                Optional<String> firstName,
+                                Optional<String> lastName,
+                                Optional<String> category,
+                                Optional<String> title
+    ){
+        return bookRepository.findByAuthors_FirstNameAndAuthors_LastNameAndCategories_NameAndTitle(firstName, lastName, category, title);
     }
 }

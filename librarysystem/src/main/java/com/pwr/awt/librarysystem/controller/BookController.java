@@ -18,24 +18,21 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("books")
 public class BookController {
     private final BookMapper bookMapper;
     private final BookService bookService;
-    private final CategoryMapper categoryMapper;
     private final CategoryService categoryService;
-    private final AuthorMapper authorMapper;
     private final AuthorService authorService;
 
     @Autowired
-    public BookController(BookMapper bookMapper, BookService bookService, CategoryMapper categoryMapper, CategoryService categoryService, AuthorMapper authorMapper, AuthorService authorService) {
+    public BookController(BookMapper bookMapper, BookService bookService, CategoryService categoryService,  AuthorService authorService) {
         this.bookMapper = bookMapper;
         this.bookService = bookService;
-        this.categoryMapper = categoryMapper;
         this.categoryService = categoryService;
-        this.authorMapper = authorMapper;
         this.authorService = authorService;
     }
 
@@ -101,6 +98,17 @@ public class BookController {
         Author author = authorService.findByAuthorId(authorId);
         Book updated = bookService.removeBookAuthor(book, author);
         return new ResponseEntity<>(bookMapper.toDto(updated), HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<BookDTO>> searchBook(
+                                              @RequestParam Optional<String> firstName,
+                                              @RequestParam Optional<String> lastName,
+                                              @RequestParam Optional<String> category,
+                                             @RequestParam Optional<String> title
+    ) {
+        List<Book> books = bookService.searchBook( firstName, lastName, category, title);
+        return new ResponseEntity<>(bookMapper.toDto(books), HttpStatus.OK);
     }
 
 
