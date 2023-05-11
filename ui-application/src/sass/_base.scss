@@ -1,5 +1,5 @@
 :root {
-  --color-primary: #FEDA00;
+  --color-primary: #feda00;
   //--color-primary-light: #ff3366;
   //--color-primary-dark: #ba265d;
 
@@ -11,7 +11,7 @@
   --color-grey-dark-1: #333;
   --color-grey-dark-2: #777;
   --color-grey-dark-3: #999;
-
+  --color-white: #fff;
   --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
   --shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.06);
 
@@ -49,3 +49,4 @@ body {
   background-repeat: no-repeat;
   min-height: 100vh;
 }
+

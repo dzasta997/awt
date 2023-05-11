@@ -5,6 +5,11 @@
   height: 9rem;
   background-color: var(--color-primary);
   padding-left: 2rem;
+
+  &--blurred {
+    filter: blur(3px);
+    pointer-events: none;
+  }
 }
 
 .header__logo-container {
