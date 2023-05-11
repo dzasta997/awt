@@ -31,23 +31,31 @@ public class AuthorController {
         return new ResponseEntity<>(authorMapper.toDto(authors), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<AuthorDTO> getAuthor(@PathVariable long id) {
-        Author author = authorService.findByAuthorId(id);
-        return new ResponseEntity<>(authorMapper.toDto(author), HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<AuthorDTO> postAuthor(@RequestBody AuthorDTO authorDTO) {
         Author authorSaved = authorService.saveAuthor(authorMapper.toEntity(authorDTO));
         return new ResponseEntity<>(authorMapper.toDto(authorSaved), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<AuthorDTO> getAuthor(@PathVariable long id) {
+        Author author = authorService.findByAuthorId(id);
+        return new ResponseEntity<>(authorMapper.toDto(author), HttpStatus.OK);
+    }
+    
     @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity deleteAuthor(@PathVariable long id) {
         authorService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AuthorDTO> updateAuthor(@PathVariable long id, @RequestBody AuthorDTO authorDTO) {
+        Author author = authorService.findByAuthorId(id);
+        Author updated = authorMapper.toEntity(authorDTO.setAuthorId(author.getAuthorId()));
+        authorService.saveAuthor(updated);
+        return new ResponseEntity<>(authorMapper.toDto(updated), HttpStatus.OK);
     }
 
 

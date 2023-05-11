@@ -31,16 +31,16 @@ public class CategoryController {
         return new ResponseEntity<>(categoryMapper.toDto(categories), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CategoryDTO> getCategory(@PathVariable long id) {
-        Category category = categoryService.findByCategoryId(id);
-        return new ResponseEntity<>(categoryMapper.toDto(category), HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<CategoryDTO> postCategory(@RequestBody CategoryDTO categoryDTO) {
         Category categorySaved = categoryService.saveCategory(categoryMapper.toEntity(categoryDTO));
         return new ResponseEntity<>(categoryMapper.toDto(categorySaved), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryDTO> getCategory(@PathVariable long id) {
+        Category category = categoryService.findByCategoryId(id);
+        return new ResponseEntity<>(categoryMapper.toDto(category), HttpStatus.OK);
     }
 
     @Transactional
@@ -49,6 +49,16 @@ public class CategoryController {
         categoryService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryDTO> updateCategory(@PathVariable long id, @RequestBody CategoryDTO categoryDTO) {
+        Category category = categoryService.findByCategoryId(id);
+        Category updated = categoryMapper.toEntity(categoryDTO.setCategoryId(category.getCategoryId()));
+        categoryService.saveCategory(updated);
+        return new ResponseEntity<>(categoryMapper.toDto(updated), HttpStatus.OK);
+    }
+
+
 
 
 }
