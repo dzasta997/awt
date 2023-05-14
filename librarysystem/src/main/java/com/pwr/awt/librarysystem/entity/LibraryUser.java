@@ -1,5 +1,6 @@
 package com.pwr.awt.librarysystem.entity;
 
+import com.pwr.awt.librarysystem.security.Role;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,8 +12,8 @@ public class LibraryUser {
     private String username;
     private String password;
     //TODO:    Will be changed to enum, now just a draft
-    private String role;
-    @OneToOne
+    private Role role;
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_info_id")
     private UserInfo userInfo;
 
@@ -46,11 +47,11 @@ public class LibraryUser {
         return this;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public LibraryUser setRole(String role) {
+    public LibraryUser setRole(Role role) {
         this.role = role;
         return this;
     }

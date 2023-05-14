@@ -1,6 +1,7 @@
 package com.pwr.awt.librarysystem.dto;
 
 import com.pwr.awt.librarysystem.entity.UserInfo;
+import com.pwr.awt.librarysystem.security.Role;
 
 
 public class LibraryUserDTO {
@@ -8,7 +9,7 @@ public class LibraryUserDTO {
     private String username;
     private String password;
     //TODO:    Will be changed to enum, now just a draft
-    private String role;
+    private Role role;
     private UserInfoDTO userInfo;
 
     public LibraryUserDTO() {
@@ -41,11 +42,11 @@ public class LibraryUserDTO {
         return this;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public LibraryUserDTO setRole(String role) {
+    public LibraryUserDTO setRole(Role role) {
         this.role = role;
         return this;
     }

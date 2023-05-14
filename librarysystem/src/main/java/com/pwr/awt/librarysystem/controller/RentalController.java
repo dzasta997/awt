@@ -1,7 +1,10 @@
 package com.pwr.awt.librarysystem.controller;
 
+import com.pwr.awt.librarysystem.dto.CopyDTO;
 import com.pwr.awt.librarysystem.dto.RentalDTO;
+import com.pwr.awt.librarysystem.entity.Copy;
 import com.pwr.awt.librarysystem.entity.Rental;
+import com.pwr.awt.librarysystem.mapper.CopyMapper;
 import com.pwr.awt.librarysystem.mapper.RentalMapper;
 import com.pwr.awt.librarysystem.service.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +20,13 @@ import java.util.List;
 @RequestMapping("rentals")
 public class RentalController {
     private final RentalMapper rentalMapper;
+    private final CopyMapper copyMapper;
     private final RentalService rentalService;
 
     @Autowired
-    public RentalController(RentalMapper rentalMapper, RentalService rentalService) {
+    public RentalController(RentalMapper rentalMapper, CopyMapper copyMapper, RentalService rentalService) {
         this.rentalMapper = rentalMapper;
+        this.copyMapper = copyMapper;
         this.rentalService = rentalService;
     }
 
@@ -37,10 +42,17 @@ public class RentalController {
         return new ResponseEntity<>(rentalMapper.toDto(rental), HttpStatus.OK);
     }
 
+//    @PostMapping
+//    public ResponseEntity<RentalDTO> postRental(@RequestBody RentalDTO rentalDTO) {
+//        Rental rentalSaved = rentalService.saveRental(rentalMapper.toEntity(rentalDTO));
+//        return new ResponseEntity<>(rentalMapper.toDto(rentalSaved), HttpStatus.OK);
+//    }
+
     @PostMapping
-    public ResponseEntity<RentalDTO> postRental(@RequestBody RentalDTO rentalDTO) {
-        Rental rentalSaved = rentalService.saveRental(rentalMapper.toEntity(rentalDTO));
-        return new ResponseEntity<>(rentalMapper.toDto(rentalSaved), HttpStatus.OK);
+    public ResponseEntity<RentalDTO> postRental(@RequestBody CopyDTO copyDTO) {
+        Copy copy = copyMapper.toEntity(copyDTO);
+        Rental rental = rentalService.addRental(copy);
+        return new ResponseEntity<>(rentalMapper.toDto(rental), HttpStatus.OK);
     }
 
     @Transactional
