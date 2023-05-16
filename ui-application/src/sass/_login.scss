@@ -1,0 +1,174 @@
+.login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 80%;
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 80%;
+    gap: 2px;
+
+    &__close {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      outline: 0;
+      position: absolute;
+      top: 15rem; // Adjust this to position the button at the top
+      right: -11rem; // Adjust this to position the button at the right
+    }
+  }
+
+  &--picture {
+    max-width: 120rem;
+    position: absolute;
+    z-index: -1;
+  }
+
+  &__box {
+    width: 50rem;
+    height: 26rem;
+    padding: 2rem;
+    margin-left: -49rem;
+
+    &__input {
+      font-size: 1.5rem;
+      border: none;
+      min-width: 90%;
+      height: 4.7rem;
+      border-radius: 1rem;
+      padding: 1.5rem 2rem;
+      line-height: 1rem;
+      border-radius: 2rem;
+      margin-bottom: 2rem;
+      background-color: rgba(255, 255, 255, 0.85);
+      transition: all 0.3s;
+      width: calc(100% - 4rem); // Adjust the width to accommodate the SVG icons
+      padding-left: 4rem; 
+    }
+
+    &__group {
+      position: relative;
+      width: 100%;
+      margin-bottom: 2rem;
+
+      svg {
+        position: absolute;
+        vertical-align: auto;
+        top: 25%;
+        left: 1rem; // Change from right to left
+        transform: translateY(-50%);
+        pointer-events: none;
+        overflow: hidden;
+      }
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba(#333, 0.1);
+    }
+
+    &::-webkit-input-placeholder {
+      color: var(--color-grey-dark-1);
+    }
+
+    &__password {
+      border: none;
+      width: 40rem;
+      height: 5.7rem;
+      line-height: 1rem;
+      border-radius: 2rem;
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    &__label {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-left: 2rem;
+      margin-top: 0.7rem;
+      display: block;
+      transition: all 0.5s ease;
+    }
+
+    &__input:placeholder-shown + &__label {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-4rem);
+    }
+
+    &__button {
+      font-family: inherit;
+      background-color: var(--color-white);
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1.5rem 4rem;
+      display: inline-block;
+      border-radius: 10rem;
+      transition: all 0.2s;
+      position: relative;
+      top: -2rem;
+      right: 3rem;
+      max-width: 20rem;
+      //Change for the <button> element
+      border: none;
+      cursor: pointer;
+
+      &:focus {
+        box-shadow: 0 0 1rem rgba(var(--color-white), 0.5); // Change the color to yellow
+        outline: none; // Remove the default blue outline
+      }
+
+      &:active {
+        transform: scale(
+          0.95
+        ); // Slightly decrease the size when the button is pressed
+      }
+
+      &:hover:not(:active) {
+        background-color: rgba(
+          255,
+          255,
+          0,
+          0.2
+        ); // Slightly change the background color when hovering
+      }
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__close {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: 0;
+    position: absolute;
+    top: 24.7rem; // Change this to position the button at the top
+    right: 45.12rem; // Add this to position the button at the right
+    transform: translate(-50%, -50%);
+  }
+}
