@@ -58,4 +58,14 @@ public class RentalService {
                 .setLibraryUser(libraryUser);
         return rentalRepository.save(rental);
     }
+
+    public List<Rental> userRentals(){
+        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        return rentalRepository.findByLibraryUser_Username(username);
+    }
+
+    public List<Rental> userCurrentRentals(){
+        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        return rentalRepository.findByReturnDateIsNullAndLibraryUser_Username(username);
+    }
 }
