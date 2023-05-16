@@ -50,7 +50,6 @@ public class SecurityConfig {
         return http
                .httpBasic().and()
 //                .formLogin(form -> form
-//                        .loginPage("/login")
 ////                        .successForwardUrl("/success")
 ////                        .failureHandler(authenticationFailureHandler))
                 .authorizeHttpRequests()
