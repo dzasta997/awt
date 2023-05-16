@@ -52,7 +52,7 @@ public class SecurityConfig {
 //                .formLogin(form -> form.successForwardUrl("/success")
 //                        .failureHandler(authenticationFailureHandler))
                 .authorizeHttpRequests()
-                .requestMatchers("/user/**").permitAll()
+                .requestMatchers("/books/**", "GET").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .authenticationProvider(authenticationProvider())

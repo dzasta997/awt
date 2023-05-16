@@ -13,6 +13,7 @@ import com.pwr.awt.librarysystem.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -36,18 +37,21 @@ public class BookController {
         this.authorService = authorService;
     }
 
+    @PreAuthorize("permitAll()")
     @GetMapping
     public ResponseEntity<List<BookDTO>> getAllBooks() {
         List<Book> books = bookService.findAll();
         return new ResponseEntity<>(bookMapper.toDto(books), HttpStatus.OK);
     }
 
+    @PreAuthorize("permitAll()")
     @PostMapping
     public ResponseEntity<BookDTO> postBook(@RequestBody BookDTO bookDTO) {
         Book bookSaved = bookService.saveBook(bookMapper.toEntity(bookDTO));
         return new ResponseEntity<>(bookMapper.toDto(bookSaved), HttpStatus.OK);
     }
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/{id}")
     public ResponseEntity<BookDTO> getBook(@PathVariable long id) {
         Book book = bookService.findByBookId(id);
@@ -100,6 +104,7 @@ public class BookController {
         return new ResponseEntity<>(bookMapper.toDto(updated), HttpStatus.OK);
     }
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/search")
     public ResponseEntity<List<BookDTO>> searchBook(
                                               @RequestParam Optional<String> firstName,

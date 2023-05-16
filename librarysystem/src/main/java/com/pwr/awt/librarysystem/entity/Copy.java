@@ -16,6 +16,8 @@ public class Copy {
     @JoinColumn(name = "book_id")
     private Book book;
 
+    private boolean rented;
+
     public Copy() {
     }
 
@@ -61,6 +63,15 @@ public class Copy {
 
     public Copy setBook(Book book) {
         this.book = book;
+        return this;
+    }
+
+    public boolean isRented() {
+        return rented;
+    }
+
+    public Copy setRented(boolean rented) {
+        this.rented = rented;
         return this;
     }
 }
