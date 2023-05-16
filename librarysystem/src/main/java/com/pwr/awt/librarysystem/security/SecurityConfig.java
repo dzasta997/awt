@@ -51,10 +51,10 @@ public class SecurityConfig {
                .httpBasic().and()
 //                .formLogin(form -> form
 //                        .loginPage("/login")
-//                        .successForwardUrl("/success")
-//                        .failureHandler(authenticationFailureHandler))
+////                        .successForwardUrl("/success")
+////                        .failureHandler(authenticationFailureHandler))
                 .authorizeHttpRequests()
-                .requestMatchers("/login").permitAll()
+                .requestMatchers("/books/**", "GET").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .authenticationProvider(authenticationProvider())
