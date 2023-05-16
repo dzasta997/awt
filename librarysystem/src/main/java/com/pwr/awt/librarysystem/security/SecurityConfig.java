@@ -48,11 +48,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-//                .httpBasic().and()
-                .formLogin(form -> form.successForwardUrl("/success")
-                        .failureHandler(authenticationFailureHandler))
+               .httpBasic().and()
+//                .formLogin(form -> form
+//                        .loginPage("/login")
+//                        .successForwardUrl("/success")
+//                        .failureHandler(authenticationFailureHandler))
                 .authorizeHttpRequests()
-                .requestMatchers("/user/**").permitAll()
+                .requestMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .authenticationProvider(authenticationProvider())

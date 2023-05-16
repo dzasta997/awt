@@ -42,13 +42,13 @@ public class RentalController {
         return new ResponseEntity<>(rentalMapper.toDto(rental), HttpStatus.OK);
     }
 
-//    @PostMapping
-//    public ResponseEntity<RentalDTO> postRental(@RequestBody RentalDTO rentalDTO) {
-//        Rental rentalSaved = rentalService.saveRental(rentalMapper.toEntity(rentalDTO));
-//        return new ResponseEntity<>(rentalMapper.toDto(rentalSaved), HttpStatus.OK);
-//    }
-
     @PostMapping
+    public ResponseEntity<RentalDTO> postRental(@RequestBody RentalDTO rentalDTO) {
+        Rental rentalSaved = rentalService.saveRental(rentalMapper.toEntity(rentalDTO));
+        return new ResponseEntity<>(rentalMapper.toDto(rentalSaved), HttpStatus.OK);
+    }
+
+    @PostMapping("/new")
     public ResponseEntity<RentalDTO> postRental(@RequestBody CopyDTO copyDTO) {
         Copy copy = copyMapper.toEntity(copyDTO);
         Rental rental = rentalService.addRental(copy);
@@ -62,5 +62,16 @@ public class RentalController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<RentalDTO>> getUserRental(){
+        List<Rental> rentals = rentalService.userRentals();
+        return new ResponseEntity<>(rentalMapper.toDto(rentals), HttpStatus.OK);
+    }
+
+    @GetMapping("/current")
+    public ResponseEntity<List<RentalDTO>> getUserCurrentRental(){
+        List<Rental> rentals = rentalService.userCurrentRentals();
+        return new ResponseEntity<>(rentalMapper.toDto(rentals), HttpStatus.OK);
+    }
 
 }
