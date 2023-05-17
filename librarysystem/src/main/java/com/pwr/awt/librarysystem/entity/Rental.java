@@ -1,5 +1,6 @@
 package com.pwr.awt.librarysystem.entity;
 
+import com.pwr.awt.librarysystem.enumeration.RentalStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ public class Rental {
     private LocalDate rentalDate;
     private LocalDate dueDate;
     private LocalDate returnDate;
-    private boolean penalty;
+    private RentalStatus status;
     @ManyToOne
     @JoinColumn(name = "copy_id")
     private Copy copy;
@@ -59,12 +60,12 @@ public class Rental {
         return this;
     }
 
-    public boolean isPenalty() {
-        return penalty;
+    public RentalStatus getStatus() {
+        return status;
     }
 
-    public Rental setPenalty(boolean penalty) {
-        this.penalty = penalty;
+    public Rental setStatus(RentalStatus status) {
+        this.status = status;
         return this;
     }
 

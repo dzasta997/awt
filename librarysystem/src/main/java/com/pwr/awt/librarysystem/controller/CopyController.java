@@ -7,6 +7,7 @@ import com.pwr.awt.librarysystem.service.CopyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +26,14 @@ public class CopyController {
         this.categoryService = categoryService;
     }
 
+    @PreAuthorize("permitAll()")
     @GetMapping
     public ResponseEntity<List<CopyDTO>> getAllCopies() {
         List<Copy> copies = categoryService.findAll();
         return new ResponseEntity<>(categoryMapper.toDto(copies), HttpStatus.OK);
     }
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/{id}")
     public ResponseEntity<CopyDTO> getCopy(@PathVariable long id) {
         Copy category = categoryService.findByCopyId(id);
