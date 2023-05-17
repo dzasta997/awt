@@ -1,0 +1,664 @@
+_type: export
+__export_format: 4
+__export_date: 2023-05-17T19:56:27.818Z
+__export_source: insomnia.desktop.app:v2023.1.0
+resources:
+  - _id: req_05479a827b78473494afe794055bade3
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1684352124457
+    created: 1684352014882
+    url: http://localhost:8080/rentals/all?status=RESERVED
+    name: get all rentals
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: employee
+      password: pass
+    metaSortKey: -1684352014882
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_801c552775724156ad6ddf9855c410e4
+    parentId: null
+    modified: 1680720492466
+    created: 1680720492466
+    name: My Collection
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_422077c3f2404066b5245e9a8d7f7cc8
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1684345286458
+    created: 1684344989545
+    url: http://localhost:8080/rentals/1
+    name: Return Book
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"status":"RETURNED"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: admin
+      password: pass
+    metaSortKey: -1684344989545
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e72dfc3338674177bd985e5fc47b1e5a
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1684344982380
+    created: 1684344268888
+    url: http://localhost:8080/rentals/1
+    name: Rental Status
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"status":"RENTED"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: admin
+      password: pass
+    metaSortKey: -1684344268888
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_dbbb8773c9e145198380fae163c1c06d
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1684086865142
+    created: 1684086744900
+    url: http://localhost:8080/copies
+    name: add copy
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"isbn": "ISBN-1234-5678",
+        	"description": "New edition",
+        	"publicationYear": 2022,
+        	"book": {
+        		"bookId":1
+        	}
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: admin
+      password: pass
+    metaSortKey: -1684086744900
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_4dd4177a00b8481d993357debbd7c7d6
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1684086740512
+    created: 1684086698160
+    url: http://localhost:8080/copies
+    name: get copies
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: admin
+      password: pass
+    metaSortKey: -1684086698160
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_86a204168fa5457f888294c674b20323
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1684351387966
+    created: 1684085282825
+    url: http://localhost:8080/rentals?status=RENTED
+    name: get rentals
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: admin
+      password: pass
+    metaSortKey: -1684085282825
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8513ac16c25244599f59960536ae611d
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1684343132560
+    created: 1682686493538
+    url: http://localhost:8080/rentals/new
+    name: add rental
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+
+        		"copyId":1
+        
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: admin
+      password: pass
+    metaSortKey: -1682686493538
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2c7162d19be945c7a732fa5f8deba634
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1682686513389
+    created: 1682676726596
+    url: http://localhost:8080/books/search?title=booktest&firstName=Po
+    name: Search filter
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1682676726596
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a590e4a782204a5ba2ccfbdd6ccf493a
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1684340448287
+    created: 1680720499237
+    url: http://localhost:8080/books
+    name: add book
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+
+        	"title": "book",
+        	"description": "book test",
+        	"authors": [
+        		{
+        	"authorId": 1,
+        	"firstName": "Po",
+        	"lastName": "lali",
+        	"description": "best"
+        }
+        	],
+        	"categories": [{
+        	"categoryId": 1,
+        	"name": "fantasy",
+        	"description": "fantasyvoll"
+        }
+        
+        	]
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: admin
+      password: pass
+    metaSortKey: -1680805645720.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_85fd8c0d55b2434ba1f54780befabd72
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1680806210140
+    created: 1680806198498
+    url: http://localhost:8080/books/1/categories/1
+    name: add book category
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+
+        	"title": "booktest",
+        	"description": "test",
+        	"authors": [],
+        	"categories": []
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1680805645408.0938
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_80efb2de6bf8419ba81b4d528103cea8
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1680806471612
+    created: 1680806467650
+    url: http://localhost:8080/books/1/categories/1
+    name: remove book category
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+
+        	"title": "booktest",
+        	"description": "test",
+        	"authors": [],
+        	"categories": []
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1680805645330.0547
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_9218877f29d6405d858610cb37987612
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1680807168963
+    created: 1680806225801
+    url: http://localhost:8080/books/1/authors/3
+    name: add book author
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+
+        	"title": "booktest",
+        	"description": "test",
+        	"authors": [],
+        	"categories": []
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1680805645252.0156
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_428b5990ded1484798f3051aeecd2599
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1680806310493
+    created: 1680806307963
+    url: http://localhost:8080/books/1/authors/1
+    name: remove book author
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+
+        	"title": "booktest",
+        	"description": "test",
+        	"authors": [],
+        	"categories": []
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1680805645173.9766
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_6b7d1e080eef4229b2637aec70651b2f
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1684340393349
+    created: 1680806179034
+    url: http://localhost:8080/login
+    name: get books
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: |-
+        {
+
+        	"title": "booktest",
+        	"description": "test",
+        	"authors": [],
+        	"categories": []
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: admin
+      password: pass
+    metaSortKey: -1680805645095.9375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1219be4d835a4383b92a0f90e576c3d2
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1684086647806
+    created: 1680805646077
+    url: http://localhost:8080/authors
+    name: add author
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"firstName":"Po",
+        	"lastName":"lali",
+        	"description":"best"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: admin
+      password: pass
+    metaSortKey: -1680805644471.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_af72a45d74d34e91bae8c74eb998ee6b
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1680807198723
+    created: 1680807190813
+    url: http://localhost:8080/authors/3
+    name: delete author
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"firstName":"Po",
+        	"lastName":"lali",
+        	"description":"best"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1680805644159.4688
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_cc38bd4c1410403792a90a78f22b69fe
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1680807144804
+    created: 1680806003057
+    url: http://localhost:8080/authors
+    name: get authors
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"firstName":"Po",
+        	"lastName":"lali",
+        	"description":"best"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1680805643847.3125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3c49f7810d084a6b82890a9226c699f1
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1684086636265
+    created: 1680805643223
+    url: http://localhost:8080/categories
+    name: add category
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name":"fantasy",
+        	"description":"fantasyvoll"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: admin
+      password: pass
+    metaSortKey: -1680805643223
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_cb4554b38ac04da7a7de3cab4a262e5d
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1684258848403
+    created: 1680805980192
+    url: http://localhost:8080/categories
+    name: get categories
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name":"fantasy",
+        	"description":"fantasyvoll"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: admin
+      password: pass
+    metaSortKey: -1670160055295.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_1aa45e5b47f7a7d5fa3575f6dd51a8e0dc66ff31
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1680720492472
+    created: 1680720492472
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1680720492472
+    _type: environment
+  - _id: jar_1aa45e5b47f7a7d5fa3575f6dd51a8e0dc66ff31
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1684352033772
+    created: 1680720492474
+    name: Default Jar
+    cookies:
+      - key: JSESSIONID
+        value: 208D166AFBD301132E3AC9E4A165181F
+        domain: localhost
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2023-05-11T19:26:47.328Z
+        lastAccessed: 2023-05-17T19:33:53.772Z
+        id: "9891971860443345"
+    _type: cookie_jar
+  - _id: spc_a5b550f716014e7dbe8ad239a4295138
+    parentId: wrk_801c552775724156ad6ddf9855c410e4
+    modified: 1680720492467
+    created: 1680720492467
+    fileName: My Collection
+    contents: ""
+    contentType: yaml
+    _type: api_spec
