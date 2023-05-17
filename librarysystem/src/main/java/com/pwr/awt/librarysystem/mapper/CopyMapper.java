@@ -26,7 +26,9 @@ public class CopyMapper extends ApplicationMapper<Copy, CopyDTO>{
                     .setIsbn(copyDTO.getIsbn())
                     .setPublicationYear(copyDTO.getPublicationYear())
                     .setDescription(copyDTO.getDescription())
-                    .setBook(bookMapper.toEntity(copyDTO.getBook()));
+                    .setBook(bookMapper.toEntity(copyDTO.getBook()))
+                    .setRented(copyDTO.isRented());
+
     }
 
     @Override
@@ -39,6 +41,7 @@ public class CopyMapper extends ApplicationMapper<Copy, CopyDTO>{
                 .setIsbn(copy.getIsbn())
                 .setPublicationYear(copy.getPublicationYear())
                 .setDescription(copy.getDescription())
-                .setBook(bookMapper.toDto(copy.getBook()));
+                .setBook(bookMapper.toDto(copy.getBook()))
+                .setRented(copy.isRented());
     }
 }

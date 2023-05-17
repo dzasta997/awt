@@ -4,6 +4,7 @@ import com.pwr.awt.librarysystem.dto.CopyDTO;
 import com.pwr.awt.librarysystem.dto.RentalDTO;
 import com.pwr.awt.librarysystem.entity.Copy;
 import com.pwr.awt.librarysystem.entity.Rental;
+import com.pwr.awt.librarysystem.enumeration.RentalStatus;
 import com.pwr.awt.librarysystem.mapper.CopyMapper;
 import com.pwr.awt.librarysystem.mapper.RentalMapper;
 import com.pwr.awt.librarysystem.service.RentalService;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("rentals")
@@ -30,9 +32,9 @@ public class RentalController {
         this.rentalService = rentalService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<RentalDTO>> getAllRentals() {
-        List<Rental> rentals = rentalService.findAll();
+    @GetMapping("/all")
+    public ResponseEntity<List<RentalDTO>> getAllRentals(@RequestParam Optional<RentalStatus> status) {
+        List<Rental> rentals = rentalService.findAll(status);
         return new ResponseEntity<>(rentalMapper.toDto(rentals), HttpStatus.OK);
     }
 
@@ -40,6 +42,13 @@ public class RentalController {
     public ResponseEntity<RentalDTO> getRental(@PathVariable long id) {
         Rental rental = rentalService.findByRentalId(id);
         return new ResponseEntity<>(rentalMapper.toDto(rental), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<RentalDTO> changeRentalStatus(@PathVariable long id, @RequestBody RentalDTO rentalDTO ) {
+        Rental rental = rentalService.findByRentalId(id);
+        Rental updated = rentalService.updateRental(id, rentalMapper.toEntity(rentalDTO));
+        return new ResponseEntity<>(rentalMapper.toDto(updated), HttpStatus.OK);
     }
 
     @PostMapping
@@ -62,16 +71,11 @@ public class RentalController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<RentalDTO>> getUserRental(){
-        List<Rental> rentals = rentalService.userRentals();
+    @GetMapping
+    public ResponseEntity<List<RentalDTO>> getUserRental(@RequestParam Optional<RentalStatus> status){
+        List<Rental> rentals = rentalService.userRentals(status);
         return new ResponseEntity<>(rentalMapper.toDto(rentals), HttpStatus.OK);
     }
 
-    @GetMapping("/current")
-    public ResponseEntity<List<RentalDTO>> getUserCurrentRental(){
-        List<Rental> rentals = rentalService.userCurrentRentals();
-        return new ResponseEntity<>(rentalMapper.toDto(rentals), HttpStatus.OK);
-    }
 
 }

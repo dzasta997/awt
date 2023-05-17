@@ -27,7 +27,7 @@ public class RentalMapper extends ApplicationMapper<Rental, RentalDTO> {
                 .setRentalDate(rentalDTO.getRentalDate())
                 .setDueDate(rentalDTO.getDueDate())
                 .setReturnDate(rentalDTO.getReturnDate())
-                .setPenalty(rentalDTO.isPenalty())
+                .setStatus(rentalDTO.getStatus())
                 .setCopy(copyMapper.toEntity(rentalDTO.getCopy()))
                 .setLibraryUser(libraryUserMapper.toEntity(rentalDTO.getLibraryUser()));
     }
@@ -42,7 +42,7 @@ public class RentalMapper extends ApplicationMapper<Rental, RentalDTO> {
                 .setRentalDate(rental.getRentalDate())
                 .setDueDate(rental.getDueDate())
                 .setReturnDate(rental.getReturnDate())
-                .setPenalty(rental.isPenalty())
+                .setStatus(rental.getStatus())
                 .setCopy(copyMapper.toDto(rental.getCopy()))
                 .setLibraryUser(libraryUserMapper.toDto(rental.getLibraryUser()));
     }
