@@ -1,7 +1,5 @@
 package com.pwr.awt.librarysystem.dto;
 
-import com.pwr.awt.librarysystem.entity.Book;
-
 import java.time.LocalDate;
 
 public class CopyDTO {
@@ -10,6 +8,9 @@ public class CopyDTO {
     private String description;
     private LocalDate publicationYear;
     private BookDTO book;
+    private boolean rented;
+
+
 
     public CopyDTO() {
     }
@@ -56,6 +57,15 @@ public class CopyDTO {
 
     public CopyDTO setBook(BookDTO book) {
         this.book = book;
+        return this;
+    }
+
+    public boolean isRented() {
+        return rented;
+    }
+
+    public CopyDTO setRented(boolean rented) {
+        this.rented = rented;
         return this;
     }
 }

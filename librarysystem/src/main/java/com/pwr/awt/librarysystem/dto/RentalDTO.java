@@ -2,6 +2,7 @@ package com.pwr.awt.librarysystem.dto;
 
 import com.pwr.awt.librarysystem.entity.Copy;
 import com.pwr.awt.librarysystem.entity.LibraryUser;
+import com.pwr.awt.librarysystem.enumeration.RentalStatus;
 
 import java.time.LocalDate;
 
@@ -10,7 +11,7 @@ public class RentalDTO {
     private LocalDate rentalDate;
     private LocalDate dueDate;
     private LocalDate returnDate;
-    private boolean penalty;
+    private RentalStatus status;
     private CopyDTO copy;
     private LibraryUserDTO libraryUser;
 
@@ -53,12 +54,12 @@ public class RentalDTO {
         return this;
     }
 
-    public boolean isPenalty() {
-        return penalty;
+    public RentalStatus getStatus() {
+        return status;
     }
 
-    public RentalDTO setPenalty(boolean penalty) {
-        this.penalty = penalty;
+    public RentalDTO setStatus(RentalStatus status) {
+        this.status = status;
         return this;
     }
 

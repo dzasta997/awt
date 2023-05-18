@@ -2,6 +2,7 @@ package com.pwr.awt.librarysystem.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,13 +17,13 @@ public class Book {
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id")
             )
-    private List<Author> authors;
+    private List<Author> authors = new ArrayList<>();
     @ManyToMany
     @JoinTable(name="book_category",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<>();
     public Book() {
     }
 
