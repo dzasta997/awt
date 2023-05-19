@@ -13,12 +13,21 @@ const App: React.FC = () => {
   const [searchResults, setSearchResults] = useState<BookDTO[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userName, setUserName] = useState('');
+
   const handleButtonClick = () => {
     setLogInvisible(!isLogInvisible);
   };
 
   const toggleRegisterModal = () => {
     setIsRegisterVisible(!isRegisterVisible);
+  };
+
+  const handleLoginSuccess = (name: string) => {
+    setUserName(name);
+    setIsAuthenticated(true);
+    setLogInvisible(false);
   };
 
   return (
@@ -35,10 +44,13 @@ const App: React.FC = () => {
             setSearchResults(books);
             setHasSearched(true);
           }}
+          isAuthenticated={isAuthenticated}
+          userName={userName}
         />
         {hasSearched ? (
           searchResults.length > 0 ? (
-            <SearchResults books={searchResults} />
+            // Use the SearchResults component and pass an id prop to it
+            <SearchResults books={searchResults} id='app__search-results' />
           ) : (
             <p>No search results found.</p>
           )
@@ -46,7 +58,12 @@ const App: React.FC = () => {
           <AdContainer />
         )}
       </div>
-      {isLogInvisible && <Login onClose={handleButtonClick} />}
+      {isLogInvisible && (
+        <Login
+          onClose={handleButtonClick}
+          onLoginSuccess={handleLoginSuccess}
+        />
+      )}
       {isRegisterVisible && <Register onClose={toggleRegisterModal} />}
     </>
   );

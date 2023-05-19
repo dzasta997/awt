@@ -4,7 +4,12 @@ import picture from '../SvgContainer/picture--login.svg';
 import { login } from '../services/authService';
 import Popup from './Popup';  // import the Popup component
 
-const Login: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+interface LoginProps {
+  onClose: () => void;
+  onLoginSuccess: (name: string) => void;  // Add this line
+}
+
+const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
   // Add state for username and password
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -15,14 +20,16 @@ const Login: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     try {
       const data = await login(username, password);
       console.log('Login successful', data);
+      // Assuming that the "name" field is returned from the "login" function
+      onLoginSuccess(data.name);  // Add this line
       onClose();
     } catch (error) {
       console.error('Login failed', error);
-      setErrorMessage('Sorry, this account either does not exist or the password is incorrect.'); // Add this line
+      setErrorMessage('Sorry, this account either does not exist or the password is incorrect.');
     }
   };
 
-  const handlePopupClose = () => {  // Add this function
+  const handlePopupClose = () => {
     setErrorMessage('');
   };
 
