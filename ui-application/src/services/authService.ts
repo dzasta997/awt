@@ -1,11 +1,12 @@
 // api.ts
-import axios from 'axios'
+import api from '../api/api'
+import axios, { AxiosError } from 'axios';
 
 export const login = async (username: string, password: string) => {
   try {
     const encodedCredentials = window.btoa(`${username}:${password}`);
 
-    const response = await axios.get('/login', {
+    const response = await api.get('/login', {
       headers: {
         'Authorization': `Basic ${encodedCredentials}`
       }
@@ -25,6 +26,11 @@ export const login = async (username: string, password: string) => {
     throw new Error('Error logging in');
   } catch (error) {
     console.error(error);
-    throw error;
+    const axiosError = error as AxiosError;
+    if (axiosError.response && axiosError.response.status === 401) {
+      throw new Error('Incorrect username or password');
+    } else {
+      throw new Error('Error logging in');
+    }
   }
 };

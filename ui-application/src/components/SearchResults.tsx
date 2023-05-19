@@ -6,7 +6,7 @@ interface SearchResultsProps {
   books: BookDTO[]; // Replace BookDTO with the type of your book object
 }
 
-const SearchResults: React.FC<SearchResultsProps> = ({ books }) => {
+const SearchResults: React.FC<{ books: BookDTO[] }> = ({ books }) => {
   return (
     <div>
       {books.map((book) => (
@@ -18,5 +18,6 @@ const SearchResults: React.FC<SearchResultsProps> = ({ books }) => {
     </div>
   );
 };
+
 
 export default SearchResults;

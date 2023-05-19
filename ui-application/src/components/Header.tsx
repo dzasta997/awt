@@ -16,13 +16,10 @@ const Header: React.FC<{
     event.preventDefault();
     const books = await searchBooks(
       searchText,
-      searchText,
-      searchText,
-      searchText
     );
     onSearch(books);
   };
-
+  
   return (
     <header className='header'>
       <div className='header__logo-container'>
