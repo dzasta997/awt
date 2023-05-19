@@ -1,0 +1,70 @@
+// A simple style file for the search results component
+// Use an id selector for the component
+#app__search-results {
+  // Use a yellow border for the component
+  border: 1rem solid var(--color-primary);
+  border-radius: 1.3rem;
+  // Use some padding and margin for spacing
+  padding: 1rem;
+  // Use a margin of auto to center the component horizontally
+  margin: 2.7rem auto;
+  // Use a grid layout to align the items
+  display: grid;
+  // Use three columns for the grid layout
+  grid-template-columns: 1fr 1fr auto;
+  grid-gap: 1rem;
+  width: 40%;
+  // Use a nested selector for the item class
+  .item {
+    // Use a nested selector for the title class
+    position: relative;
+    .title {
+      // Use a bold font weight and a larger font size
+      font-weight: bold;
+      font-size: 2.3rem;
+    }
+
+    // Use a nested selector for the description class
+    .description {
+      // Use a normal font weight and a smaller font size
+      font-weight: normal;
+      font-size: 2rem;
+    }
+
+    // Use a class selector for the button element
+    .borrow-button {
+      position: absolute;
+      right: -32rem;
+      top: 85%;
+      transform: translateY(-50%);
+      // Use no border for the button
+      border: none;
+      // Use some padding for spacing
+      padding: 0.5rem 1rem;
+      // Use a border radius for round corners
+      border-radius: 0.5rem;
+      // Use a white color for the text
+      // Use a nice font family for the text
+      font-family: 'Roboto', sans-serif;
+      // Use a relative unit for the font size
+      font-size: 1.5rem;
+      // Use a box shadow for some depth effect
+      box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+      // Use a transition property to animate the color and box shadow properties
+      transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        // Change the color and box shadow properties when hovering over the button
+        color: white;
+        box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+      }
+
+      &:active {
+        // Change the color and box shadow properties when clicking on the button
+        color: white;
+        box-shadow: inset 0 -0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}

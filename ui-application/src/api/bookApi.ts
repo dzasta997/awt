@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios from '../api/api'
+import { BookDTO } from './types';
 
 const API_BASE_URL = 'http://localhost:8080';
 
@@ -19,4 +20,15 @@ export const postBook = async (book: any) => {
 
 export const deleteBook = async (id: number) => {
   await axios.delete(`${API_BASE_URL}/books/${id}`);
+};
+
+export const searchBooks = async (
+  title?: string
+): Promise<BookDTO[]> => {
+  const response = await axios.get(`${API_BASE_URL}/books/search`, {
+    params: {
+      title: title,
+    },
+  });
+  return response.data;
 };
