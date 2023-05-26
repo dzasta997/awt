@@ -44,6 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             UserInfo userInfo = new UserInfo();
             userInfo.setFirstName("Andrew");
             userInfo.setLastName("Bernard");
+            userInfo.setEmail("filtracjaseparacja@gmail.com");
             LibraryUser user = new LibraryUser();
             user.setUserInfo(userInfo);
             user.setUsername(username);
