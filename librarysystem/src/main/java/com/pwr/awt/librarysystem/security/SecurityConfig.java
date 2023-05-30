@@ -53,6 +53,7 @@ public class SecurityConfig {
 //                        .failureHandler(authenticationFailureHandler))
                 .authorizeHttpRequests()
                 .requestMatchers("/books/**", "GET").permitAll()
+                .requestMatchers("/users", "POST").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .authenticationProvider(authenticationProvider())
