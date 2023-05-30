@@ -7,8 +7,7 @@ const encodedCredentials = window.btoa('admin:pass');
 const instance = axios.create({
   baseURL: 'http://localhost:8080', // Replace this with your server URL
   headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Basic ${encodedCredentials}`
+    'Content-Type': 'application/json'
   },
 });
 
@@ -18,12 +17,8 @@ instance.interceptors.request.use((config) => {
 
   if (user && user.authdata) {
     config.headers['Authorization'] = 'Basic ' + user.authdata;
-  } else {
-    config.headers['Authorization'] = `Basic ${encodedCredentials}`;
   }
-
   return config;
 });
-
 
 export default instance;

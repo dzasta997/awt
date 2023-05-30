@@ -17,7 +17,7 @@ export const login = async (username: string, password: string) => {
 
       if (data) {
         // save user data to localStorage
-        localStorage.setItem('user', JSON.stringify(data));
+        localStorage.setItem('user', JSON.stringify(`${username}:${password}`));
       }
 
       return data;

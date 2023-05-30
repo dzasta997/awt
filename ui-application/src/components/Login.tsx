@@ -2,30 +2,32 @@ import React, { useState } from 'react';
 import '../sass/main.scss';
 import picture from '../SvgContainer/picture--login.svg';
 import { login } from '../services/authService';
-import Popup from './Popup';  // import the Popup component
+import Popup from './Popup'; // import the Popup component
 
 interface LoginProps {
   onClose: () => void;
-  onLoginSuccess: (name: string) => void;  // Add this line
+  onLoginSuccess: (name: string) => void; // Add this line
 }
 
 const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
   // Add state for username and password
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');  // Add this line
+  const [errorMessage, setErrorMessage] = useState(''); // Add this line
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
+      setErrorMessage(''); // Clear the error message
       const data = await login(username, password);
       console.log('Login successful', data);
-      // Assuming that the "name" field is returned from the "login" function
-      onLoginSuccess(data); 
-      onClose(); 
+      onLoginSuccess(data);
+      onClose();
     } catch (error) {
       console.error('Login failed', error);
-      setErrorMessage('Sorry, this account either does not exist or the password is incorrect.');
+      setErrorMessage(
+        'Sorry, this account either does not exist or the password is incorrect.'
+      );
     }
   };
 
@@ -113,7 +115,10 @@ const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
             </svg>
           </button>
         </div>
-        {errorMessage && <Popup message={errorMessage} onClose={handlePopupClose} />}  {/* Add this line */}
+        {errorMessage && (
+          <Popup message={errorMessage} onClose={handlePopupClose} />
+        )}{' '}
+        {/* Add this line */}
       </div>
     </div>
   );
