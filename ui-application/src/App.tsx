@@ -30,6 +30,11 @@ const App: React.FC = () => {
     setLogInvisible(false);
   };
 
+  const handleSearch = (books: BookDTO[]) => {
+    setSearchResults(books);
+    setHasSearched(true);
+  };
+
   return (
     <>
       <div
@@ -40,16 +45,12 @@ const App: React.FC = () => {
         <Header
           onButtonClick={handleButtonClick}
           onRegisterClick={toggleRegisterModal}
-          onSearch={(books) => {
-            setSearchResults(books);
-            setHasSearched(true);
-          }}
+          onSearch={handleSearch} // Pass the handleSearch function directly
           isAuthenticated={isAuthenticated}
           userName={userName}
         />
         {hasSearched ? (
           searchResults.length > 0 ? (
-            // Use the SearchResults component and pass an id prop to it
             <SearchResults books={searchResults} id='app__search-results' />
           ) : (
             <p>No search results found.</p>

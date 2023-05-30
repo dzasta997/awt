@@ -1,41 +1,34 @@
-import api from './api';
+import axios from '../api/api';
+import { LibraryUserDTO } from './types';
 
+const API_BASE_URL = 'http://localhost:8080';
+
+// Get All Users
 export const getAllLibraryUsers = async () => {
-  try {
-    const response = await api.get('/users');
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching library users:', error);
-    throw error;
-  }
+  const { data } = await axios.get<LibraryUserDTO[]>(`${API_BASE_URL}/users`);
+  return data;
 };
 
-export const getLibraryUserById = async (id: number) => {
-  try {
-    const response = await api.get(`/users/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error(`Error fetching library user with ID ${id}:`, error);
-    throw error;
-  }
+// Get User by Id
+export const getLibraryUser = async (id: number) => {
+  const { data } = await axios.get<LibraryUserDTO>(`${API_BASE_URL}/users/${id}`);
+  return data;
 };
 
-export const postLibraryUser = async (libraryUser: any) => {
-  try {
-    const response = await api.post('/users', libraryUser);
-    return response.data;
-  } catch (error) {
-    console.error('Error posting library user:', error);
-    throw error;
-  }
+// Create User
+export const postLibraryUser = async (user: LibraryUserDTO) => {
+  await axios.post<LibraryUserDTO>(`${API_BASE_URL}/users`, user);
 };
 
+// Delete User
 export const deleteLibraryUser = async (id: number) => {
-  try {
-    const response = await api.delete(`/users/${id}`);
-    return response.status;
-  } catch (error) {
-    console.error(`Error deleting library user with ID ${id}:`, error);
-    throw error;
-  }
+  await axios.delete(`${API_BASE_URL}/users/${id}`);
 };
+
+// Get Current User
+export const getCurrentUsername = async () => {
+  const { data } = await axios.get<string>(`${API_BASE_URL}/users/user`);
+  return data;
+};
+
+

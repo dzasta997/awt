@@ -22,13 +22,19 @@ export const deleteBook = async (id: number) => {
   await axios.delete(`${API_BASE_URL}/books/${id}`);
 };
 
-export const searchBooks = async (
-  title?: string
-): Promise<BookDTO[]> => {
-  const response = await axios.get(`${API_BASE_URL}/books/search`, {
-    params: {
-      title: title,
-    },
-  });
-  return response.data;
+export interface SearchParams {
+  firstName?: string;
+  lastName?: string;
+  category?: string;
+  title?: string;
+}
+
+export const searchBooks = async (params: SearchParams) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/books/search`);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to search books', error);
+    throw error;
+  }
 };

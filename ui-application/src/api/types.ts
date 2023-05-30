@@ -1,14 +1,10 @@
 export interface Author {
-  authorId: number;
   firstName: string;
   lastName: string;
-  description: string;
 }
 
 export interface Category {
-  categoryId: number;
   name: string;
-  description: string;
 }
 
 export interface BookDTO {
@@ -18,3 +14,39 @@ export interface BookDTO {
   authors: Author[];
   categories: Category[];
 }
+
+
+export interface AddressDTO {
+  street: string;
+  number: string;
+  city: string;
+  zipcode: string;
+}
+
+export interface AddressDTO {
+  street: string;
+  number: string;
+  city: string;
+  zipcode: string;
+}
+
+export interface LibraryUserDTO {
+  id?: number;
+  username: string;
+  password: string;
+  repeatPassword: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: {
+    street: string;
+    number: string;
+    city: string;
+    zipcode: string;
+  };
+  phoneNumber: string; // Add the phoneNumber property
+}
+
+
+
+

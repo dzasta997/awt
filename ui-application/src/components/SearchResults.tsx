@@ -15,16 +15,27 @@ const SearchResults: React.FC<SearchResultsProps> = ({ books, id }) => {
     console.log(`Borrowing book with id ${bookId}`);
   };
 
-  // Use the id prop for the component div element
   return (
     <div id={id}>
       {books.map((book) => (
-        // Use a div element with a class name of item for each book
         <div key={book.bookId} className='item'>
-          {/* Wrap the title and description in a container */}
           <div className='content'>
             <div className='title' role='heading' aria-level={2}>
               {book.title}
+            </div>
+            <div className='author' role='paragraph'>
+              {book.authors.map((author, index) => (
+                <div key={index}>
+                  {author.firstName} {author.lastName}
+                </div>
+              ))}
+            </div>
+            <div className='category' role='paragraph'>
+              {book.categories.map((category, index) => (
+                <div key={index}>
+                  {category.name}
+                </div>
+              ))}
             </div>
             <div className='description' role='paragraph'>
               {book.description}

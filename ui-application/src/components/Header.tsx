@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import '../sass/main.scss';
 import logo from '../SvgContainer/logo.svg';
-import searchIcon from '../SvgContainer/search.svg';
+import Search from './Search';
 import { BookDTO } from '../api/types';
-import { searchBooks } from '../api/bookApi';
-import profilePhoto from '../SvgContainer/healthicons_ui-user-profile.svg';
 
 interface HeaderProps {
   onButtonClick: () => void;
   onRegisterClick: () => void;
-  onSearch: (books: BookDTO[]) => void;
+  onSearch: (books: BookDTO[]) => void; // Add the onSearch prop
   isAuthenticated: boolean;
   userName: string;
 }
@@ -17,18 +15,9 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({
   onButtonClick,
   onRegisterClick,
-  onSearch,
   isAuthenticated,
   userName,
 }) => {
-  const [searchText, setSearchText] = useState('');
-
-  const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const books = await searchBooks(searchText);
-    onSearch(books);
-  };
-
   const handleLogoClick = () => {
     window.location.assign('/');
   };
@@ -43,23 +32,10 @@ const Header: React.FC<HeaderProps> = ({
           System
         </h1>
       </div>
-      <form action='#' className='search' onSubmit={handleSearch}>
-        <input
-          type='text'
-          className='search__input'
-          placeholder='Search...'
-          onChange={(event) => setSearchText(event.target.value)}
-        />
-        <button className='search__button'>
-          <img src={searchIcon} alt='searchIcon' />
-        </button>
-      </form>
+      <Search onSearch={(books) => console.log(books)} />
       <nav className='user-nav'>
         {isAuthenticated ? (
-          <>
-            <img src={profilePhoto} alt='Profile' />
-            <p>Hello, {userName}. What do you want to do today?</p>
-          </>
+          <>{/* Profile information */}</>
         ) : (
           <>
             <button className='user-nav__register' onClick={onRegisterClick}>
