@@ -9,7 +9,7 @@ def send_email(subject, name, title, receiver_email):
     port = 587  # For SSL
     smtp_server = "smtp.gmail.com"
     sender_email = "233889@student.pwr.edu.pl"
-    password = "Kosiarka1"
+    password = "placeholder"
 
     context = ssl.create_default_context()
 
