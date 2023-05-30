@@ -118,7 +118,6 @@ const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
         {errorMessage && (
           <Popup message={errorMessage} onClose={handlePopupClose} />
         )}{' '}
-        {/* Add this line */}
       </div>
     </div>
   );
