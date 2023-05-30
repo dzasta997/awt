@@ -7,6 +7,7 @@ import com.pwr.awt.librarysystem.service.LibraryUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,7 @@ public class LibraryUserController {
         return new ResponseEntity<>(libraryUserMapper.toDto(libraryUser), HttpStatus.OK);
     }
 
+    @PreAuthorize("permitAll()")
     @PostMapping
     public ResponseEntity<LibraryUserDTO> postLibraryUser(@RequestBody LibraryUserDTO libraryUserDTO) {
         LibraryUser libraryUserSaved = libraryUserService.saveLibraryUser(libraryUserMapper.toEntity(libraryUserDTO));
