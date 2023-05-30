@@ -3,6 +3,7 @@ import '../sass/main.scss';
 import { BookDTO } from '../api/types';
 import searchIcon from '../SvgContainer/search.svg';
 import filterIcon from '../SvgContainer/ion_filter-sharp.svg';
+import { searchBooks } from '../api/bookApi';
 
 interface SearchProps {
   onSearch: (books: BookDTO[]) => void;
@@ -22,10 +23,8 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      // Perform the search and obtain the books
-      // Use the onSearch prop to pass the books to the parent component
-      // Example API call: const books: BookDTO[] = await searchBooks(searchFields);
-      // onSearch(books);
+      const books: BookDTO[] = await searchBooks(searchFields);
+      onSearch(books);
     } catch (error) {
       console.error('Search failed', error);
     }
@@ -43,7 +42,11 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
   };
 
   return (
-    <form action='#' className={`search ${filterActive ? 'filter-active' : ''}`} onSubmit={handleSearch}>
+    <form
+      action='#'
+      className={`search ${filterActive ? 'filter-active' : ''}`}
+      onSubmit={handleSearch}
+    >
       <input
         type='text'
         name='title'
@@ -52,18 +55,13 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
         onChange={handleFieldChange}
       />
       <button className='search__button'>
-        <img
-          src={searchIcon}
-          alt='searchIcon'
-          className='search__icon'
-        />
+        <img src={searchIcon} alt='searchIcon' className='search__icon' />
       </button>
-      <button className={`search__filter-button ${filterActive ? 'active' : ''}`} onClick={handleFilterClick}>
-        <img
-          src={filterIcon}
-          alt='filterIcon'
-          className='search__icon'
-        />
+      <button
+        className={`search__filter-button ${filterActive ? 'active' : ''}`}
+        onClick={handleFilterClick}
+      >
+        <img src={filterIcon} alt='filterIcon' className='search__icon' />
       </button>
       {filterActive && (
         <div className='search__filter-content'>

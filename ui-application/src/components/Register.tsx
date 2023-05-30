@@ -18,7 +18,7 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       city: '',
       zipcode: '',
     },
-    phoneNumber: '', 
+    phoneNumber: '',
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +51,7 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         firstName: form.firstName,
         lastName: form.lastName,
         email: form.email,
-        phoneNumber: form.phoneNumber, // Add phoneNumber property
+        phoneNumber: form.phoneNumber,
         address: {
           street: form.address.street,
           number: form.address.number,
@@ -87,9 +87,6 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               value={form.firstName}
               onChange={handleInputChange}
             />
-            <label htmlFor='firstName' className='register__label'>
-              First Name
-            </label>
             <input
               type='text'
               id='lastName'
@@ -100,9 +97,6 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               value={form.lastName}
               onChange={handleInputChange}
             />
-            <label htmlFor='lastName' className='register__label'>
-              Last Name
-            </label>
             <input
               type='email'
               id='email'
@@ -113,15 +107,9 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               value={form.email}
               onChange={handleInputChange}
             />
-            <label htmlFor='email' className='register__label'>
-              Email
-            </label>
           </div>
 
           <div className='register__column register__column--address'>
-            <label htmlFor='street' className='register__label'>
-              Street
-            </label>
             <input
               type='text'
               id='number'
@@ -132,9 +120,6 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               value={form.address.number}
               onChange={handleAddressChange}
             />
-            <label htmlFor='number' className='register__label'>
-              Number
-            </label>
             <input
               type='text'
               id='city'
@@ -145,9 +130,6 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               value={form.address.city}
               onChange={handleAddressChange}
             />
-            <label htmlFor='city' className='register__label'>
-              City
-            </label>
             <input
               type='text'
               id='zipcode'
@@ -158,9 +140,6 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               value={form.address.zipcode}
               onChange={handleAddressChange}
             />
-            <label htmlFor='zipcode' className='register__label'>
-              Zip Code
-            </label>
           </div>
 
           <div className='register__column'>
@@ -174,9 +153,6 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               value={form.password}
               onChange={handleInputChange}
             />
-            <label htmlFor='password' className='register__label'>
-              Password
-            </label>
             <input
               type='password'
               id='repeatPassword'
@@ -187,9 +163,6 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               value={form.repeatPassword}
               onChange={handleInputChange}
             />
-            <label htmlFor='repeatPassword' className='register__label'>
-              Repeat Password
-            </label>
             <input
               type='text'
               id='street'
@@ -211,9 +184,6 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               value={form.phoneNumber}
               onChange={handleInputChange}
             />
-            <label htmlFor='phoneNumber' className='register__label'>
-              Phone Number
-            </label>
           </div>
         </div>
         <button className='register__close' onClick={onClose}>

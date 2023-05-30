@@ -31,7 +31,7 @@ export interface SearchParams {
 
 export const searchBooks = async (params: SearchParams) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/books/search`);
+    const response = await axios.get(`${API_BASE_URL}/books/search`, { params });
     return response.data;
   } catch (error) {
     console.error('Failed to search books', error);

@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import { BookDTO } from './api/types';
 import SearchResults from './components/SearchResults';
+import NoResults from './components/NoResults';
 
 const App: React.FC = () => {
   const [isLogInvisible, setLogInvisible] = useState(false);
@@ -53,7 +54,7 @@ const App: React.FC = () => {
           searchResults.length > 0 ? (
             <SearchResults books={searchResults} id='app__search-results' />
           ) : (
-            <p>No search results found.</p>
+            <NoResults />
           )
         ) : (
           <AdContainer />

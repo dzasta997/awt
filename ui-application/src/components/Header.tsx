@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({
   onButtonClick,
   onRegisterClick,
   isAuthenticated,
-  userName,
+  onSearch,
 }) => {
   const handleLogoClick = () => {
     window.location.assign('/');
@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({
           System
         </h1>
       </div>
-      <Search onSearch={(books) => console.log(books)} />
+      <Search  onSearch={onSearch} /> 
       <nav className='user-nav'>
         {isAuthenticated ? (
           <>{/* Profile information */}</>

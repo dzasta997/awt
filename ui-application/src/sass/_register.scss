@@ -38,14 +38,13 @@
     &__column {
       display: flex;
       flex-direction: column; // ensure inputs stack vertically
-      width: 50%; // make sure columns take up equal width
     }
   }
 
   &__input {
     font-size: 1.5rem;
     border: none;
-    width: 100%; // ensure inputs take up full width of their parent column
+    width: 90%; // ensure inputs take up full width of their parent column
     height: 4.7rem;
     border-radius: 1rem;
     padding: 1.5rem 2rem; // reduce padding so that inputs can fit within their parent column
@@ -57,8 +56,8 @@
   }
 
   &--address {
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
+    padding: 1rem;
   }
 
   &__submit {
@@ -74,6 +73,7 @@
     border: none;
     cursor: pointer;
     margin-left: -4rem;
+    margin-top: 4rem;
 
     &:focus {
       box-shadow: 0 0 1rem rgba(var(--color-white), 0.5); // Change the color to yellow
@@ -96,20 +96,7 @@
     }
   }
 
-  &__label {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-left: 2rem;
-    margin-top: 0.7rem;
-    display: block;
-    transition: all 0.5s ease;
-  }
 
-  &__input:placeholder-shown + &__label {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-4rem);
-  }
 
   &__close {
     background-color: transparent;
@@ -118,6 +105,8 @@
     outline: 0;
     position: absolute;
     transform: translate(-50%, -50%);
-    right: 5;
+    right: 40.8rem;
+    top: 17rem;
+    
   }
 }
