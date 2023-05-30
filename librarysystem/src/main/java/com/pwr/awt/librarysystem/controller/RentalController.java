@@ -7,6 +7,7 @@ import com.pwr.awt.librarysystem.entity.Rental;
 import com.pwr.awt.librarysystem.enumeration.RentalStatus;
 import com.pwr.awt.librarysystem.mapper.CopyMapper;
 import com.pwr.awt.librarysystem.mapper.RentalMapper;
+import com.pwr.awt.librarysystem.service.CopyService;
 import com.pwr.awt.librarysystem.service.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,12 +25,14 @@ public class RentalController {
     private final RentalMapper rentalMapper;
     private final CopyMapper copyMapper;
     private final RentalService rentalService;
+    private final CopyService copyService;
 
     @Autowired
-    public RentalController(RentalMapper rentalMapper, CopyMapper copyMapper, RentalService rentalService) {
+    public RentalController(RentalMapper rentalMapper, CopyMapper copyMapper, RentalService rentalService, CopyService copyService) {
         this.rentalMapper = rentalMapper;
         this.copyMapper = copyMapper;
         this.rentalService = rentalService;
+        this.copyService = copyService;
     }
 
     @GetMapping("/all")
@@ -46,7 +49,6 @@ public class RentalController {
 
     @PutMapping("/{id}")
     public ResponseEntity<RentalDTO> changeRentalStatus(@PathVariable long id, @RequestBody RentalDTO rentalDTO ) {
-        Rental rental = rentalService.findByRentalId(id);
         Rental updated = rentalService.updateRental(id, rentalMapper.toEntity(rentalDTO));
         return new ResponseEntity<>(rentalMapper.toDto(updated), HttpStatus.OK);
     }
@@ -59,7 +61,7 @@ public class RentalController {
 
     @PostMapping("/new")
     public ResponseEntity<RentalDTO> postRental(@RequestBody CopyDTO copyDTO) {
-        Copy copy = copyMapper.toEntity(copyDTO);
+        Copy copy = copyService.findByCopyId(copyDTO.getCopyId());
         Rental rental = rentalService.addRental(copy);
         return new ResponseEntity<>(rentalMapper.toDto(rental), HttpStatus.OK);
     }

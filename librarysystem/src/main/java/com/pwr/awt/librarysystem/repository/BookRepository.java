@@ -9,35 +9,35 @@ import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-    List<Book> findByTitle(String title);
+    List<Book> findByTitleContainingIgnoreCase(String title);
 
-    List<Book> findByAuthors_FirstName(String firstName);
+    List<Book> findByAuthors_FirstNameContainingIgnoreCase(String firstName);
 
-    List<Book> findByAuthors_LastName(String firstName);
+    List<Book> findByAuthors_LastNameContainingIgnoreCase(String firstName);
 
-    List<Book> findByCategories_Name(String firstName);
+    List<Book> findByCategories_NameIgnoreCase(String firstName);
 
-    List<Book> findByTitleAndAuthors_FirstName(String title,   String firstName);
+    List<Book> findByTitleContainingIgnoreCaseAndAuthors_FirstNameContainingIgnoreCase(String title,   String firstName);
 
-    List<Book> findByTitleAndAuthors_LastName(  String title,   String lastName);
+    List<Book> findByTitleContainingIgnoreCaseAndAuthors_LastNameContainingIgnoreCase(  String title,   String lastName);
 
-    List<Book> findByTitleAndCategories_Name(  String title,   String category);
+    List<Book> findByTitleContainingIgnoreCaseAndCategories_NameIgnoreCase(  String title,   String category);
 
-    List<Book> findByAuthors_FirstNameAndAuthors_LastName(  String firstName,   String lastName);
+    List<Book> findByAuthors_FirstNameContainingIgnoreCaseAndAuthors_LastNameContainingIgnoreCase(  String firstName,   String lastName);
 
-    List<Book> findByAuthors_FirstNameAndCategories_Name(  String firstName,   String lastCategory);
+    List<Book> findByAuthors_FirstNameContainingIgnoreCaseAndCategories_NameIgnoreCase(  String firstName,   String lastCategory);
 
-    List<Book> findByAuthors_LastNameAndCategories_Name(  String firstName,   String category);
+    List<Book> findByAuthors_LastNameContainingIgnoreCaseAndCategories_NameIgnoreCase(  String firstName,   String category);
 
-    List<Book> findByTitleAndAuthors_FirstNameAndAuthors_LastName(  String title,   String firstName,   String lastName);
+    List<Book> findByTitleContainingIgnoreCaseAndAuthors_FirstNameContainingIgnoreCaseAndAuthors_LastNameContainingIgnoreCase(  String title,   String firstName,   String lastName);
 
-    List<Book> findByTitleAndAuthors_FirstNameAndCategories_Name(  String title,   String firstName,   String category);
+    List<Book> findByTitleContainingIgnoreCaseAndAuthors_FirstNameContainingIgnoreCaseAndCategories_NameIgnoreCase(  String title,   String firstName,   String category);
 
-    List<Book> findByTitleAndAuthors_LastNameAndCategories_Name(  String title,   String lastName,   String category);
+    List<Book> findByTitleContainingIgnoreCaseAndAuthors_LastNameContainingIgnoreCaseAndCategories_NameIgnoreCase(  String title,   String lastName,   String category);
 
-    List<Book> findByAuthors_FirstNameAndAuthors_LastNameAndCategories_Name(  String firstName,   String lastName,   String category);
+    List<Book> findByAuthors_FirstNameContainingIgnoreCaseAndAuthors_LastNameContainingIgnoreCaseAndCategories_NameIgnoreCase(  String firstName,   String lastName,   String category);
 
-    List<Book> findByTitleAndAuthors_FirstNameAndAuthors_LastNameAndCategories_Name(  String title,   String firstName,   String lastName,   String category);
+    List<Book> findByTitleContainingIgnoreCaseAndAuthors_FirstNameContainingIgnoreCaseAndAuthors_LastNameContainingIgnoreCaseAndCategories_NameIgnoreCase(  String title,   String firstName,   String lastName,   String category);
 
 
     default List<Book> findByAuthors_FirstNameAndAuthors_LastNameAndCategories_NameAndTitle(  Optional<String> firstName,   Optional<String> lastName,  Optional<String> category,   Optional<String> title) {
@@ -47,27 +47,27 @@ public interface BookRepository extends JpaRepository<Book, Long> {
                     if (title.isEmpty()) {
                         return findAll();
                     } else {
-                        return findByTitle(title.get());
+                        return findByTitleContainingIgnoreCase(title.get());
                     }
                 } else {
                     if (title.isEmpty()) {
-                        return findByCategories_Name(category.get());
+                        return findByCategories_NameIgnoreCase(category.get());
                     } else {
-                        return findByTitleAndCategories_Name(title.get(), category.get());
+                        return findByTitleContainingIgnoreCaseAndCategories_NameIgnoreCase(title.get(), category.get());
                     }
                 }
             } else {
                 if (category.isEmpty()) {
                     if (title.isEmpty()) {
-                        return findByAuthors_LastName(lastName.get());
+                        return findByAuthors_LastNameContainingIgnoreCase(lastName.get());
                     } else {
-                        return findByTitleAndAuthors_LastName(title.get(), lastName.get());
+                        return findByTitleContainingIgnoreCaseAndAuthors_LastNameContainingIgnoreCase(title.get(), lastName.get());
                     }
                 } else {
                     if (title.isEmpty()) {
-                        return findByAuthors_LastNameAndCategories_Name(lastName.get(), category.get());
+                        return findByAuthors_LastNameContainingIgnoreCaseAndCategories_NameIgnoreCase(lastName.get(), category.get());
                     } else {
-                        return findByTitleAndAuthors_LastNameAndCategories_Name(title.get(), lastName.get(), category.get());
+                        return findByTitleContainingIgnoreCaseAndAuthors_LastNameContainingIgnoreCaseAndCategories_NameIgnoreCase(title.get(), lastName.get(), category.get());
                     }
                 }
             }
@@ -75,29 +75,29 @@ public interface BookRepository extends JpaRepository<Book, Long> {
             if (lastName.isEmpty()) {
                 if (category.isEmpty()) {
                     if (title.isEmpty()) {
-                        return findByAuthors_FirstName(firstName.get());
+                        return findByAuthors_FirstNameContainingIgnoreCase(firstName.get());
                     } else {
-                        return findByTitleAndAuthors_FirstName(title.get(), firstName.get());
+                        return findByTitleContainingIgnoreCaseAndAuthors_FirstNameContainingIgnoreCase(title.get(), firstName.get());
                     }
                 } else {
                     if (title.isEmpty()) {
-                        return findByAuthors_FirstNameAndCategories_Name(firstName.get(), category.get());
+                        return findByAuthors_FirstNameContainingIgnoreCaseAndCategories_NameIgnoreCase(firstName.get(), category.get());
                     } else {
-                        return findByTitleAndAuthors_FirstNameAndCategories_Name(title.get(), firstName.get(), category.get());
+                        return findByTitleContainingIgnoreCaseAndAuthors_FirstNameContainingIgnoreCaseAndCategories_NameIgnoreCase(title.get(), firstName.get(), category.get());
                     }
                 }
             } else {
                 if (category.isEmpty()) {
                     if (title.isEmpty()) {
-                        return findByAuthors_FirstNameAndAuthors_LastName(firstName.get(), lastName.get());
+                        return findByAuthors_FirstNameContainingIgnoreCaseAndAuthors_LastNameContainingIgnoreCase(firstName.get(), lastName.get());
                     } else {
-                        return findByTitleAndAuthors_FirstNameAndAuthors_LastName(title.get(), firstName.get(), lastName.get());
+                        return findByTitleContainingIgnoreCaseAndAuthors_FirstNameContainingIgnoreCaseAndAuthors_LastNameContainingIgnoreCase(title.get(), firstName.get(), lastName.get());
                     }
                 } else {
                     if (title.isEmpty()) {
-                        return findByAuthors_FirstNameAndAuthors_LastNameAndCategories_Name(firstName.get(), lastName.get(), category.get());
+                        return findByAuthors_FirstNameContainingIgnoreCaseAndAuthors_LastNameContainingIgnoreCaseAndCategories_NameIgnoreCase(firstName.get(), lastName.get(), category.get());
                     } else {
-                        return findByTitleAndAuthors_FirstNameAndAuthors_LastNameAndCategories_Name(title.get(), firstName.get(), lastName.get(), category.get());
+                        return findByTitleContainingIgnoreCaseAndAuthors_FirstNameContainingIgnoreCaseAndAuthors_LastNameContainingIgnoreCaseAndCategories_NameIgnoreCase(title.get(), firstName.get(), lastName.get(), category.get());
                     }
                 }
             }

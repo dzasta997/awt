@@ -6,6 +6,7 @@ import com.pwr.awt.librarysystem.entity.Rental;
 import com.pwr.awt.librarysystem.enumeration.RentalStatus;
 import com.pwr.awt.librarysystem.exception.NotFoundException;
 import com.pwr.awt.librarysystem.exception.OperationException;
+import com.pwr.awt.librarysystem.repository.CopyRepository;
 import com.pwr.awt.librarysystem.repository.LibraryUserRepository;
 import com.pwr.awt.librarysystem.repository.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -20,11 +23,13 @@ import java.util.Optional;
 @Service
 public class RentalService {
     private final RentalRepository rentalRepository;
+    private final CopyRepository copyRepository;
     private final LibraryUserRepository libraryUserRepository;
 
     @Autowired
-    public RentalService(final RentalRepository rentalRepository, LibraryUserRepository libraryUserRepository) {
+    public RentalService(final RentalRepository rentalRepository, CopyRepository copyRepository, LibraryUserRepository libraryUserRepository) {
         this.rentalRepository = rentalRepository;
+        this.copyRepository = copyRepository;
         this.libraryUserRepository = libraryUserRepository;
     }
 
@@ -62,6 +67,9 @@ public class RentalService {
         }
         if(rental.getStatus() == RentalStatus.RETURNED){
             rentalDB.setReturnDate(LocalDate.now());
+            sendReturnEmail(rentalDB.getLibraryUser(), rentalDB.getCopy());
+            rentalDB.getCopy().setRented(false);
+//            copyRepository.save(rentalDB.getCopy().setRented(false));
         }
         return rentalRepository.save(rentalDB);
     }
@@ -75,8 +83,12 @@ public class RentalService {
                 .setStatus(RentalStatus.RESERVED)
                 .setCopy(copy)
                 .setLibraryUser(libraryUser);
+        sendReserveEmail(libraryUser, copy);
+        copyRepository.save(copy.setRented(true));
         return rentalRepository.save(rental);
     }
+
+
 
     public List<Rental> userRentals(Optional<RentalStatus> status){
         String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
@@ -84,6 +96,36 @@ public class RentalService {
             return rentalRepository.findByLibraryUser_Username(username);
         }
         return rentalRepository.findByLibraryUser_UsernameAndStatus(username, status.get());
+
+    }
+
+    public void sendReserveEmail(LibraryUser libraryUser, Copy copy){
+        String title = copy.getBook().getTitle();
+        String name = libraryUser.getUserInfo().getFirstName();
+        String email = libraryUser.getUserInfo().getEmail();
+        String subject = "BOOK_RESERVATION";
+        String command = String.format("python3 scrips/reserveemail.py %s %s %s %s", email,name, subject, title );
+        sendEmail(command);
+    }
+
+    public void sendReturnEmail(LibraryUser libraryUser, Copy copy){
+        String title = copy.getBook().getTitle();
+        String name = libraryUser.getUserInfo().getFirstName();
+        String email = libraryUser.getUserInfo().getEmail();
+        String subject = "BOOK_RESERVATION";
+        String command = String.format("python3 scrips/returnemail.py %s %s %s %s", email,name, subject, title );
+        sendEmail(command);
+    }
+
+    public void sendEmail(String command){
+
+            try {
+                Process process = Runtime.getRuntime().exec(command);
+                process.waitFor();
+                System.out.println(new BufferedReader(new InputStreamReader(process.getInputStream())).readLine());
+            } catch (Exception e) {
+                System.out.println(e.getCause());
+            }
 
     }
 
