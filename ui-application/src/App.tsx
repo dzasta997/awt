@@ -34,6 +34,7 @@ const App: React.FC = () => {
   const handleSearch = (books: BookDTO[]) => {
     setSearchResults(books);
     setHasSearched(true);
+    console.log('Is it working even');
   };
 
   return (

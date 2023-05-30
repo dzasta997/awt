@@ -4,6 +4,7 @@ import { BookDTO } from '../api/types';
 import searchIcon from '../SvgContainer/search.svg';
 import filterIcon from '../SvgContainer/ion_filter-sharp.svg';
 import { searchBooks } from '../api/bookApi';
+import { log } from 'console';
 
 interface SearchProps {
   onSearch: (books: BookDTO[]) => void;
@@ -22,8 +23,10 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
 
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log("Form has been submitted"); // Add this line
     try {
       const books: BookDTO[] = await searchBooks(searchFields);
+      console.log('Search Results:', books)
       onSearch(books);
     } catch (error) {
       console.error('Search failed', error);
@@ -54,7 +57,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
         placeholder='Title...'
         onChange={handleFieldChange}
       />
-      <button className='search__button'>
+      <button type="submit" className='search__button'>
         <img src={searchIcon} alt='searchIcon' className='search__icon' />
       </button>
       <button

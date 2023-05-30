@@ -23,18 +23,23 @@ export const deleteBook = async (id: number) => {
 };
 
 export interface SearchParams {
-  firstName?: string;
-  lastName?: string;
-  category?: string;
-  title?: string;
+  firstName: string;
+  lastName: string;
+  category: string;
+  title: string;
 }
 
 export const searchBooks = async (params: SearchParams) => {
+  console.log("API request is about to be made with these parameters:", params);
+
   try {
     const response = await axios.get(`${API_BASE_URL}/books/search`, { params });
+    console.log("API request was made. The response is:", response);
+
     return response.data;
   } catch (error) {
     console.error('Failed to search books', error);
     throw error;
   }
 };
+
