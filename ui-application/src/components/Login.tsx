@@ -21,8 +21,8 @@ const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
       const data = await login(username, password);
       console.log('Login successful', data);
       // Assuming that the "name" field is returned from the "login" function
-      onLoginSuccess(data.name);  // Add this line
-      onClose();
+      onLoginSuccess(data); 
+      onClose(); 
     } catch (error) {
       console.error('Login failed', error);
       setErrorMessage('Sorry, this account either does not exist or the password is incorrect.');

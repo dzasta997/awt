@@ -12,11 +12,11 @@ interface SearchProps {
 
 const Search: React.FC<SearchProps> = ({ onSearch }) => {
   const [searchFields, setSearchFields] = useState({
-    title: '',
-    category: '',
-    author: '',
-    firstName: '',
-    lastName: '',
+    title: null,
+    category: null,
+    author: null,
+    firstName: null,
+    lastName: null,
   });
 
   const [filterActive, setFilterActive] = useState(false);

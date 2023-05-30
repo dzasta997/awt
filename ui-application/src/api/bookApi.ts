@@ -23,10 +23,10 @@ export const deleteBook = async (id: number) => {
 };
 
 export interface SearchParams {
-  firstName: string;
-  lastName: string;
-  category: string;
-  title: string;
+  firstName: null;
+  lastName: null;
+  category: null;
+  title: null;
 }
 
 export const searchBooks = async (params: SearchParams) => {
