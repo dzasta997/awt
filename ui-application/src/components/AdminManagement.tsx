@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { LibraryUserDTO, BookDTO } from '../api/types';
+import React, { useState, useEffect, FormEvent } from 'react';
+import { LibraryUserDTO, BookDTO, NewBookDTO } from '../api/types';
 import { getAllLibraryUsers, deleteLibraryUser } from '../api/libraryUserApi';
-import { getAllBooks, deleteBook } from '../api/bookApi';
+import { getAllBooks, deleteBook, postBook } from '../api/bookApi';
 import '../sass/main.scss';
 
 const AdminManagement: React.FC = () => {
   const [users, setUsers] = useState<LibraryUserDTO[]>([]);
   const [books, setBooks] = useState<BookDTO[]>([]);
+  const [newBook, setNewBook] = useState<NewBookDTO>({
+    title: '',
+    authors: [],
+    categories: [],
+    description: '',
+  });
 
   // Fetch users and books from API
   useEffect(() => {
@@ -33,6 +39,18 @@ const AdminManagement: React.FC = () => {
       setBooks(books.filter((book) => book.bookId !== bookId));
     } catch (error) {
       console.error('Failed to delete book', error);
+    }
+  };
+
+  // Handle add book
+  const handleAddBook = async (event: FormEvent) => {
+    event.preventDefault();
+    try {
+      const book = await postBook(newBook);
+      setBooks([...books, book]);
+      setNewBook({ title: '', authors: [], categories: [], description: '' }); // Clear the input fields
+    } catch (error) {
+      console.error('Failed to add book', error);
     }
   };
 
@@ -67,6 +85,35 @@ const AdminManagement: React.FC = () => {
             </button>
           </div>
         ))}
+      </div>
+
+      <div className='admin-management__add-book-section'>
+        <h1 className='add-book__title'>Add Book</h1>
+        <form onSubmit={handleAddBook}>
+          <label>
+            Title:
+            <input
+              type='text'
+              value={newBook.title}
+              onChange={(e) =>
+                setNewBook({ ...newBook, title: e.target.value })
+              }
+              required
+            />
+          </label>
+          <label>
+            Description:
+            <textarea
+              value={newBook.description}
+              onChange={(e) =>
+                setNewBook({ ...newBook, description: e.target.value })
+              }
+              required
+            />
+          </label>
+          {/* Add more input fields for authors and categories if needed */}
+          <button type='submit'>Add book</button>
+        </form>
       </div>
     </div>
   );

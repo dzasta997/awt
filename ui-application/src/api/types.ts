@@ -30,6 +30,13 @@ export interface AddressDTO {
   zipcode: string;
 }
 
+export interface NewBookDTO {
+  title: string;
+  description: string;
+  authors: Author[];
+  categories: Category[];
+}
+
 export interface LibraryUserDTO {
   id?: number;
   username: string;
