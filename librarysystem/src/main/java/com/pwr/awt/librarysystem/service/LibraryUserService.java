@@ -5,12 +5,16 @@ import com.pwr.awt.librarysystem.exception.NotFoundException;
 import com.pwr.awt.librarysystem.exception.OperationException;
 import com.pwr.awt.librarysystem.repository.LibraryUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class LibraryUserService {
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     private final LibraryUserRepository libraryUserRepository;
 
@@ -37,6 +41,7 @@ public class LibraryUserService {
         if (libraryUser.getUserId() != null && libraryUserRepository.existsById(libraryUser.getUserId())) {
             throw new OperationException();
         }
+        libraryUser.setPassword(passwordEncoder.encode(libraryUser.getPassword()));
         return libraryUserRepository.save(libraryUser);
     }
 
