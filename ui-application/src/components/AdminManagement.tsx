@@ -1,8 +1,16 @@
 import React, { useState, useEffect, FormEvent } from 'react';
-import { LibraryUserDTO, BookDTO, NewBookDTO } from '../api/types';
+import {
+  LibraryUserDTO,
+  BookDTO,
+  NewBookDTO,
+  Author,
+  Category,
+} from '../api/types';
 import { getAllLibraryUsers, deleteLibraryUser } from '../api/libraryUserApi';
 import { getAllBooks, deleteBook, postBook } from '../api/bookApi';
 import '../sass/main.scss';
+import { postCategory } from '../api/categoryApi';
+import { postAuthor } from '../api/authorApi';
 
 const AdminManagement: React.FC = () => {
   const [users, setUsers] = useState<LibraryUserDTO[]>([]);
@@ -13,6 +21,11 @@ const AdminManagement: React.FC = () => {
     categories: [],
     description: '',
   });
+  const [newAuthor, setNewAuthor] = useState<Author>({
+    firstName: '',
+    lastName: '',
+  });
+  const [newCategory, setNewCategory] = useState<Category>({ name: '' });
 
   // Fetch users and books from API
   useEffect(() => {
@@ -42,19 +55,26 @@ const AdminManagement: React.FC = () => {
     }
   };
 
-  // Handle add book
   const handleAddBook = async (event: FormEvent) => {
     event.preventDefault();
     try {
-      const book = await postBook(newBook);
+      const author = await postAuthor(newAuthor);
+      const category = await postCategory(newCategory);
+
+      const book = await postBook({
+        ...newBook,
+        authors: [author],
+        categories: [category],
+      });
       setBooks([...books, book]);
-      setNewBook({ title: '', authors: [], categories: [], description: '' }); // Clear the input fields
+      setNewBook({ title: '', authors: [], categories: [], description: '' });
+      setNewAuthor({ firstName: '', lastName: '' });
+      setNewCategory({ name: '' });
     } catch (error) {
       console.error('Failed to add book', error);
     }
   };
 
-  // Replace with actual UI implementation
   return (
     <div className='admin-management'>
       <div className='admin-management__user-section'>
@@ -89,10 +109,11 @@ const AdminManagement: React.FC = () => {
 
       <div className='admin-management__add-book-section'>
         <h1 className='add-book__title'>Add Book</h1>
-        <form onSubmit={handleAddBook}>
-          <label>
+        <form className='add-book__form' onSubmit={handleAddBook}>
+          <label className='add-book__label'>
             Title:
             <input
+              className='add-book__input'
               type='text'
               value={newBook.title}
               onChange={(e) =>
@@ -101,9 +122,10 @@ const AdminManagement: React.FC = () => {
               required
             />
           </label>
-          <label>
+          <label className='add-book__label'>
             Description:
             <textarea
+              className='add-book__textarea'
               value={newBook.description}
               onChange={(e) =>
                 setNewBook({ ...newBook, description: e.target.value })
@@ -111,8 +133,45 @@ const AdminManagement: React.FC = () => {
               required
             />
           </label>
-          {/* Add more input fields for authors and categories if needed */}
-          <button type='submit'>Add book</button>
+
+          <label className='add-book__label'>
+            First Name:
+            <input
+              className='add-book__input'
+              type='text'
+              placeholder='First name'
+              value={newAuthor.firstName}
+              onChange={(e) =>
+                setNewAuthor({ ...newAuthor, firstName: e.target.value })
+              }
+              required
+            />
+            Last Name:
+            <input
+              className='add-book__input'
+              type='text'
+              placeholder='Last name'
+              value={newAuthor.lastName}
+              onChange={(e) =>
+                setNewAuthor({ ...newAuthor, lastName: e.target.value })
+              }
+              required
+            />
+          </label>
+
+          <label className='add-book__label'>
+            Category:
+            <input
+              className='add-book__input'
+              type='text'
+              value={newCategory.name}
+              onChange={(e) => setNewCategory({ name: e.target.value })}
+              required
+            />
+          </label>
+          <button className='add-book__button' type='submit'>
+            Add book
+          </button>
         </form>
       </div>
     </div>

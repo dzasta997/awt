@@ -31,6 +31,66 @@ $spacer-size: 4.5rem; // Define a variable for the spacer size
     border: 1rem solid $border-color;
     border-radius: 2rem;
   }
+
+  // Add styles for the add book section
+  &__add-book-section {
+    // Use the spacer mixin to add margin at the top
+    @include spacer(top);
+    border: 1rem solid $border-color;
+    border-radius: 2rem;
+
+    .add-book__title {
+      color: $primary-color;
+      font-weight: bold;
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    // Use nesting to style the form and its elements
+    .add-book__form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .add-book__label {
+        font-size: 1.3rem;
+        color: $primary-color;
+        margin-bottom: 1rem;
+      }
+
+      .add-book__input,
+      .add-book__textarea {
+
+        width: 20vw;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid $secondary-color;
+        margin-bottom: 1rem;
+        font-size: 1.7rem;
+      }
+
+      .add-book__button {
+        width: 10rem;
+        height: 3.2rem;
+        border: none;
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+        margin-left: 1rem;
+        background-color: $secondary-color;
+        color: var(--color-white);
+        border-radius: 1rem;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.1);
+          box-shadow: 0 0.5rem 1rem rgba(137, 191, 204, 0.521);
+          background-color: var(--color-primary);
+          color: $primary-color;
+        }
+      }
+    }
+  }
 }
 
 .user-management {
@@ -60,7 +120,6 @@ $spacer-size: 4.5rem; // Define a variable for the spacer size
   }
 
   &__delete-button {
-    // Use variables for width and height
     width: $button-size;
     height: $button-size;
     border: none;
@@ -69,7 +128,6 @@ $spacer-size: 4.5rem; // Define a variable for the spacer size
     color: var(--color-dark);
     cursor: pointer;
 
-    // Use &:hover to style the button on hover
     &:hover {
       transform: scale(1.1);
       box-shadow: 0 0.5rem 1rem rgba(173, 24, 24, 0.2);
