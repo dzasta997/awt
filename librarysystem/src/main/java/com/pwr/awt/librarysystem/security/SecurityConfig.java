@@ -49,8 +49,6 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                .httpBasic().and()
-//                .formLogin(form -> form.successForwardUrl("/success")
-//                        .failureHandler(authenticationFailureHandler))
                 .authorizeHttpRequests()
                 .requestMatchers("/books/**", "GET").permitAll()
                 .requestMatchers("/users", "POST").permitAll()
