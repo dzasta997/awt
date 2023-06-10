@@ -3,6 +3,7 @@ import '../sass/main.scss';
 import logo from '../SvgContainer/logo.svg';
 import Search from './Search';
 import { BookDTO } from '../api/types';
+import userIcon from '../SvgContainer/healthicons_ui-user-profile.svg';
 
 interface HeaderProps {
   onButtonClick: () => void;
@@ -17,6 +18,7 @@ const Header: React.FC<HeaderProps> = ({
   onRegisterClick,
   isAuthenticated,
   onSearch,
+  userName,
 }) => {
   const handleLogoClick = () => {
     window.location.assign('/');
@@ -32,10 +34,16 @@ const Header: React.FC<HeaderProps> = ({
           System
         </h1>
       </div>
-      <Search  onSearch={onSearch} /> 
+      <Search onSearch={onSearch} />
       <nav className='user-nav'>
         {isAuthenticated ? (
-          <>{/* Profile information */}</>
+          <>
+            <img src={userIcon} alt='User Icon' className='user-nav__icon' />
+            <p className='user-nav__userName'>
+              Hello {userName},<br />
+              what should we do today?
+            </p>
+          </>
         ) : (
           <>
             <button className='user-nav__register' onClick={onRegisterClick}>

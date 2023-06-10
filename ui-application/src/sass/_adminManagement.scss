@@ -1,0 +1,120 @@
+// Define some variables for colors and sizes
+$primary-color: #140b34;
+$secondary-color: #c0c0c0;
+$button-size: 4rem; // Increase the button size
+$border-color: var(--color-primary); // Define a variable for the border color
+$spacer-size: 4.5rem; // Define a variable for the spacer size
+
+// Define a mixin for adding margin with the spacer size
+@mixin spacer($direction) {
+  margin-#{$direction}: $spacer-size;
+}
+
+// Use nesting to group styles for the same block or element
+.admin-management {
+  // Use rem units for font size, padding and margin
+  font-size: 2rem;
+  padding: 3rem;
+  margin: 3rem;
+
+  // Use & to reference the parent selector
+  &__user-section {
+    // Use the spacer mixin to add margin at the bottom
+    @include spacer(bottom);
+    border: 1rem solid $border-color;
+    border-radius: 2rem;
+  }
+
+  &__book-section {
+    // Use the spacer mixin to add margin at the top
+    @include spacer(top);
+    border: 1rem solid $border-color;
+    border-radius: 2rem;
+  }
+}
+
+.user-management {
+  // Use rem units for font size, padding and margin
+  font-size: 2rem; // Increase the font size
+  padding: 3rem; // Increase the padding
+  margin: 3rem; // Increase the margin
+
+  // Use & to reference the parent selector
+  &__title {
+    color: $primary-color;
+    font-weight: bold;
+    text-align: center;
+    font-size: 2rem;
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $secondary-color;
+  font-size: large;
+
+  &__name {
+    margin-left: 1rem;
+  }
+
+  &__delete-button {
+    // Use variables for width and height
+    width: $button-size;
+    height: $button-size;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--color-white);
+    color: var(--color-dark);
+    cursor: pointer;
+
+    // Use &:hover to style the button on hover
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0.5rem 1rem rgba(173, 24, 24, 0.2);
+      background-color: rgba(255, 0, 0, 0.678);
+    }
+  }
+}
+
+.book-management {
+  font-size: 2rem; // Increase the font size
+  padding: 3rem; // Increase the padding
+  margin: 3rem; // Increase the margin
+
+  &__title {
+    color: $primary-color;
+    font-weight: bold;
+    text-align: center;
+    font-size: 2rem;
+  }
+}
+
+.book {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $secondary-color;
+  font-size: large;
+
+  &__title {
+    margin-left: 1rem;
+  }
+
+  &__delete-button {
+    width: $button-size;
+    height: $button-size;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--color-white);
+    color: var(--color-dark);
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0.5rem rgba(180, 132, 27, 0.247);
+      background-color: rgba(69, 187, 202, 0.616);
+    }
+  }
+}

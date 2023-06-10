@@ -7,6 +7,7 @@ import Register from './components/Register';
 import { BookDTO } from './api/types';
 import SearchResults from './components/SearchResults';
 import NoResults from './components/NoResults';
+import AdminManagement from './components/AdminManagement';
 
 const App: React.FC = () => {
   const [isLogInvisible, setLogInvisible] = useState(false);
@@ -47,13 +48,15 @@ const App: React.FC = () => {
         <Header
           onButtonClick={handleButtonClick}
           onRegisterClick={toggleRegisterModal}
-          onSearch={handleSearch} // Pass the handleSearch function directly
+          onSearch={handleSearch} 
           isAuthenticated={isAuthenticated}
           userName={userName}
         />
-        {hasSearched ? (
+        {isAuthenticated ? (
+          <AdminManagement />
+        ) : hasSearched ? (
           searchResults.length > 0 ? (
-            <SearchResults books={searchResults} id='app__search-results' />
+            <SearchResults books={searchResults} />
           ) : (
             <NoResults />
           )

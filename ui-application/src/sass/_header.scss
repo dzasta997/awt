@@ -28,8 +28,6 @@
   flex-shrink: 0;
 }
 
-
-
 .user-nav {
   display: flex;
   justify-content: space-between;
@@ -77,4 +75,10 @@
       transform: scale(0.95); /* add scale transformation on active */
     }
   }
+}
+
+.user-nav__userName {
+  font-size: medium;
+  font-weight: bolder;
+  color: #140B34;
 }

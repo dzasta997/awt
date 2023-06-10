@@ -1,3 +1,4 @@
+// Create a .scss file for the styles
 .ad-container {
   position: relative;
   background-color: var(--color-grey-light-1); /* Light grey background */
@@ -10,7 +11,6 @@
   background-color: var(--color-grey-light-1);
   box-shadow: var(--shadow-dark);
   min-height: 50rem;
-
 
   &__header {
     position: absolute;
@@ -27,8 +27,64 @@
     width: calc(
       70% - 1rem
     ); /* Adjust this value to give more or less space between the items */
-    height: calc(75% - 1rem); /* Adjust this value to set the desired height */
+    height: 80%; /* Adjust this value to set the desired height */
     border: 1px solid #ccc;
     box-sizing: border-box;
+
+    // Add these lines to position the image inside the div
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .book-cover {
+      height: 80%; // Keep this value to preserve the aspect ratio
+      object-fit: contain; // Keep this value to avoid stretching or cropping the image
+      width: 12rem; // Keep this value to set the desired image size
+    }
+
+    .book-details {
+      display: flex;
+      flex-direction: column; // Arrange the details in a column
+      align-items: flex-start; // Align the details to the left
+      margin-left: 1rem; // Add some space between the image and the details
+
+      .book-title {
+        font-size: 1.8rem; // Adjust this value to set the desired title size
+        font-weight: bold; // Make the title bold
+        color: var(--color-primary); // Use a primary color for the title
+      }
+
+      .book-author {
+        font-size: 1.4rem; // Adjust this value to set the desired author size
+        font-style: italic; // Make the author italic
+        color: var(--color-grey-dark-2); // Use a dark grey color for the author
+      }
+
+      .book-genre {
+        font-size: 1.2rem; // Adjust this value to set the desired genre size
+        color: var(
+          --color-grey-dark-3
+        ); // Use a darker grey color for the genre
+      }
+
+      .book-button {
+        margin-top: auto; // Push the button to the bottom of the column
+        padding: 0.5rem 1rem; // Add some padding to the button
+        border: none; // Remove the default border
+        border-radius: 0.5rem; // Add some border radius to the button
+        background-color: var(
+          --color-secondary
+        ); // Use a secondary color for the button background
+        color: white; // Use white for the button text
+        cursor: pointer; // Change the cursor to a pointer when hovering over the button
+
+        &:hover {
+          transform: scale(
+            1.1
+          ); // Add some hover effect to the button by scaling it up slightly
+          transition: all 0.3s; // Add some transition to the hover effect
+        }
+      }
+    }
   }
 }
