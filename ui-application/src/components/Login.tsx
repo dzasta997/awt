@@ -2,26 +2,25 @@ import React, { useState } from 'react';
 import '../sass/main.scss';
 import picture from '../SvgContainer/picture--login.svg';
 import { login } from '../services/authService';
-import Popup from './Popup'; // import the Popup component
+import Popup from './Popup'; 
 
 interface LoginProps {
   onClose: () => void;
-  onLoginSuccess: (name: string) => void; // Add this line
+  onLoginSuccess: (name: string, token: string) => void; 
 }
 
 const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
-  // Add state for username and password
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); // Add this line
+  const [errorMessage, setErrorMessage] = useState(''); 
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      setErrorMessage(''); // Clear the error message
+      setErrorMessage(''); 
       const data = await login(username, password);
       console.log('Login successful', data);
-      onLoginSuccess(data);
+      onLoginSuccess(data, data);
       onClose();
     } catch (error) {
       console.error('Login failed', error);
@@ -30,6 +29,7 @@ const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
       );
     }
   };
+  
 
   const handlePopupClose = () => {
     setErrorMessage('');

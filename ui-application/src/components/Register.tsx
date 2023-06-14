@@ -4,10 +4,9 @@ import { postLibraryUser } from '../api/libraryUserApi';
 import { LibraryUserDTO } from '../api/types';
 import { useState } from 'react';
 
-
 const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [form, setForm] = useState<LibraryUserDTO>({
-    username: '',
+    username: '', // Add the username field here
     password: '',
     repeatPassword: '',
     firstName: '',
@@ -61,7 +60,7 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         },
       };
 
-      await postLibraryUser(userToRegister);
+      await postLibraryUser(userToRegister, null);
       console.log('User registered:', form.username);
       onClose();
     } catch (error) {
@@ -78,6 +77,17 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         </div>
         <div className='register__form-box'>
           <div className='register__column'>
+            <input
+              type='text'
+              id='username'
+              name='username'
+              className='register__input register__input--username'
+              placeholder='Username'
+              required
+              value={form.username}
+              onChange={handleInputChange}
+            />
+
             <input
               type='text'
               id='firstName'

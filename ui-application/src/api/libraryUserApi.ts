@@ -1,34 +1,27 @@
-import axios from '../api/api';
+import api from './api'
 import { LibraryUserDTO } from './types';
-
-const API_BASE_URL = 'http://localhost:8080';
 
 // Get All Users
 export const getAllLibraryUsers = async () => {
-  const { data } = await axios.get<LibraryUserDTO[]>(`${API_BASE_URL}/users`);
-  return data;
+  const response = await api.get<LibraryUserDTO[]>(`/users`);
+  return response.data;
 };
 
-// Get User by Id
-export const getLibraryUser = async (id: number) => {
-  const { data } = await axios.get<LibraryUserDTO>(`${API_BASE_URL}/users/${id}`);
-  return data;
+export const getLibraryUser = async (id: number, token: string | null) => {
+  const response = await api.get<LibraryUserDTO>(`/users/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
 };
 
-// Create User
-export const postLibraryUser = async (user: LibraryUserDTO) => {
-  await axios.post<LibraryUserDTO>(`${API_BASE_URL}/users`, user);
+export const postLibraryUser = async (user: LibraryUserDTO, token: string | null) => {
+  await api.post(`/users`, user, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 };
 
-// Delete User
-export const deleteLibraryUser = async (id: number) => {
-  await axios.delete(`${API_BASE_URL}/users/${id}`);
+export const deleteLibraryUser = async (id: number, token: string | null) => {
+  await api.delete(`/users/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 };
-
-// Get Current User
-export const getCurrentUsername = async () => {
-  const { data } = await axios.get<string>(`${API_BASE_URL}/users/user`);
-  return data;
-};
-
-

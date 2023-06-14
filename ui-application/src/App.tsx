@@ -14,7 +14,7 @@ const App: React.FC = () => {
   const [isRegisterVisible, setIsRegisterVisible] = useState(false);
   const [searchResults, setSearchResults] = useState<BookDTO[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
-
+  const [authToken, setAuthToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState('');
 
@@ -26,9 +26,10 @@ const App: React.FC = () => {
     setIsRegisterVisible(!isRegisterVisible);
   };
 
-  const handleLoginSuccess = (name: string) => {
+  const handleLoginSuccess = (name: string, token: string) => {
     setUserName(name);
     setIsAuthenticated(true);
+    setAuthToken(token);
     setLogInvisible(false);
   };
 
@@ -48,12 +49,12 @@ const App: React.FC = () => {
         <Header
           onButtonClick={handleButtonClick}
           onRegisterClick={toggleRegisterModal}
-          onSearch={handleSearch} 
+          onSearch={handleSearch}
           isAuthenticated={isAuthenticated}
           userName={userName}
         />
         {isAuthenticated ? (
-          <AdminManagement />
+          <AdminManagement authToken={authToken} isAdmin />
         ) : hasSearched ? (
           searchResults.length > 0 ? (
             <SearchResults books={searchResults} />
