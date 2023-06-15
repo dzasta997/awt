@@ -1,17 +1,18 @@
 version: "3.8"
 
-networks:
-  library-network:
-    name: library-network
-    driver: bridge
+#networks:
+#  library-network:
+#    name: library-network
+#    driver: bridge
 
 services:
   db:
     image: postgres:15.1-alpine
     hostname: postgres
     restart: always
-    networks:
-      - library-network
+#    networks:
+#      - library-network
+    network_mode: host
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -22,8 +23,9 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    networks:
-      - library-network
+#    networks:
+#      - library-network
+    network_mode: host
     depends_on:
       - db
     ports:
@@ -32,6 +34,7 @@ services:
       - "8080"
 
   prometheus:
+    network_mode: host
     image: prom/prometheus:v2.38.0
     container_name: prometheus-container
     volumes:
@@ -41,10 +44,11 @@ services:
     ports:
       - "9090:9090"
     restart: always
-    networks:
-      - library-network
+#    networks:
+#      - library-network
 
   grafana:
+    network_mode: host
     image: grafana/grafana-oss:9.1.4
     user: "$UID:$GID"
     container_name: grafana-container
@@ -57,5 +61,5 @@ services:
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_SERVER_DOMAIN=localhost
-    networks:
-      - library-network
+#    networks:
+#      - library-network
