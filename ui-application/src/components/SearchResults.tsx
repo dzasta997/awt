@@ -5,15 +5,17 @@ import { postRental } from '../api/rentalApi';
 
 interface SearchResultsProps {
   books: BookDTO[];
+  onBorrowBook: (bookId: string) => void;
 }
 
-const SearchResults: React.FC<SearchResultsProps> = ({ books }) => {
+
+const SearchResults: React.FC<SearchResultsProps> = ({ books, onBorrowBook }) => {
   const handleBorrow = (bookId: string) => {
-    console.log(`Borrowing book with id ${bookId}`);
+    onBorrowBook(bookId);
   };
 
   return (
-    <div  className='search-results'>
+    <div className='search-results'>
       {books.map((book) => (
         <div key={book.bookId} className='search-results__item'>
           <div className='search-results__content'>
@@ -60,3 +62,4 @@ const SearchResults: React.FC<SearchResultsProps> = ({ books }) => {
 };
 
 export default SearchResults;
+

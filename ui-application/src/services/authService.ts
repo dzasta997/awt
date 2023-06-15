@@ -1,47 +1,56 @@
-// api.ts
+import { AxiosError } from "axios";
 import api from '../api/api'
-import axios, { AxiosError } from 'axios';
 
-export const login = async (username: string, password: string) => {
+export interface LoginResponse {
+  isAdmin: boolean;
+  username: string;
+  // Add other relevant properties as needed
+}
+
+
+export const login = async (username: string, password: string): Promise<LoginResponse> => {
   try {
-    // encode the username and password in base64 format
+    // Encode the username and password in base64 format
     const encodedCredentials = window.btoa(`${username}:${password}`);
 
-    // send a GET request to the /login endpoint with the encoded credentials as the authorization header
+    // Send a GET request to the /login endpoint with the encoded credentials as the Authorization header
     const response = await api.get('/login', {
       headers: {
         'Authorization': `Basic ${encodedCredentials}`
       }
     });
-    
-    // check if the response status is 200 (OK)
+
+    // Check if the response status is 200 (OK)
     if (response.status === 200) {
       const { data } = response;
 
       if (data) {
-        // save user data to localStorage
-        localStorage.setItem('user', JSON.stringify(`${username}:${password}`));
+        // Save user data to localStorage
+        localStorage.setItem('user', JSON.stringify({username, isAdmin: data.isAdmin, token: data.token}));
       }
 
-      // return the data from the response
+      // Return the data from the response
       return data;
     }
 
-    // throw an error if the response status is not 200
+    // Throw an error if the response status is not 200
     throw new Error('Error logging in');
-    
   } catch (error) {
-    // log the error to the console
+    // Log the error to the console
     console.error(error);
-    // cast the error as an AxiosError type
+
+    // Cast the error as an AxiosError type
     const axiosError = error as AxiosError;
-    // check if the error has a response and the status is 401 (Unauthorized)
+
+    // Check if the error has a response and the status is 401 (Unauthorized)
     if (axiosError.response && axiosError.response.status === 401) {
-      // throw an error with a custom message
+      // Throw an error with a custom message
       throw new Error('Incorrect username or password');
     } else {
-      // throw an error with a generic message
+      // Throw an error with a generic message
       throw new Error('Error logging in');
     }
   }
 };
+
+export default login;

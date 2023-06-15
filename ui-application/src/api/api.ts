@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const encodedCredentials = window.btoa('admin:pass');
-
 
 // Provide a default value for config if it is undefined or null
 const instance = axios.create( {

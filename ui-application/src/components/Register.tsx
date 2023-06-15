@@ -60,7 +60,7 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         },
       };
 
-      await postLibraryUser(userToRegister, null);
+      await postLibraryUser(userToRegister);
       console.log('User registered:', form.username);
       onClose();
     } catch (error) {

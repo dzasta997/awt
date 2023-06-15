@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './sass/main.scss';
 import Header from './components/Header';
 import AdContainer from './components/AdContainer';
@@ -8,15 +8,16 @@ import { BookDTO } from './api/types';
 import SearchResults from './components/SearchResults';
 import NoResults from './components/NoResults';
 import AdminManagement from './components/AdminManagement';
+import { LoginResponse } from './services/authService';
 
 const App: React.FC = () => {
   const [isLogInvisible, setLogInvisible] = useState(false);
   const [isRegisterVisible, setIsRegisterVisible] = useState(false);
   const [searchResults, setSearchResults] = useState<BookDTO[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
-  const [authToken, setAuthToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const handleButtonClick = () => {
     setLogInvisible(!isLogInvisible);
@@ -26,18 +27,26 @@ const App: React.FC = () => {
     setIsRegisterVisible(!isRegisterVisible);
   };
 
-  const handleLoginSuccess = (name: string, token: string) => {
-    setUserName(name);
+  const handleLoginSuccess = (loginResponse: LoginResponse) => {
+    setUserName(loginResponse.username);
     setIsAuthenticated(true);
-    setAuthToken(token);
+    setIsAdmin(loginResponse.isAdmin);
     setLogInvisible(false);
   };
+
 
   const handleSearch = (books: BookDTO[]) => {
     setSearchResults(books);
     setHasSearched(true);
     console.log('Is it working even');
   };
+
+  const handleBorrowBook = (bookId: string) => {
+    // Implement the logic for borrowing the book
+    console.log(`Borrowing book with ID: ${bookId}`);
+  };
+  
+  
 
   return (
     <>
@@ -54,10 +63,10 @@ const App: React.FC = () => {
           userName={userName}
         />
         {isAuthenticated ? (
-          <AdminManagement authToken={authToken} isAdmin />
+          <AdminManagement  isAdmin={isAdmin} />
         ) : hasSearched ? (
           searchResults.length > 0 ? (
-            <SearchResults books={searchResults} />
+            <SearchResults books={searchResults} onBorrowBook={handleBorrowBook} />
           ) : (
             <NoResults />
           )

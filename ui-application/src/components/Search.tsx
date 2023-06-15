@@ -4,7 +4,6 @@ import { BookDTO } from '../api/types';
 import searchIcon from '../SvgContainer/search.svg';
 import filterIcon from '../SvgContainer/ion_filter-sharp.svg';
 import { searchBooks } from '../api/bookApi';
-import { log } from 'console';
 
 interface SearchProps {
   onSearch: (books: BookDTO[]) => void;

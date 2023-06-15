@@ -14,12 +14,10 @@ import { postCategory } from '../api/categoryApi';
 import { postAuthor } from '../api/authorApi';
 
 interface AdminManagementProps {
-  authToken: string | null;
   isAdmin: boolean; // This prop indicates if the current user is an admin
 }
 
 const AdminManagement: React.FC<AdminManagementProps> = ({
-  authToken,
   isAdmin,
 }) => {
   const [users, setUsers] = useState<LibraryUserDTO[]>([]);
@@ -36,7 +34,6 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
   });
   const [newCategory, setNewCategory] = useState<Category>({ name: '' });
 
-  axios.defaults.headers.common = { Authorization: `Bearer ${authToken}` };
 
   useEffect(() => {
     if (isAdmin) {
@@ -45,10 +42,12 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
     getAllBooks().then(setBooks);
   }, [isAdmin]);
 
+  const role = localStorage.getItem('role');
+
   const handleDeleteUser = async (userId: number) => {
     if (!isAdmin) return;
     try {
-      await deleteLibraryUser(userId, authToken);
+      await deleteLibraryUser(userId);
       setUsers(users.filter((user) => user.id !== userId));
     } catch (error) {
       console.error('Failed to delete user', error);
@@ -86,7 +85,7 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
 
   return (
     <div className='admin-management'>
-      {isAdmin && (
+      {isAdmin ? (
         <div className='admin-management__user-section'>
           <h1 className='user-management__title'>User Management</h1>
           {users.map((user) => (
@@ -101,7 +100,7 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
             </div>
           ))}
         </div>
-      )}
+      ) : null}
       <div className='admin-management__book-section'>
         <h1 className='book-management__title'>Book Management</h1>
         {books.map((book) => (
@@ -117,73 +116,75 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
         ))}
       </div>
 
-      <div className='admin-management__add-book-section'>
-        <h1 className='add-book__title'>Add Book</h1>
-        <form className='add-book__form' onSubmit={handleAddBook}>
-          <label className='add-book__label'>
-            Title:
-            <input
-              className='add-book__input'
-              type='text'
-              value={newBook.title}
-              onChange={(e) =>
-                setNewBook({ ...newBook, title: e.target.value })
-              }
-              required
-            />
-          </label>
-          <label className='add-book__label'>
-            Description:
-            <textarea
-              className='add-book__textarea'
-              value={newBook.description}
-              onChange={(e) =>
-                setNewBook({ ...newBook, description: e.target.value })
-              }
-              required
-            />
-          </label>
+      {isAdmin ? (
+        <div className='admin-management__add-book-section'>
+          <h1 className='add-book__title'>Add Book</h1>
+          <form className='add-book__form' onSubmit={handleAddBook}>
+            <label className='add-book__label'>
+              Title:
+              <input
+                className='add-book__input'
+                type='text'
+                value={newBook.title}
+                onChange={(e) =>
+                  setNewBook({ ...newBook, title: e.target.value })
+                }
+                required
+              />
+            </label>
+            <label className='add-book__label'>
+              Description:
+              <textarea
+                className='add-book__textarea'
+                value={newBook.description}
+                onChange={(e) =>
+                  setNewBook({ ...newBook, description: e.target.value })
+                }
+                required
+              />
+            </label>
 
-          <label className='add-book__label'>
-            First Name:
-            <input
-              className='add-book__input'
-              type='text'
-              placeholder='First name'
-              value={newAuthor.firstName}
-              onChange={(e) =>
-                setNewAuthor({ ...newAuthor, firstName: e.target.value })
-              }
-              required
-            />
-            Last Name:
-            <input
-              className='add-book__input'
-              type='text'
-              placeholder='Last name'
-              value={newAuthor.lastName}
-              onChange={(e) =>
-                setNewAuthor({ ...newAuthor, lastName: e.target.value })
-              }
-              required
-            />
-          </label>
+            <label className='add-book__label'>
+              First Name:
+              <input
+                className='add-book__input'
+                type='text'
+                placeholder='First name'
+                value={newAuthor.firstName}
+                onChange={(e) =>
+                  setNewAuthor({ ...newAuthor, firstName: e.target.value })
+                }
+                required
+              />
+              Last Name:
+              <input
+                className='add-book__input'
+                type='text'
+                placeholder='Last name'
+                value={newAuthor.lastName}
+                onChange={(e) =>
+                  setNewAuthor({ ...newAuthor, lastName: e.target.value })
+                }
+                required
+              />
+            </label>
 
-          <label className='add-book__label'>
-            Category:
-            <input
-              className='add-book__input'
-              type='text'
-              value={newCategory.name}
-              onChange={(e) => setNewCategory({ name: e.target.value })}
-              required
-            />
-          </label>
-          <button className='add-book__button' type='submit'>
-            Add book
-          </button>
-        </form>
-      </div>
+            <label className='add-book__label'>
+              Category:
+              <input
+                className='add-book__input'
+                type='text'
+                value={newCategory.name}
+                onChange={(e) => setNewCategory({ name: e.target.value })}
+                required
+              />
+            </label>
+            <button className='add-book__button' type='submit'>
+              Add book
+            </button>
+          </form>
+        </div>
+      ) : null}
     </div>
   );
 };
