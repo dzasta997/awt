@@ -42,6 +42,34 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
   const [categories, setCategories] = useState<Category[]>([]);
   const [rentals, setRentals] = useState<RentalDTO[]>([]);
 
+  const [newCategory, setNewCategory] = useState<Category>({ name: '' });
+  const [newAuthor, setNewAuthor] = useState<Author>({
+    firstName: '',
+    lastName: '',
+  });
+
+  const handleAddCategory = async (event: FormEvent) => {
+    event.preventDefault();
+    try {
+      const addedCategory = await postCategory(newCategory);
+      setCategories([...categories, addedCategory]);
+      setNewCategory({ name: '' });
+    } catch (error) {
+      console.error('Failed to add category', error);
+    }
+  };
+
+  const handleAddAuthor = async (event: FormEvent) => {
+    event.preventDefault();
+    try {
+      const addedAuthor = await postAuthor(newAuthor);
+      setAuthors([...authors, addedAuthor]);
+      setNewAuthor({ firstName: '', lastName: '' });
+    } catch (error) {
+      console.error('Failed to add author', error);
+    }
+  };
+
   useEffect(() => {
     if (isAdmin) {
       getAllLibraryUsers().then(setUsers);
@@ -155,19 +183,113 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
 
       {isAdmin && (
         <div className='admin-management__add-category-section'>
-          {/* Add Category section */}
+          <form onSubmit={handleAddCategory}>
+            <label>
+              Category Name:
+              <input
+                type='text'
+                value={newCategory.name}
+                onChange={(e) =>
+                  setNewCategory({ ...newCategory, name: e.target.value })
+                }
+              />
+            </label>
+            <input type='submit' value='Add Category' />
+          </form>
         </div>
       )}
 
       {isAdmin && (
         <div className='admin-management__add-author-section'>
-          {/* Add Author section */}
+          <form onSubmit={handleAddAuthor}>
+            <label>
+              Author First Name:
+              <input
+                type='text'
+                value={newAuthor.firstName}
+                onChange={(e) =>
+                  setNewAuthor({ ...newAuthor, firstName: e.target.value })
+                }
+              />
+            </label>
+            <label>
+              Author Last Name:
+              <input
+                type='text'
+                value={newAuthor.lastName}
+                onChange={(e) =>
+                  setNewAuthor({ ...newAuthor, lastName: e.target.value })
+                }
+              />
+            </label>
+            <input type='submit' value='Add Author' />
+          </form>
         </div>
       )}
 
       {isAdmin && (
         <div className='admin-management__add-book-section'>
-          {/* Add Book section */}
+          <form onSubmit={handleAddBook}>
+            {/* existing fields ... */}
+            <label>
+              Authors:
+              <select
+                multiple
+                value={newBook.authors.map(
+                  (author) => `${author.firstName} ${author.lastName}`
+                )}
+                onChange={(e) => {
+                  setNewBook({
+                    ...newBook,
+                    authors: Array.from(
+                      e.target.selectedOptions,
+                      (option) =>
+                        authors.find(
+                          (author) =>
+                            `${author.firstName} ${author.lastName}` ===
+                            option.value
+                        )!
+                    ),
+                  });
+                }}
+              >
+                {authors.map((author) => (
+                  <option
+                    value={`${author.firstName} ${author.lastName}`}
+                    key={`${author.firstName} ${author.lastName}`}
+                  >
+                    {`${author.firstName} ${author.lastName}`}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Categories:
+              <select
+                multiple
+                value={newBook.categories.map((category) => category.name)}
+                onChange={(e) => {
+                  setNewBook({
+                    ...newBook,
+                    categories: Array.from(
+                      e.target.selectedOptions,
+                      (option) =>
+                        categories.find(
+                          (category) => category.name === option.value
+                        )!
+                    ),
+                  });
+                }}
+              >
+                {categories.map((category) => (
+                  <option value={category.name} key={category.name}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <input type='submit' value='Add Book' />
+          </form>
         </div>
       )}
     </div>
