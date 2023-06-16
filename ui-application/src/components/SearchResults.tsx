@@ -18,15 +18,15 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   const handleBorrow = async (bookId: string) => {
     try {
       const rentalData = {
-        userId: currentUser, // Provide the user ID of the borrower
-        bookId: bookId, // Provide the ID of the book being borrowed
+        userId: currentUser?.username, // Provide the user ID of the borrower
+        copyId: bookId, // Provide the ID of the copy being borrowed
         rentalDate: new Date().toISOString(), // Provide the rental date
       };
 
       const response = await postRental(rentalData);
       onBorrowBook(bookId);
     } catch (error) {
-      console.error('Could not borrow book: ', error);
+      console.error( currentUser?.username,':','Could not borrow book: ', error);
     }
   };
 
