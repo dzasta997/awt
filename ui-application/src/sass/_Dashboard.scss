@@ -1,0 +1,37 @@
+// Define some variables for colors and sizes
+$primary-color: var(--color-white);
+$secondary-color: #6c757d;
+$link-size: 1.2rem;
+
+// Use nesting to group the styles for the dashboard block
+.dashboard {
+  // Use a mixin to apply some common styles for the links
+  @mixin link-style {
+    display: block;
+    padding: 0.4rem;
+    font-size: $link-size;
+    text-decoration: none;
+    color: black;
+    font-weight: 700
+  }
+
+  // Use the & symbol to refer to the parent selector
+  &__link {
+    @include link-style; // Apply the mixin
+
+    // Use modifiers to change the background color based on the user name
+    &--admin {
+      background-color: $primary-color;
+    }
+
+    &--user {
+      background-color: $secondary-color;
+    }
+
+    // Use pseudo-classes to change the appearance on hover and focus
+    &:hover,
+    &:focus {
+      opacity: 0.8;
+    }
+  }
+}

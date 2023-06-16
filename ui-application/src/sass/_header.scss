@@ -28,69 +28,6 @@
   flex-shrink: 0;
 }
 
-// SEARCH
-.search {
-  flex: 0 0 40%;
-  display: flex;
-  width: 48rem;
-  align-items: center;
-  justify-content: center;
-  margin-left: -14rem;
-  @media only screen and (max-width: $bp-smallest) {
-    order: 1;
-    flex: 0 0 100%;
-    background-color: var(--color-grey-light-2);
-  }
-
-  &__input {
-    font-family: inherit;
-    font-size: 2rem;
-    height: 4rem;
-    color: inherit;
-    background-color: var(--color-grey-light-2);
-    border: none;
-    padding: 0.7rem 2rem;
-    border-radius: 100px;
-    width: 90%;
-    transition: all 0.2s;
-    margin-right: -3.25rem;
-
-    &:focus {
-      outline: none;
-      width: 100%;
-      background-color: var(--color-grey-light-3);
-    }
-
-    &::-webkit-input-placeholder {
-      font-weight: 100;
-      color: var(--color-grey-light-4);
-    }
-  }
-
-  &__input:focus + &__button {
-    background-color: var(--color-grey-light-3);
-  }
-
-  &__button {
-    border: none;
-    background-color: var(--color-grey-light-2);
-
-    &:focus {
-      outline: none;
-    }
-
-    &:active {
-      transform: translateY(2px);
-    }
-  }
-
-  &__icon {
-    height: 2rem;
-    width: 2rem;
-    fill: var(--color-grey-dark-3);
-  }
-}
-
 .user-nav {
   display: flex;
   justify-content: space-between;
@@ -137,5 +74,69 @@
     &:active {
       transform: scale(0.95); /* add scale transformation on active */
     }
+  }
+
+  // Add styles for the dashboard button
+  // Add styles for the dashboard button
+  &__dashboard-button {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    width: auto; // adjust the width according to the content
+    height: auto; // adjust the height according to the content
+    background-color: #140b34; // use a dark color for contrast
+    color: #ffffff; // use a light color for contrast
+    border-radius: 0.4rem; // match the border radius of other buttons
+    border: none; // remove the default border
+    margin-right: 1rem; // add some margin to separate from other elements
+    padding: 0.5rem; // add some padding to make it look more spacious
+
+    &:hover,
+    &:active,
+    &:focus {
+      box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2); // add a subtle shadow effect on hover, active and focus
+      transform: translateY(
+        -0.1rem
+      ); // add a slight movement on hover and active
+    }
+
+    &:active {
+      transform: none; // reset the movement on active
+    }
+  }
+
+  // Add styles for the logout button
+  &__logout {
+    font-family: inherit;
+    font-size: inherit; // use the same font size as the dashboard button
+    font-weight: inherit; // use the same font weight as the dashboard button
+    width: auto; // adjust the width according to the content
+    height: auto; // adjust the height according to the content
+    background-color: #ffffff; // use a light color for contrast
+    color: #140b34; // use a dark color for contrast
+    border-radius: 0.4rem; // match the border radius of other buttons
+    border: none; // remove the default border
+    margin-right: 0.5rem; // add some margin to separate from other elements
+    padding: 0.5rem; // use the same padding as the dashboard button
+
+    &:hover,
+    &:active,
+    &:focus {
+      box-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2); // add a subtle shadow effect on hover, active and focus
+      transform: translateY(
+        -0.1rem
+      ); // add a slight movement on hover and active
+    }
+
+    &:active {
+      transform: none; // reset the movement on active
+    }
+  }
+
+  .user-nav__userName {
+    font-size: medium;
+    font-weight: bolder;
+    color: #140b34; // use a dark color for contrast
+    margin-right: 1rem; // add some margin to separate from other elements
   }
 }

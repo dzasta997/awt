@@ -1,70 +1,97 @@
-// A simple style file for the search results component
-// Use an id selector for the component
-#app__search-results {
-  // Use a yellow border for the component
-  border: 1rem solid var(--color-primary);
-  border-radius: 1.3rem;
-  // Use some padding and margin for spacing
-  padding: 1rem;
-  // Use a margin of auto to center the component horizontally
-  margin: 2.7rem auto;
-  // Use a grid layout to align the items
-  display: grid;
-  // Use three columns for the grid layout
-  grid-template-columns: 1fr 1fr auto;
-  grid-gap: 1rem;
-  width: 40%;
-  // Use a nested selector for the item class
-  .item {
-    // Use a nested selector for the title class
-    position: relative;
-    .title {
-      // Use a bold font weight and a larger font size
-      font-weight: bold;
-      font-size: 2.3rem;
+// Define some variables for colors and sizes
+$primary-color: var(--color-dark);
+$secondary-color: var(--color-primary);
+$border-color: yellow;
+$border-radius: 0.5rem; // Define a variable for the border radius
+$spacer-size: 4.5rem; // Define a variable for the spacer size
+
+// Use nesting to group styles for the same block or element
+.search-results {
+  // Use rem units for font size, padding and margin
+  padding: 3rem; // Increase the padding
+  margin: 2rem; // Increase the margin
+
+  // Use & to reference the parent selector
+  &__item {
+    font-size: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 8px solid $secondary-color;
+    border-radius: $border-radius; // Add a border radius
+    margin-bottom: 4rem;
+  }
+
+  &__content {
+    margin-left: 1rem;
+  }
+
+  &__title {
+    color: $primary-color;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  &__author {
+    // Add a border around the array section
+    border: 1px solid $border-color;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: $border-radius; // Add a border radius
+  }
+
+  &__category {
+    // Add a border around the array section
+    border: 1px solid $border-color;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: $border-radius; // Add a border radius
+  }
+
+  &__description {
+    margin-left: 1rem;
+  }
+
+  &__borrow-button {
+    // Use variables for width and height
+    font-size: medium;
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    cursor: pointer;
+    height: 3rem;
+    border: none;
+    width: 10rem;
+    margin-right: 1rem;
+
+    // Use border-radius to make the button more rounded
+    border-radius: 1rem;
+
+    // Use box-shadow to add some depth and softness to the button
+    box-shadow: inset 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.1),
+      inset -0.2rem -0.2rem 0.5rem rgba(255, 255, 255, 0.1);
+
+    // Use transition to enable smooth animations
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: inset 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.1),
+        inset -0.2rem -0.2rem 0.5rem rgba(255, 255, 255, 0.1),
+        // Add an extra box-shadow to create a glow effect
+        0 0.5rem 1rem var(--color-primary);
+
+      // Use animation to add some bounce effect
+      animation: bounce 0.5s infinite alternate;
     }
+  }
 
-    // Use a nested selector for the description class
-    .description {
-      // Use a normal font weight and a smaller font size
-      font-weight: normal;
-      font-size: 2rem;
+  // Define a keyframes rule for the bounce animation
+  @keyframes bounce {
+    from {
+      transform: translateY(0);
     }
-
-    // Use a class selector for the button element
-    .borrow-button {
-      position: absolute;
-      right: -32rem;
-      top: 85%;
-      transform: translateY(-50%);
-      // Use no border for the button
-      border: none;
-      // Use some padding for spacing
-      padding: 0.5rem 1rem;
-      // Use a border radius for round corners
-      border-radius: 0.5rem;
-      // Use a white color for the text
-      // Use a nice font family for the text
-      font-family: 'Roboto', sans-serif;
-      // Use a relative unit for the font size
-      font-size: 1.5rem;
-      // Use a box shadow for some depth effect
-      box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
-      // Use a transition property to animate the color and box shadow properties
-      transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-
-      &:hover {
-        cursor: pointer;
-        // Change the color and box shadow properties when hovering over the button
-        color: white;
-        box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
-      }
-
-      &:active {
-        // Change the color and box shadow properties when clicking on the button
-        color: white;
-        box-shadow: inset 0 -0.2rem 0.4rem rgba(0, 0, 0, 0.2);
-      }
+    to {
+      transform: translateY(-0.2rem);
     }
   }
 }

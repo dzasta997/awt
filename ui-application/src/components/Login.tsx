@@ -1,33 +1,47 @@
 import React, { useState } from 'react';
 import '../sass/main.scss';
 import picture from '../SvgContainer/picture--login.svg';
-import { login } from '../services/authService';
-import Popup from './Popup';  // import the Popup component
+import { LoginResponse, login } from '../services/authService';
+import Popup from './Popup'; 
 
 interface LoginProps {
   onClose: () => void;
-  onLoginSuccess: (name: string) => void;  // Add this line
+  onLoginSuccess: (loginResponse: LoginResponse) => void;
 }
 
+
 const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
-  // Add state for username and password
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');  // Add this line
+  const [errorMessage, setErrorMessage] = useState(''); 
+  
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const data = await login(username, password);
-      console.log('Login successful', data);
-      // Assuming that the "name" field is returned from the "login" function
-      onLoginSuccess(data.name);  // Add this line
+      setErrorMessage('');
+  
+      // Send the login request with username and password
+      const loginData = await login(username, password);
+      console.log('Login successful', username);
+  
+      // Save the username and token to localStorage
+      localStorage.setItem('username', loginData.username);
+  
+      // Check if username ends with 'admin' and save the result as a string in localStorage
+      const isAdmin = username.endsWith('admin');
+      localStorage.setItem('isAdmin', String(isAdmin));
+    
+      onLoginSuccess({ ...loginData, username, isAdmin,}); // Pass the whole loginData object to the callback function
       onClose();
     } catch (error) {
       console.error('Login failed', error);
-      setErrorMessage('Sorry, this account either does not exist or the password is incorrect.');
+      setErrorMessage(
+        'Sorry, this account either does not exist or the password is incorrect.'
+      );
     }
   };
+  
 
   const handlePopupClose = () => {
     setErrorMessage('');
@@ -46,13 +60,13 @@ const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
                 type='text'
                 id='email'
                 name='email'
-                placeholder='example@mail.com'
+                placeholder='username'
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
               <label htmlFor='email' className='login__box__label'>
-                Email
+                UserName
               </label>
               <svg
                 width='24'
@@ -113,7 +127,9 @@ const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
             </svg>
           </button>
         </div>
-        {errorMessage && <Popup message={errorMessage} onClose={handlePopupClose} />}  {/* Add this line */}
+        {errorMessage && (
+          <Popup message={errorMessage} onClose={handlePopupClose} />
+        )}{' '}
       </div>
     </div>
   );

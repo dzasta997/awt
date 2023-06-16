@@ -1,42 +1,78 @@
 import React from 'react';
 import { BookDTO } from '../api/types';
 import '../sass/main.scss';
+import { postRental } from '../api/rentalApi';
+import { LoginResponse } from '../services/authService';
 
-// Define an interface for the props of the component
 interface SearchResultsProps {
-  books: BookDTO[]; // The array of books
-  id?: string; // The optional id for the component
+  books: BookDTO[];
+  onBorrowBook: (bookId: string) => void;
+  currentUser: LoginResponse | null;
 }
 
-// Use the interface for the props type
-const SearchResults: React.FC<SearchResultsProps> = ({ books, id }) => {
-  const handleBorrow = (bookId: string) => {
-    // Do something with the bookId, such as calling an API or updating the state
-    console.log(`Borrowing book with id ${bookId}`);
+const SearchResults: React.FC<SearchResultsProps> = ({
+  books,
+  onBorrowBook,
+  currentUser,
+}) => {
+  const handleBorrow = async (bookId: string) => {
+    try {
+      const rentalData = {
+        userId: currentUser?.username, // Provide the user ID of the borrower
+        copyId: bookId, // Provide the ID of the copy being borrowed
+        rentalDate: new Date().toISOString(), // Provide the rental date
+      };
+
+      const response = await postRental(rentalData);
+      onBorrowBook(bookId);
+    } catch (error) {
+      console.error( currentUser?.username,':','Could not borrow book: ', error);
+    }
   };
 
-  // Use the id prop for the component div element
   return (
-    <div id={id}>
+    <div className='search-results'>
       {books.map((book) => (
-        // Use a div element with a class name of item for each book
-        <div key={book.bookId} className='item'>
-          {/* Wrap the title and description in a container */}
-          <div className='content'>
-            <div className='title' role='heading' aria-level={2}>
+        <div key={book.bookId} className='search-results__item'>
+          <div className='search-results__content'>
+            <div
+              className='search-results__title'
+              role='heading'
+              aria-level={2}
+            >
               {book.title}
             </div>
-            <div className='description' role='paragraph'>
-              {book.description}
+            <div
+              className='search-results__author array-section'
+              role='paragraph'
+            >
+              {book.authors.map((author, index) => (
+                <div key={index}>
+                  Author: {author.firstName} {author.lastName}
+                </div>
+              ))}
+            </div>
+            <div
+              className='search-results__category array-section'
+              role='paragraph'
+            >
+              {book.categories.map((category, index) => (
+                <div key={index}>Category: {category.name}</div>
+              ))}
+            </div>
+            <div className='search-results__description' role='paragraph'>
+              Description: {book.description}
             </div>
           </div>
-          <button
-            className='borrow-button'
-            onClick={() => handleBorrow(book.bookId.toString())}
-            style={{ backgroundColor: 'var(--color-primary)' }}
-          >
-            Borrow book
-          </button>
+          {currentUser && ( // Check if currentUser is not null/undefined
+            <button
+              className='search-results__borrow-button'
+              onClick={() => handleBorrow(book.bookId.toString())}
+              style={{ backgroundColor: 'var(--color-primary)' }}
+            >
+              Borrow book
+            </button>
+          )}
         </div>
       ))}
     </div>
