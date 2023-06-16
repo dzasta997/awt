@@ -50,6 +50,9 @@ public class SecurityConfig {
         return http
                .httpBasic().and()
                 .authorizeHttpRequests()
+                .requestMatchers("/", "GET").permitAll()
+                .requestMatchers("/actuator/**", "GET").permitAll()
+                .requestMatchers("/actuator/**", "POST").permitAll()
                 .requestMatchers("/books/**", "GET").permitAll()
                 .requestMatchers("/users", "POST").permitAll()
                 .anyRequest().authenticated()

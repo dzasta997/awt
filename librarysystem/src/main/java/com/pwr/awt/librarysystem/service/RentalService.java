@@ -71,7 +71,8 @@ public class RentalService {
             rentalDB.getCopy().setRented(false);
 //            copyRepository.save(rentalDB.getCopy().setRented(false));
         }
-        return rentalRepository.save(rentalDB);
+        rentalRepository.save(rentalDB);
+        return rentalDB;
     }
 
     public Rental addRental(Copy copy){
