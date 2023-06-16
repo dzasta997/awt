@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../sass/main.scss';
 import logo from '../SvgContainer/logo.svg';
-import searchIcon from '../SvgContainer/search.svg';
+import Search from './Search';
 import { BookDTO } from '../api/types';
-import { searchBooks } from '../api/bookApi';
-import profilePhoto from '../SvgContainer/healthicons_ui-user-profile.svg';
+import userIcon from '../SvgContainer/healthicons_ui-user-profile.svg';
 
 interface HeaderProps {
   onButtonClick: () => void;
@@ -12,6 +11,8 @@ interface HeaderProps {
   onSearch: (books: BookDTO[]) => void;
   isAuthenticated: boolean;
   userName: string;
+  onDashboardClick: () => void;
+  onLogout: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -20,17 +21,15 @@ const Header: React.FC<HeaderProps> = ({
   onSearch,
   isAuthenticated,
   userName,
+  onDashboardClick,
+  onLogout,
 }) => {
-  const [searchText, setSearchText] = useState('');
-
-  const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const books = await searchBooks(searchText);
-    onSearch(books);
-  };
-
   const handleLogoClick = () => {
     window.location.assign('/');
+  };
+
+  const handleLogout = () => {
+    onLogout(); // Call the onLogout function when the logout button is clicked
   };
 
   return (
@@ -43,22 +42,24 @@ const Header: React.FC<HeaderProps> = ({
           System
         </h1>
       </div>
-      <form action='#' className='search' onSubmit={handleSearch}>
-        <input
-          type='text'
-          className='search__input'
-          placeholder='Search...'
-          onChange={(event) => setSearchText(event.target.value)}
-        />
-        <button className='search__button'>
-          <img src={searchIcon} alt='searchIcon' />
-        </button>
-      </form>
+      <Search onSearch={onSearch} />
       <nav className='user-nav'>
         {isAuthenticated ? (
           <>
-            <img src={profilePhoto} alt='Profile' />
-            <p>Hello, {userName}. What do you want to do today?</p>
+            <img src={userIcon} alt='User Icon' className='user-nav__icon' />
+            <p className='user-nav__userName'>
+              Hello {userName},<br />
+              what should we do today?
+            </p>
+            <button
+              className='user-nav__dashboard-button'
+              onClick={onDashboardClick}
+            >
+              Dashboard
+            </button>
+            <button className='user-nav__logout' onClick={handleLogout}>
+                Log out
+            </button>
           </>
         ) : (
           <>

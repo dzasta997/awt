@@ -1,22 +1,49 @@
-import axios from 'axios';
+import axios from '../api/api';
 
 const API_BASE_URL = 'http://localhost:8080';
 
+// Define the username and password
+const username = 'admin';
+const password = 'pass';
+
+// Encode the credentials
+const encodedCredentials = window.btoa(`${username}:${password}`);
+
 export const getAllRentals = async () => {
-  const response = await axios.get(`${API_BASE_URL}/rentals`);
+  // Pass the authorization header
+  const response = await axios.get(`${API_BASE_URL}/rentals`, {
+    headers: {
+      Authorization: `Basic ${encodedCredentials}`,
+    },
+  });
   return response.data;
 };
 
 export const getRental = async (id: number) => {
-  const response = await axios.get(`${API_BASE_URL}/rentals/${id}`);
+  // Pass the authorization header
+  const response = await axios.get(`${API_BASE_URL}/rentals/${id}`, {
+    headers: {
+      Authorization: `Basic ${encodedCredentials}`,
+    },
+  });
   return response.data;
 };
 
 export const postRental = async (rental: any) => {
-  const response = await axios.post(`${API_BASE_URL}/rentals`, rental);
+  // Pass the authorization header
+  const response = await axios.post(`${API_BASE_URL}/rentals`, rental, {
+    headers: {
+      Authorization: `Basic ${encodedCredentials}`,
+    },
+  });
   return response.data;
 };
 
 export const deleteRental = async (id: number) => {
-  await axios.delete(`${API_BASE_URL}/rentals/${id}`);
+  // Pass the authorization header
+  await axios.delete(`${API_BASE_URL}/rentals/${id}`, {
+    headers: {
+      Authorization: `Basic ${encodedCredentials}`,
+    },
+  });
 };

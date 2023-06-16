@@ -1,0 +1,42 @@
+.user-management {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__copies {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid  #feda00;
+    border-radius: 10px;
+    height: 50vw;
+    width: 50vw;
+    margin-bottom: 20px;
+   
+
+    &__title {
+      font-size: 1.5em;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    &__copy {
+      border: 2px solid #000;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+
+      &-title {
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      &-details {
+        line-height: 1.5;
+        text-align: center;
+      }
+    }
+  }
+}

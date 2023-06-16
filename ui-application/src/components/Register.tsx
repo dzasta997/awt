@@ -1,21 +1,40 @@
-import React, { useState } from 'react';
 import '../sass/main.scss';
 import picture from '../SvgContainer/picture--register.svg';
 import { postLibraryUser } from '../api/libraryUserApi';
+import { LibraryUserDTO } from '../api/types';
+import { useState } from 'react';
 
 const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-  const [form, setForm] = useState({
-    name: '',
-    surname: '',
-    email: '',
+  const [form, setForm] = useState<LibraryUserDTO>({
+    username: '', // Add the username field here
     password: '',
     repeatPassword: '',
-    address: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: {
+      street: '',
+      number: '',
+      city: '',
+      zipcode: '',
+    },
+    phoneNumber: '',
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setForm({ ...form, [name]: value });
+    setForm((prevForm: LibraryUserDTO) => ({ ...prevForm, [name]: value }));
+  };
+
+  const handleAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setForm((prevForm: LibraryUserDTO) => ({
+      ...prevForm,
+      address: {
+        ...prevForm.address,
+        [name]: value,
+      },
+    }));
   };
 
   const handleRegister = async () => {
@@ -24,26 +43,31 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       return;
     }
 
-    const libraryUser = {
-      username: form.email,
-      password: form.password,
-      userInfo: {
-        firstName: form.name,
-        lastName: form.surname,
-        address: form.address,
-      },
-    };
-
     try {
-      const newUser = await postLibraryUser(libraryUser);
-      console.log('User registered:', newUser);
+      const userToRegister: LibraryUserDTO = {
+        username: form.username,
+        password: form.password,
+        repeatPassword: form.repeatPassword,
+        firstName: form.firstName,
+        lastName: form.lastName,
+        email: form.email,
+        phoneNumber: form.phoneNumber,
+        address: {
+          street: form.address.street,
+          number: form.address.number,
+          city: form.address.city,
+          zipcode: form.address.zipcode,
+        },
+      };
+
+      await postLibraryUser(userToRegister);
+      console.log('User registered:', form.username);
       onClose();
     } catch (error) {
       console.error('Error registering user:', error);
       alert('Error registering user. Please try again.');
     }
   };
-
   return (
     <div className='register'>
       <div className='register__background'></div>
@@ -55,30 +79,35 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           <div className='register__column'>
             <input
               type='text'
-              id='name'
-              name='name'
-              className='register__input register__input--name'
-              placeholder='Name'
+              id='username'
+              name='username'
+              className='register__input register__input--username'
+              placeholder='Username'
               required
-              value={form.name}
+              value={form.username}
               onChange={handleInputChange}
             />
-            <label htmlFor='surname' className='register__label'>
-              Surname
-            </label>
+
             <input
               type='text'
-              id='surname'
-              name='surname'
-              className='register__input register__input--surname'
-              placeholder='Surname'
+              id='firstName'
+              name='firstName'
+              className='register__input register__input--name'
+              placeholder='First Name'
               required
-              value={form.surname}
+              value={form.firstName}
               onChange={handleInputChange}
             />
-            <label htmlFor='name' className='register__label'>
-              Name
-            </label>
+            <input
+              type='text'
+              id='lastName'
+              name='lastName'
+              className='register__input register__input--surname'
+              placeholder='Last Name'
+              required
+              value={form.lastName}
+              onChange={handleInputChange}
+            />
             <input
               type='email'
               id='email'
@@ -89,50 +118,83 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               value={form.email}
               onChange={handleInputChange}
             />
-            <label htmlFor='email' className='register__label'>
-              Email
-            </label>
           </div>
+
+          <div className='register__column register__column--address'>
+            <input
+              type='text'
+              id='number'
+              name='number'
+              className='register__input register__input--number'
+              placeholder='Number'
+              required
+              value={form.address.number}
+              onChange={handleAddressChange}
+            />
+            <input
+              type='text'
+              id='city'
+              name='city'
+              className='register__input register__input--city'
+              placeholder='City'
+              required
+              value={form.address.city}
+              onChange={handleAddressChange}
+            />
+            <input
+              type='text'
+              id='zipcode'
+              name='zipcode'
+              className='register__input register__input--zipcode'
+              placeholder='Zip Code'
+              required
+              value={form.address.zipcode}
+              onChange={handleAddressChange}
+            />
+          </div>
+
           <div className='register__column'>
             <input
               type='password'
               id='password'
               name='password'
               className='register__input register__input--password'
-              placeholder='password'
+              placeholder='Password'
               required
               value={form.password}
               onChange={handleInputChange}
             />
-            <label htmlFor='password' className='register__label'>
-              Password
-            </label>
             <input
               type='password'
-              id='repeat-password'
+              id='repeatPassword'
               name='repeatPassword'
               className='register__input register__input--repeat-password'
-              placeholder='repeat password'
+              placeholder='Repeat Password'
               required
               value={form.repeatPassword}
               onChange={handleInputChange}
             />
-            <label htmlFor='repeat-password' className='register__label'>
-              Repeat Password
-            </label>
             <input
               type='text'
-              id='address'
-              name='address'
-              className='register__input register__input--address'
-              placeholder='Address'
+              id='street'
+              name='street'
+              className='register__input register__input--street'
+              placeholder='Street'
               required
-              value={form.address}
+              value={form.address.street}
+              onChange={handleAddressChange}
+            />
+
+            <input
+              type='text'
+              id='phoneNumber'
+              name='phoneNumber'
+              className='register__input register__input--phone'
+              placeholder='Phone Number'
+              required
+              value={form.phoneNumber}
               onChange={handleInputChange}
             />
-            <label htmlFor='address' className='register__label'>
-              Address
-            </label>
           </div>
         </div>
         <button className='register__close' onClick={onClose}>

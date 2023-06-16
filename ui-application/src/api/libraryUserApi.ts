@@ -1,41 +1,41 @@
 import api from './api';
+import { LibraryUserDTO } from './types';
 
+const username = 'admin';
+const password = 'pass';
+const encodedCredentials = window.btoa(`${username}:${password}`);
+
+// Get All Users
 export const getAllLibraryUsers = async () => {
-  try {
-    const response = await api.get('/users');
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching library users:', error);
-    throw error;
-  }
+  const response = await api.get<LibraryUserDTO[]>('/users', {
+    headers: {
+      Authorization: `Basic ${encodedCredentials}`,
+    },
+  });
+  return response.data;
 };
 
-export const getLibraryUserById = async (id: number) => {
-  try {
-    const response = await api.get(`/users/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error(`Error fetching library user with ID ${id}:`, error);
-    throw error;
-  }
+export const getLibraryUser = async (id: number) => {
+  const response = await api.get<LibraryUserDTO>(`/users/${id}`, {
+    headers: {
+      Authorization: `Basic ${encodedCredentials}`,
+    },
+  });
+  return response.data;
 };
 
-export const postLibraryUser = async (libraryUser: any) => {
-  try {
-    const response = await api.post('/users', libraryUser);
-    return response.data;
-  } catch (error) {
-    console.error('Error posting library user:', error);
-    throw error;
-  }
+export const postLibraryUser = async (user: LibraryUserDTO) => {
+  await api.post('/users', user, {
+    headers: {
+      Authorization: `Basic ${encodedCredentials}`,
+    },
+  });
 };
 
 export const deleteLibraryUser = async (id: number) => {
-  try {
-    const response = await api.delete(`/users/${id}`);
-    return response.status;
-  } catch (error) {
-    console.error(`Error deleting library user with ID ${id}:`, error);
-    throw error;
-  }
+  await api.delete(`/users/${id}`, {
+    headers: {
+      Authorization: `Basic ${encodedCredentials}`,
+    },
+  });
 };
