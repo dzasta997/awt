@@ -42,7 +42,6 @@ const AdContainer: React.FC = () => {
       <h1 className='ad-container__header'>
         Feeling lost? Check out the popular ones!
       </h1>
-      {/* Map over the books array and render each book as an item */}
       {books.map((book) => (
         <div className='ad-container__item'>
           <img src={book.image} alt='Book cover' className='book-cover' />

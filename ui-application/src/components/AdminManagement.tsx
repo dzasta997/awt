@@ -5,41 +5,51 @@ import {
   NewBookDTO,
   Author,
   Category,
+  RentalDTO,
+  CopyDTO,
 } from '../api/types';
 import { getAllLibraryUsers, deleteLibraryUser } from '../api/libraryUserApi';
 import { getAllBooks, deleteBook, postBook } from '../api/bookApi';
+import { getAllRentals } from '../api/rentalApi';
 import '../sass/main.scss';
 import axios from '../api/api';
-import { postCategory } from '../api/categoryApi';
-import { postAuthor } from '../api/authorApi';
+import {
+  getAllCategories,
+  postCategory,
+  deleteCategory,
+} from '../api/categoryApi';
+import { getAllAuthors, postAuthor } from '../api/authorApi';
+import { LoginResponse } from '../services/authService';
 
 interface AdminManagementProps {
-  isAdmin: boolean; // This prop indicates if the current user is an admin
+  isAdmin: boolean;
+  currentUser?: LoginResponse | null;
 }
 
 const AdminManagement: React.FC<AdminManagementProps> = ({
   isAdmin,
+  currentUser,
 }) => {
   const [users, setUsers] = useState<LibraryUserDTO[]>([]);
   const [books, setBooks] = useState<BookDTO[]>([]);
   const [newBook, setNewBook] = useState<NewBookDTO>({
     title: '',
+    description: '',
     authors: [],
     categories: [],
-    description: '',
   });
-  const [newAuthor, setNewAuthor] = useState<Author>({
-    firstName: '',
-    lastName: '',
-  });
-  const [newCategory, setNewCategory] = useState<Category>({ name: '' });
-
+  const [authors, setAuthors] = useState<Author[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [rentals, setRentals] = useState<RentalDTO[]>([]);
 
   useEffect(() => {
     if (isAdmin) {
       getAllLibraryUsers().then(setUsers);
     }
     getAllBooks().then(setBooks);
+    getAllAuthors().then(setAuthors);
+    getAllCategories().then(setCategories);
+    getAllRentals().then(setRentals);
   }, [isAdmin]);
 
   const role = localStorage.getItem('role');
@@ -66,18 +76,27 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
   const handleAddBook = async (event: FormEvent) => {
     event.preventDefault();
     try {
-      const author = await postAuthor(newAuthor);
-      const category = await postCategory(newCategory);
+      const addedAuthors = await Promise.all(
+        newBook.authors.map((author) => postAuthor(author))
+      );
+      const addedCategories = await Promise.all(
+        newBook.categories.map((category) => postCategory(category))
+      );
 
-      const book = await postBook({
+      const book: NewBookDTO = {
         ...newBook,
-        authors: [author],
-        categories: [category],
+        authors: addedAuthors,
+        categories: addedCategories,
+      };
+
+      const addedBook = await postBook(book);
+      setBooks([...books, addedBook]);
+      setNewBook({
+        title: '',
+        description: '',
+        authors: [],
+        categories: [],
       });
-      setBooks([...books, book]);
-      setNewBook({ title: '', authors: [], categories: [], description: '' });
-      setNewAuthor({ firstName: '', lastName: '' });
-      setNewCategory({ name: '' });
     } catch (error) {
       console.error('Failed to add book', error);
     }
@@ -85,7 +104,7 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
 
   return (
     <div className='admin-management'>
-      {isAdmin ? (
+      {isAdmin && (
         <div className='admin-management__user-section'>
           <h1 className='user-management__title'>User Management</h1>
           {users.map((user) => (
@@ -100,7 +119,8 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
             </div>
           ))}
         </div>
-      ) : null}
+      )}
+
       <div className='admin-management__book-section'>
         <h1 className='book-management__title'>Book Management</h1>
         {books.map((book) => (
@@ -116,75 +136,40 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
         ))}
       </div>
 
-      {isAdmin ? (
-        <div className='admin-management__add-book-section'>
-          <h1 className='add-book__title'>Add Book</h1>
-          <form className='add-book__form' onSubmit={handleAddBook}>
-            <label className='add-book__label'>
-              Title:
-              <input
-                className='add-book__input'
-                type='text'
-                value={newBook.title}
-                onChange={(e) =>
-                  setNewBook({ ...newBook, title: e.target.value })
-                }
-                required
-              />
-            </label>
-            <label className='add-book__label'>
-              Description:
-              <textarea
-                className='add-book__textarea'
-                value={newBook.description}
-                onChange={(e) =>
-                  setNewBook({ ...newBook, description: e.target.value })
-                }
-                required
-              />
-            </label>
-
-            <label className='add-book__label'>
-              First Name:
-              <input
-                className='add-book__input'
-                type='text'
-                placeholder='First name'
-                value={newAuthor.firstName}
-                onChange={(e) =>
-                  setNewAuthor({ ...newAuthor, firstName: e.target.value })
-                }
-                required
-              />
-              Last Name:
-              <input
-                className='add-book__input'
-                type='text'
-                placeholder='Last name'
-                value={newAuthor.lastName}
-                onChange={(e) =>
-                  setNewAuthor({ ...newAuthor, lastName: e.target.value })
-                }
-                required
-              />
-            </label>
-
-            <label className='add-book__label'>
-              Category:
-              <input
-                className='add-book__input'
-                type='text'
-                value={newCategory.name}
-                onChange={(e) => setNewCategory({ name: e.target.value })}
-                required
-              />
-            </label>
-            <button className='add-book__button' type='submit'>
-              Add book
-            </button>
-          </form>
+      {isAdmin && (
+        <div className='admin-management__rental-section'>
+          <h1 className='rental-management__title'>Rental Management</h1>
+          {rentals.map((rental) => (
+            <div className='rental' key={rental.rentalId}>
+              <p className='rental__user'>{rental.libraryUser.username}</p>
+              <p className='rental__book'>{rental.copy.name}</p>
+              {currentUser && currentUser.isAdmin && (
+                <p className='rental__borrower'>
+                  Borrowed by: {currentUser.username}
+                </p>
+              )}
+            </div>
+          ))}
         </div>
-      ) : null}
+      )}
+
+      {isAdmin && (
+        <div className='admin-management__add-category-section'>
+          {/* Add Category section */}
+        </div>
+      )}
+
+      {isAdmin && (
+        <div className='admin-management__add-author-section'>
+          {/* Add Author section */}
+        </div>
+      )}
+
+      {isAdmin && (
+        <div className='admin-management__add-book-section'>
+          {/* Add Book section */}
+        </div>
+      )}
     </div>
   );
 };

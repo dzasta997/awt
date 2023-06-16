@@ -75,10 +75,68 @@
       transform: scale(0.95); /* add scale transformation on active */
     }
   }
-}
 
-.user-nav__userName {
-  font-size: medium;
-  font-weight: bolder;
-  color: #140B34;
+  // Add styles for the dashboard button
+  // Add styles for the dashboard button
+  &__dashboard-button {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    width: auto; // adjust the width according to the content
+    height: auto; // adjust the height according to the content
+    background-color: #140b34; // use a dark color for contrast
+    color: #ffffff; // use a light color for contrast
+    border-radius: 0.4rem; // match the border radius of other buttons
+    border: none; // remove the default border
+    margin-right: 1rem; // add some margin to separate from other elements
+    padding: 0.5rem; // add some padding to make it look more spacious
+
+    &:hover,
+    &:active,
+    &:focus {
+      box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2); // add a subtle shadow effect on hover, active and focus
+      transform: translateY(
+        -0.1rem
+      ); // add a slight movement on hover and active
+    }
+
+    &:active {
+      transform: none; // reset the movement on active
+    }
+  }
+
+  // Add styles for the logout button
+  &__logout {
+    font-family: inherit;
+    font-size: inherit; // use the same font size as the dashboard button
+    font-weight: inherit; // use the same font weight as the dashboard button
+    width: auto; // adjust the width according to the content
+    height: auto; // adjust the height according to the content
+    background-color: #ffffff; // use a light color for contrast
+    color: #140b34; // use a dark color for contrast
+    border-radius: 0.4rem; // match the border radius of other buttons
+    border: none; // remove the default border
+    margin-right: 0.5rem; // add some margin to separate from other elements
+    padding: 0.5rem; // use the same padding as the dashboard button
+
+    &:hover,
+    &:active,
+    &:focus {
+      box-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2); // add a subtle shadow effect on hover, active and focus
+      transform: translateY(
+        -0.1rem
+      ); // add a slight movement on hover and active
+    }
+
+    &:active {
+      transform: none; // reset the movement on active
+    }
+  }
+
+  .user-nav__userName {
+    font-size: medium;
+    font-weight: bolder;
+    color: #140b34; // use a dark color for contrast
+    margin-right: 1rem; // add some margin to separate from other elements
+  }
 }

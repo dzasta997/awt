@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../sass/main.scss';
 import logo from '../SvgContainer/logo.svg';
 import Search from './Search';
@@ -8,20 +8,28 @@ import userIcon from '../SvgContainer/healthicons_ui-user-profile.svg';
 interface HeaderProps {
   onButtonClick: () => void;
   onRegisterClick: () => void;
-  onSearch: (books: BookDTO[]) => void; // Add the onSearch prop
+  onSearch: (books: BookDTO[]) => void;
   isAuthenticated: boolean;
   userName: string;
+  onDashboardClick: () => void;
+  onLogout: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
   onButtonClick,
   onRegisterClick,
-  isAuthenticated,
   onSearch,
+  isAuthenticated,
   userName,
+  onDashboardClick,
+  onLogout,
 }) => {
   const handleLogoClick = () => {
     window.location.assign('/');
+  };
+
+  const handleLogout = () => {
+    onLogout(); // Call the onLogout function when the logout button is clicked
   };
 
   return (
@@ -43,6 +51,15 @@ const Header: React.FC<HeaderProps> = ({
               Hello {userName},<br />
               what should we do today?
             </p>
+            <button
+              className='user-nav__dashboard-button'
+              onClick={onDashboardClick}
+            >
+              Dashboard
+            </button>
+            <button className='user-nav__logout' onClick={handleLogout}>
+                Log out
+            </button>
           </>
         ) : (
           <>

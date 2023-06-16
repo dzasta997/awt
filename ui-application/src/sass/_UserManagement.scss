@@ -1,0 +1,63 @@
+.user-management {
+  &__title {
+    color: #140b34;
+    font-weight: bold;
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  &__books {
+    &__book {
+      margin-bottom: 1rem;
+      
+
+      &-title {
+        margin-bottom: 0.5rem;
+        font-size: 5rem;
+      }
+
+      &-button {
+        margin-right: 0.5rem;
+        font-size: 1.4rem;
+        background-color: #c0c0c0;
+        color: #140b34;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #140b34;
+          color: #c0c0c0;
+        }
+      }
+    }
+  }
+
+  &__copies {
+    &__copy {
+      margin-bottom: 1rem;
+
+      &-title {
+        margin-bottom: 0.5rem;
+        font-size: 1.6rem;
+      }
+
+      &-button {
+        margin-right: 0.5rem;
+        font-size: 1.4rem;
+        background-color: #c0c0c0;
+        color: #140b34;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #140b34;
+          color: #c0c0c0;
+        }
+      }
+    }
+  }
+}

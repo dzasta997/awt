@@ -1,5 +1,5 @@
-import { AxiosError } from "axios";
-import api from '../api/api'
+import { AxiosError } from 'axios';
+import api from '../api/api';
 
 export interface LoginResponse {
   isAdmin: boolean;
@@ -7,8 +7,10 @@ export interface LoginResponse {
   // Add other relevant properties as needed
 }
 
-
-export const login = async (username: string, password: string): Promise<LoginResponse> => {
+export const login = async (
+  username: string,
+  password: string
+): Promise<LoginResponse> => {
   try {
     // Encode the username and password in base64 format
     const encodedCredentials = window.btoa(`${username}:${password}`);
@@ -16,8 +18,8 @@ export const login = async (username: string, password: string): Promise<LoginRe
     // Send a GET request to the /login endpoint with the encoded credentials as the Authorization header
     const response = await api.get('/login', {
       headers: {
-        'Authorization': `Basic ${encodedCredentials}`
-      }
+        Authorization: `Basic ${encodedCredentials}`,
+      },
     });
 
     // Check if the response status is 200 (OK)
@@ -26,7 +28,10 @@ export const login = async (username: string, password: string): Promise<LoginRe
 
       if (data) {
         // Save user data to localStorage
-        localStorage.setItem('user', JSON.stringify({username, isAdmin: data.isAdmin, token: data.token}));
+        localStorage.setItem(
+          'user',
+          JSON.stringify({ username, isAdmin: data.isAdmin, token: data.token })
+        );
       }
 
       // Return the data from the response
@@ -51,6 +56,12 @@ export const login = async (username: string, password: string): Promise<LoginRe
       throw new Error('Error logging in');
     }
   }
+};
+
+export const getCurrentUser = (): LoginResponse | null => {
+  // Retrieve user data from localStorage
+  const userData = localStorage.getItem('user');
+  return userData ? JSON.parse(userData) : null;
 };
 
 export default login;

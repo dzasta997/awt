@@ -2,16 +2,32 @@ import React from 'react';
 import { BookDTO } from '../api/types';
 import '../sass/main.scss';
 import { postRental } from '../api/rentalApi';
+import { LoginResponse } from '../services/authService';
 
 interface SearchResultsProps {
   books: BookDTO[];
   onBorrowBook: (bookId: string) => void;
+  currentUser: LoginResponse | null;
 }
 
+const SearchResults: React.FC<SearchResultsProps> = ({
+  books,
+  onBorrowBook,
+  currentUser,
+}) => {
+  const handleBorrow = async (bookId: string) => {
+    try {
+      const rentalData = {
+        userId: currentUser, // Provide the user ID of the borrower
+        bookId: bookId, // Provide the ID of the book being borrowed
+        rentalDate: new Date().toISOString(), // Provide the rental date
+      };
 
-const SearchResults: React.FC<SearchResultsProps> = ({ books, onBorrowBook }) => {
-  const handleBorrow = (bookId: string) => {
-    onBorrowBook(bookId);
+      const response = await postRental(rentalData);
+      onBorrowBook(bookId);
+    } catch (error) {
+      console.error('Could not borrow book: ', error);
+    }
   };
 
   return (
@@ -48,13 +64,15 @@ const SearchResults: React.FC<SearchResultsProps> = ({ books, onBorrowBook }) =>
               Description: {book.description}
             </div>
           </div>
-          <button
-            className='search-results__borrow-button'
-            onClick={() => handleBorrow(book.bookId.toString())}
-            style={{ backgroundColor: 'var(--color-primary)' }}
-          >
-            Borrow book
-          </button>
+          {currentUser && ( // Check if currentUser is not null/undefined
+            <button
+              className='search-results__borrow-button'
+              onClick={() => handleBorrow(book.bookId.toString())}
+              style={{ backgroundColor: 'var(--color-primary)' }}
+            >
+              Borrow book
+            </button>
+          )}
         </div>
       ))}
     </div>
@@ -62,4 +80,3 @@ const SearchResults: React.FC<SearchResultsProps> = ({ books, onBorrowBook }) =>
 };
 
 export default SearchResults;
-

@@ -1,110 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import { getAllBooks, getBook, deleteBook } from '../api/bookApi';
-import { getAllCopies, getCopy, deleteCopy, postCopy } from '../api/copyApi';
-import { BookDTO } from '../api/types';
-import Search from './Search';
-import SearchResults from './SearchResults';
+import { getAllRentals, getRental } from '../api/rentalApi';
+import { RentalDTO } from '../api/types';
+import '../sass/main.scss';
+import { LoginResponse } from '../services/authService';
 
-interface Book extends BookDTO {
-  isFetching: boolean;
+interface UserManagementProps {
+  currentUser: LoginResponse | null;
 }
 
-interface Copy {
-  id: number;
-  name: string;
-  // ...
-}
+const UserManagement: React.FC<UserManagementProps> = ({ currentUser }) => {
+  // Define a state variable to store the rentals for the current user
+  const [userRentals, setUserRentals] = useState<RentalDTO[]>([]);
 
-const UserManagement: React.FC = () => {
-  const [books, setBooks] = useState<Book[]>([]);
-  const [copies, setCopies] = useState<Copy[]>([]);
+
+  
 
   useEffect(() => {
-    loadBooks();
-    loadCopies();
+    loadRentals();
   }, []);
 
-  const loadBooks = async () => {
-    const booksData = await getAllBooks();
-    const mappedBooks: Book[] = booksData.map((book: BookDTO) => ({ ...book, isFetching: false }));
-    setBooks(mappedBooks);
-  };
-  
+  const loadRentals = async () => {
+    // Check if currentUser is not null/undefined
+    if (currentUser) {
+      // Fetch all rentals from the api
+      const rentalsData = await getAllRentals();
 
-  const loadCopies = async () => {
-    const copies = await getAllCopies();
-    setCopies(copies);
-  };
 
-  const handleViewBook = async (id: number) => {
-    const book = books.find((book) => book.bookId === id);
-    if (book && !book.isFetching) {
-      book.isFetching = true;
-      const bookDetails = await getBook(id);
-      book.isFetching = false;
-      // Do something with bookDetails
-    }
-  };
+      // Filter the rentals by the current user ID
+      const userRentalsData = rentalsData.filter(
+        (rental: RentalDTO) => rental.libraryUser.username === currentUser.username
+      );
 
-  const handleDeleteBook = async (id: number) => {
-    await deleteBook(id);
-    setBooks(books.filter((book) => book.bookId !== id));
-  };
-  
-
-  const handleViewCopy = async (id: number) => {
-    const copyDetails = await getCopy(id);
-    // Do something with copyDetails
-  };
-
-  const handleDeleteCopy = async (id: number) => {
-    await deleteCopy(id);
-    setCopies(copies.filter((copy) => copy.id !== id));
-  };
-
-  const handleBorrowBook = async (bookId: string) => {
-    try {
-      // Create a copy with the borrowed book ID
-      const copy = await postCopy({ bookId });
-
-      // Update the copies state
-      setCopies((prevCopies) => [...prevCopies, copy]);
-    } catch (error) {
-      console.error('Failed to borrow book', error);
-      // Handle the error, show a notification, etc.
+      // Set the user rentals state variable
+      setUserRentals(userRentalsData);
     }
   };
 
   return (
-    <div>
-      <h2>Your Books</h2>
-      {books.map((book) => (
-        <div key={book.bookId}>
-          <h3>{book.title}</h3>
-          <button onClick={() => handleViewBook(book.bookId)}>
-            View Details
-          </button>
-          <button onClick={() => handleDeleteBook(book.bookId)}>
-            Delete
-          </button>
-        </div>
-      ))}
-
-      <h2>Your Copies</h2>
-      {copies.map((copy) => (
-        <div key={copy.id}>
-          <h3>{copy.name}</h3>
-          <button onClick={() => handleViewCopy(copy.id)}>
-            View Details
-          </button>
-          <button onClick={() => handleDeleteCopy(copy.id)}>
-            Delete
-          </button>
-        </div>
-      ))}
-
-      <h2>Search Results</h2>
-      <SearchResults books={books} onBorrowBook={handleBorrowBook} />
+    <div className='user-management'>
+      <div className='user-management__copies'>
+        <h1 className='user-management__title'>Your Copies</h1>
+        {userRentals.map((rental) => (
+          <div className='user-management__copy' key={rental.rentalId}>
+            <h1 className='user-management__copy-title'>{rental.copy.name}</h1>
+            <p className='user-management__copy-date'>
+              Rental Date: {rental.rentalDate}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

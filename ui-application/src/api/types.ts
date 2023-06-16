@@ -15,6 +15,28 @@ export interface BookDTO {
   categories: Category[];
 }
 
+export interface RentalDTO {
+  rentalId: number;
+  rentalDate: string;
+  dueDate: string;
+  returnDate: string | null;
+  status: RentalStatus;
+  copy: CopyDTO;
+  libraryUser: LibraryUserDTO;
+}
+
+export enum RentalStatus {
+  RESERVED = 'RESERVED',
+  RENTED = 'RENTED',
+  RETURNED = 'RETURNED',
+  PENALTY = 'PENALTY',
+}
+
+export interface CopyDTO {
+  copyId: number;
+  name: string;
+}
+
 
 export interface AddressDTO {
   street: string;
@@ -53,7 +75,3 @@ export interface LibraryUserDTO {
   };
   phoneNumber: string; // Add the phoneNumber property
 }
-
-
-
-

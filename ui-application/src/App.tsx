@@ -8,6 +8,7 @@ import { BookDTO } from './api/types';
 import SearchResults from './components/SearchResults';
 import NoResults from './components/NoResults';
 import AdminManagement from './components/AdminManagement';
+import UserManagement from './components/UserManagement';
 import { LoginResponse } from './services/authService';
 
 const App: React.FC = () => {
@@ -18,6 +19,8 @@ const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isUserManagementVisible, setIsUserManagementVisible] = useState(false);
+  const [currentUser, setCurrentUser] = useState<LoginResponse | null>(null);
 
   const handleButtonClick = () => {
     setLogInvisible(!isLogInvisible);
@@ -32,8 +35,8 @@ const App: React.FC = () => {
     setIsAuthenticated(true);
     setIsAdmin(loginResponse.isAdmin);
     setLogInvisible(false);
+    setCurrentUser(loginResponse);
   };
-
 
   const handleSearch = (books: BookDTO[]) => {
     setSearchResults(books);
@@ -42,11 +45,24 @@ const App: React.FC = () => {
   };
 
   const handleBorrowBook = (bookId: string) => {
-    // Implement the logic for borrowing the book
-    console.log(`Borrowing book with ID: ${bookId}`);
+    const updatedSearchResults = searchResults.filter(
+      (book) => book.bookId !== Number(bookId)
+    );
+    setSearchResults(updatedSearchResults);
+    console.log(`${currentUser?.username}: borrowed this book ID: ${bookId}`);
   };
-  
-  
+
+  const handleDashboardClick = () => {
+    setIsUserManagementVisible(true);
+    setHasSearched(false); // Hide search results when dashboard is clicked
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setUserName('');
+    setIsAdmin(false);
+    setCurrentUser(null);
+  };
 
   return (
     <>
@@ -61,14 +77,32 @@ const App: React.FC = () => {
           onSearch={handleSearch}
           isAuthenticated={isAuthenticated}
           userName={userName}
+          onDashboardClick={handleDashboardClick}
+          onLogout={handleLogout} // Pass the handleLogout function as a prop
         />
         {isAuthenticated ? (
-          <AdminManagement  isAdmin={isAdmin} />
-        ) : hasSearched ? (
-          searchResults.length > 0 ? (
-            <SearchResults books={searchResults} onBorrowBook={handleBorrowBook} />
+          isAdmin ? (
+            <AdminManagement isAdmin={isAdmin} currentUser={currentUser} />
           ) : (
-            <NoResults />
+            <>
+              {isUserManagementVisible ? (
+                <UserManagement currentUser={currentUser} />
+              ) : (
+                <>
+                  {!hasSearched && !isUserManagementVisible ? (
+                    <AdContainer />
+                  ) : searchResults.length > 0 && !isUserManagementVisible ? (
+                    <SearchResults
+                      books={searchResults}
+                      onBorrowBook={handleBorrowBook}
+                      currentUser={currentUser}
+                    />
+                  ) : (
+                    <NoResults />
+                  )}
+                </>
+              )}
+            </>
           )
         ) : (
           <AdContainer />
