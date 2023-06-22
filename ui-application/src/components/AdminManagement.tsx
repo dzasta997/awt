@@ -142,10 +142,12 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
           {rentals.map((rental) => (
             <div className='rental' key={rental.rentalId}>
               <p className='rental__user'>{rental.libraryUser.username}</p>
-              <p className='rental__book'>{rental.copy.name}</p>
+              <p className='rental__book'>{rental.copy.book.title}</p>
+              <p className='rental__from'> Borrowing date: {rental.rentalDate}</p>
+              <p className='rental__to'> Due: {rental.dueDate}</p>
               {currentUser && currentUser.isAdmin && (
                 <p className='rental__borrower'>
-                  Borrowed by: {currentUser.username}
+                  Borrowed by: {rental.libraryUser.username}
                 </p>
               )}
             </div>
