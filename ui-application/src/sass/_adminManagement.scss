@@ -32,6 +32,14 @@ $spacer-size: 4.5rem; // Define a variable for the spacer size
     border-radius: 2rem;
   }
 
+    &__rental-section {
+      // Use the spacer mixin to add margin at the top
+      @include spacer(top);
+      border: 1rem solid $border-color;
+      border-radius: 2rem;
+    }
+
+
   // Add styles for the add book section
   &__add-book-section {
     // Use the spacer mixin to add margin at the top
@@ -175,5 +183,24 @@ $spacer-size: 4.5rem; // Define a variable for the spacer size
     }
   }
 
+
   
 }
+.rental {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $secondary-color;
+  padding:1rem;
+  font-size: large;
+  }
+
+ .rental-management{
+
+  &__title {
+    color: $primary-color;
+    font-weight: bold;
+    text-align: center;
+    font-size: 2rem;
+  }
+ }
