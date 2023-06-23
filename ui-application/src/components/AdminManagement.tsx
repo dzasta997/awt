@@ -104,19 +104,12 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
   const handleAddBook = async (event: FormEvent) => {
     event.preventDefault();
     try {
-      const addedAuthors = await Promise.all(
-        newBook.authors.map((author) => postAuthor(author))
-      );
-      const addedCategories = await Promise.all(
-        newBook.categories.map((category) => postCategory(category))
-      );
-
       const book: NewBookDTO = {
         ...newBook,
-        authors: addedAuthors,
-        categories: addedCategories,
+        authors: newBook.authors,
+        categories: newBook.categories,
       };
-
+  
       const addedBook = await postBook(book);
       setBooks([...books, addedBook]);
       setNewBook({
@@ -129,6 +122,7 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
       console.error('Failed to add book', error);
     }
   };
+  
 
   return (
     <div className='admin-management'>
@@ -227,71 +221,89 @@ const AdminManagement: React.FC<AdminManagementProps> = ({
         </div>
       )}
 
-      {isAdmin && (
-        <div className='admin-management__add-book-section'>
-          <form onSubmit={handleAddBook}>
-            {/* existing fields ... */}
-            <label>
-              Authors:
-              <select
-                multiple
-                value={newBook.authors.map(
-                  (author) => `${author.firstName} ${author.lastName}`
-                )}
-                onChange={(e) => {
-                  setNewBook({
-                    ...newBook,
-                    authors: Array.from(
-                      e.target.selectedOptions,
-                      (option) =>
-                        authors.find(
-                          (author) =>
-                            `${author.firstName} ${author.lastName}` ===
-                            option.value
-                        )!
-                    ),
-                  });
-                }}
-              >
-                {authors.map((author) => (
-                  <option
-                    value={`${author.firstName} ${author.lastName}`}
-                    key={`${author.firstName} ${author.lastName}`}
-                  >
-                    {`${author.firstName} ${author.lastName}`}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              Categories:
-              <select
-                multiple
-                value={newBook.categories.map((category) => category.name)}
-                onChange={(e) => {
-                  setNewBook({
-                    ...newBook,
-                    categories: Array.from(
-                      e.target.selectedOptions,
-                      (option) =>
-                        categories.find(
-                          (category) => category.name === option.value
-                        )!
-                    ),
-                  });
-                }}
-              >
-                {categories.map((category) => (
-                  <option value={category.name} key={category.name}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <input type='submit' value='Add Book' />
-          </form>
-        </div>
-      )}
+{isAdmin && (
+  <div className='admin-management__add-book-section'>
+    <form onSubmit={handleAddBook}>
+      <label>
+        Book Title:
+        <input
+          type='text'
+          value={newBook.title}
+          onChange={(e) =>
+            setNewBook({ ...newBook, title: e.target.value })
+          }
+        />
+      </label>
+      <label>
+        Book Description:
+        <textarea
+          value={newBook.description}
+          onChange={(e) =>
+            setNewBook({ ...newBook, description: e.target.value })
+          }
+        />
+      </label>
+      <label>
+        Authors:
+        <select
+          multiple
+          value={newBook.authors.map(
+            (author) => `${author.firstName} ${author.lastName}`
+          )}
+          onChange={(e) => {
+            setNewBook({
+              ...newBook,
+              authors: Array.from(
+                e.target.selectedOptions,
+                (option) =>
+                  authors.find(
+                    (author) =>
+                      `${author.firstName} ${author.lastName}` ===
+                      option.value
+                  )!
+              ),
+            });
+          }}
+        >
+          {authors.map((author) => (
+            <option
+              value={`${author.firstName} ${author.lastName}`}
+              key={`${author.firstName} ${author.lastName}`}
+            >
+              {`${author.firstName} ${author.lastName}`}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label>
+        Categories:
+        <select
+          multiple
+          value={newBook.categories.map((category) => category.name)}
+          onChange={(e) => {
+            setNewBook({
+              ...newBook,
+              categories: Array.from(
+                e.target.selectedOptions,
+                (option) =>
+                  categories.find(
+                    (category) => category.name === option.value
+                  )!
+              ),
+            });
+          }}
+        >
+          {categories.map((category) => (
+            <option value={category.name} key={category.name}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </label>
+      <input type='submit' value='Add Book' />
+    </form>
+  </div>
+)}
     </div>
   );
 };

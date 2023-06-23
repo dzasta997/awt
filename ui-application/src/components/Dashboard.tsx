@@ -1,47 +1,48 @@
+// Dashboard.jsx
 import React from 'react';
 import AdminManagement from './AdminManagement';
 import UserManagement from './UserManagement';
 import { LoginResponse } from '../services/authService';
 
 interface DashboardProps {
-  userName: string; // The user name prop
-  currentUser: LoginResponse | null; // The currentUser prop
+  userName: string;
+  currentUser: LoginResponse | null;
+  isUserManagementVisible: boolean;
+  setIsUserManagementVisible: (value: boolean) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ userName, currentUser }) => {
-  // Define a state variable to store the current component
-  const [currentComponent, setCurrentComponent] =
-    React.useState<React.ReactNode>(null);
-
-  // Define a function to handle the click event on the links
-  const handleClick = (component: React.ReactNode) => {
-    // Set the current component to the one passed as an argument
-    setCurrentComponent(component);
+const Dashboard: React.FC<DashboardProps> = ({
+  userName,
+  currentUser,
+  isUserManagementVisible,
+  setIsUserManagementVisible,
+}) => {
+  const handleLinkClick = () => {
+    setIsUserManagementVisible(true);
   };
 
   return (
     <div className='dashboard'>
-      {userName === 'admin' ? ( // If the user name is admin, show the admin link
+      {userName === 'admin' ? (
         <a
           href='#'
           className='dashboard__link dashboard__link--admin'
-          onClick={() => handleClick(<AdminManagement isAdmin={true} />)} // Pass isAdmin prop as true
+          onClick={handleLinkClick}
         >
           Go to Admin Management
         </a>
       ) : (
-        // Otherwise, show the user link
         <a
           href='#'
           className='dashboard__link dashboard__link--user'
-          onClick={() =>
-            handleClick(<UserManagement currentUser={currentUser} />)
-          } // Pass currentUser prop to UserManagement
+          onClick={handleLinkClick}
         >
           Go to User Management
         </a>
       )}
-      {currentComponent}
+      {isUserManagementVisible ? (
+        <UserManagement currentUser={currentUser} />
+      ) : null}
     </div>
   );
 };
