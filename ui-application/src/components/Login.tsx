@@ -9,7 +9,6 @@ interface LoginProps {
   onLoginSuccess: (loginResponse: LoginResponse) => void;
 }
 
-
 const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -31,7 +30,7 @@ const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
       // Check if username ends with 'admin' and save the result as a string in localStorage
       const isAdmin = username.endsWith('admin');
       localStorage.setItem('isAdmin', String(isAdmin));
-    
+
       onLoginSuccess({ ...loginData, username, isAdmin,}); // Pass the whole loginData object to the callback function
       onClose();
     } catch (error) {

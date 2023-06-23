@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllRentals } from '../api/rentalApi';
+import { getUserRentals } from '../api/rentalApi';
 import { RentalDTO } from '../api/types';
 import '../sass/main.scss';
 import { LoginResponse } from '../services/authService';
@@ -17,7 +17,7 @@ const UserManagement: React.FC<UserManagementProps> = ({ currentUser }) => {
 
   const loadRentals = async () => {
     try {
-      const allRentals = await getAllRentals();
+      const allRentals = await getUserRentals();
       console.log('All rentals: ', allRentals); // log all rentals to check the data
       setUserRentals(allRentals);
     } catch (error) {

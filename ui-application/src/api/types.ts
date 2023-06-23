@@ -35,6 +35,7 @@ export enum RentalStatus {
 export interface CopyDTO {
   copyId: number;
   name: string;
+  book: BookDTO
 }
 
 

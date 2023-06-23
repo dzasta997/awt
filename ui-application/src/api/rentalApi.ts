@@ -11,6 +11,16 @@ const encodedCredentials = window.btoa(`${username}:${password}`);
 
 export const getAllRentals = async () => {
   // Pass the authorization header
+  const response = await axios.get(`${API_BASE_URL}/rentals/all`, {
+    headers: {
+      Authorization: `Basic ${encodedCredentials}`,
+    },
+  });
+  return response.data;
+};
+
+export const getUserRentals = async () => {
+  // Pass the authorization header
   const response = await axios.get(`${API_BASE_URL}/rentals`, {
     headers: {
       Authorization: `Basic ${encodedCredentials}`,
