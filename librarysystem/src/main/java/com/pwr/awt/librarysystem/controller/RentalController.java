@@ -1,5 +1,6 @@
 package com.pwr.awt.librarysystem.controller;
 
+import com.pwr.awt.librarysystem.dto.BookDTO;
 import com.pwr.awt.librarysystem.dto.CopyDTO;
 import com.pwr.awt.librarysystem.dto.RentalDTO;
 import com.pwr.awt.librarysystem.entity.Copy;
@@ -59,9 +60,23 @@ public class RentalController {
         return new ResponseEntity<>(rentalMapper.toDto(rentalSaved), HttpStatus.OK);
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<RentalDTO> postRental(@RequestBody CopyDTO copyDTO) {
-        Copy copy = copyService.findByCopyId(copyDTO.getCopyId());
+//    @PostMapping("/new")
+//    public ResponseEntity<RentalDTO> postRental(@RequestBody CopyDTO copyDTO) {
+//        Copy copy = copyService.findByCopyId(copyDTO.getCopyId());
+//        Rental rental = rentalService.addRental(copy);
+//        return new ResponseEntity<>(rentalMapper.toDto(rental), HttpStatus.OK);
+//    }
+
+//    @PostMapping("/new")
+//    public ResponseEntity<RentalDTO> postBookRental(@RequestBody BookDTO bookDTO) {
+//        Copy copy = copyService.findByBookIdAndRented(bookDTO.getBookId());
+//        Rental rental = rentalService.addRental(copy);
+//        return new ResponseEntity<>(rentalMapper.toDto(rental), HttpStatus.OK);
+//    }
+
+        @PostMapping("/new")
+    public ResponseEntity<RentalDTO> postRental(@RequestBody BookDTO bookDTO) {
+        Copy copy = copyService.findByBookIdAndRented(bookDTO.getBookId());
         Rental rental = rentalService.addRental(copy);
         return new ResponseEntity<>(rentalMapper.toDto(rental), HttpStatus.OK);
     }

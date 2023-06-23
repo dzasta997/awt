@@ -40,4 +40,8 @@ public class CopyService {
         return copyRepository.save(copy);
     }
 
+    public Copy findByBookIdAndRented(long id) {
+        return copyRepository.findFirstByBook_BookIdAndRented(id, false).orElseThrow(NotFoundException::new);
+    }
+
 }
