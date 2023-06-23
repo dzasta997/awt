@@ -39,6 +39,18 @@ public class DataLoader implements ApplicationRunner {
                 .setFirstName("Witold")
                 .setLastName("Gombrowicz")
                 .setDescription("Moder paradox, absurd and psychology polish writer");
+        Author king = new Author()
+                .setFirstName("Stephen")
+                .setLastName("King");
+        Author hlasko = new Author()
+                .setFirstName("Marek")
+                .setLastName("Hłasko");
+        Author mrozek = new Author()
+                .setFirstName("Sławomir")
+                .setLastName("Mrożek");
+        Author sienkiewicz = new Author()
+                .setFirstName("Henryk")
+                .setLastName("Sienkiewicz");
         Category fantasy = new Category()
                 .setName("fantasy")
                 .setDescription("Let's get into fantastic world");
@@ -48,6 +60,8 @@ public class DataLoader implements ApplicationRunner {
         Category adventure = new Category()
                 .setName("adventure")
                 .setDescription("Here you can find adventures of a a lifetime");
+        Category history = new Category()
+                .setName("history");
         Book harryPotterCoS = new Book()
                 .addAuthor(jkRowling)
                 .addCategory(fantasy)
@@ -73,6 +87,34 @@ public class DataLoader implements ApplicationRunner {
                 .addCategory(fantasy)
                 .setTitle("Harry Potter and the Half Blood Prince")
                 .setDescription("Fifth part of cool saga");
+        Book tango = new Book()
+                .addAuthor(mrozek)
+                .addCategory(fantasy)
+                .setTitle("Tango")
+                .setDescription("Polish cool drama");
+        Book naczworaka = new Book()
+                .addAuthor(mrozek)
+                .addCategory(fantasy)
+                .setTitle("Na czworaka");
+        Book ostatnidoraju = new Book()
+                .addAuthor(hlasko)
+                .addCategory(adventure)
+                .setTitle("Ostatni do raju");
+        Book pieknidwudziestoletni = new Book()
+                .addAuthor(hlasko)
+                .addCategory(adventure)
+                .setTitle("Piękni dwudziestolenti");
+
+        Book potop= new Book()
+                .addAuthor(sienkiewicz)
+                .addCategory(history)
+                .setTitle("Potop");
+
+        Book krzyzacy= new Book()
+                .addAuthor(sienkiewicz)
+                .addCategory(history)
+                .setTitle("Krzyżacy");
+
         Book ferdydurke = new Book()
                 .addAuthor(gombrowicz)
                 .addCategory(fantasy)
@@ -113,6 +155,42 @@ public class DataLoader implements ApplicationRunner {
                 .setPublicationYear(LocalDate.of(2016, 1, 1))
                 .setRented(false)
                 .setIsbn("978-3-16-148414-9");
+        Copy tango_copy = new Copy()
+                .setBook(tango)
+                .setPublicationYear(LocalDate.of(2016, 1, 1))
+                .setRented(false)
+                .setIsbn("978-3-16-148414-9");
+
+        Copy czwor_copy = new Copy()
+                .setBook(naczworaka)
+                .setPublicationYear(LocalDate.of(2016, 1, 1))
+                .setRented(false)
+                .setIsbn("978-3-16-148414-9");
+
+        Copy ost_copy = new Copy()
+                .setBook(ostatnidoraju)
+                .setPublicationYear(LocalDate.of(2016, 1, 1))
+                .setRented(false)
+                .setIsbn("978-3-16-148414-9");
+
+        Copy piekni_cpoy = new Copy()
+                .setBook(pieknidwudziestoletni)
+                .setPublicationYear(LocalDate.of(2016, 1, 1))
+                .setRented(false)
+                .setIsbn("978-3-16-148414-9");
+
+        Copy potop_copy = new Copy()
+                .setBook(potop)
+                .setPublicationYear(LocalDate.of(2016, 1, 1))
+                .setRented(false)
+                .setIsbn("978-3-16-148414-9");
+
+        Copy krzyz_copy = new Copy()
+                .setBook(krzyzacy)
+                .setPublicationYear(LocalDate.of(2016, 1, 1))
+                .setRented(false)
+                .setIsbn("978-3-16-148414-9");
+
         Rental r1 = new Rental()
                 .setLibraryUser(new LibraryUser().setUserId(1L))
                 .setCopy(new Copy().setCopyId(3L))
@@ -150,15 +228,26 @@ public class DataLoader implements ApplicationRunner {
 
         authorRepository.save(jkRowling);
         authorRepository.save(gombrowicz);
+        authorRepository.save(mrozek);
+        authorRepository.save(hlasko);
+        authorRepository.save(king);
+        authorRepository.save(sienkiewicz);
         categoryRepository.save(fantasy);
         categoryRepository.save(adventure);
         categoryRepository.save(psychology);
+        categoryRepository.save(history);
         bookRepository.save(harryPotterOP);
         bookRepository.save(harryPotterCoS);
         bookRepository.save(harryPotterHB);
         bookRepository.save(harryPotterPA);
         bookRepository.save(harryPotterPS);
         bookRepository.save(ferdydurke);
+        bookRepository.save(tango);
+        bookRepository.save(naczworaka);
+        bookRepository.save(potop);
+        bookRepository.save(krzyzacy);
+        bookRepository.save(ostatnidoraju);
+        bookRepository.save(pieknidwudziestoletni);
         copyRepository.save(hpcos);
         copyRepository.save(hpcos1);
         copyRepository.save(hpcos2);
@@ -166,6 +255,12 @@ public class DataLoader implements ApplicationRunner {
         copyRepository.save(hpcpa);
         copyRepository.save(hpcpa2);
         copyRepository.save(hpcpa3);
+        copyRepository.save(potop_copy);
+        copyRepository.save(krzyz_copy);
+        copyRepository.save(ost_copy);
+        copyRepository.save(piekni_cpoy);
+        copyRepository.save(czwor_copy);
+        copyRepository.save(tango_copy);
         copyRepository.save(copyRepository.findById(1L).get().setRented(true));
         copyRepository.save(copyRepository.findById(2L).get().setRented(true));
         copyRepository.save(copyRepository.findById(4L).get().setRented(true));
